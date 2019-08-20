@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import Alamofire
 import DropDown
+import MBProgressHUD
 
 
 class ProfileViewController: UIViewController {
@@ -40,7 +41,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var btnLocation : UIButton!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var imagePicker = UIImagePickerController()
-    var imageURL : NSURL?
+    var imageURL : String?
     let locationDropDown = DropDown()
     
     init(with viewModel:ProfileViewModel,_ router:ProfileRouter){
@@ -134,6 +135,16 @@ class ProfileViewController: UIViewController {
                 self.setUpProfile()
                 
             }).disposed(by: disposeBag)
+        
+        viewModel.didUpdateProfileImage.skip(1).asObservable()
+            .subscribe(onNext:{ success in
+                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                guard success == true else{ self.showAlertWith(title: "Error", message: "Please try again.", action: "OK"); return }
+                
+                self.setUpProfile()
+                
+            }).disposed(by: disposeBag)
+        
     }
     
     func showAlertWith(title inputTitle:String,message inputMessage:String,action inputAction:String){
@@ -273,9 +284,15 @@ class ProfileViewController: UIViewController {
         
         self.activityIndicator.startAnimating()
         self.viewModel.updateWith(id: user.id!, firstName:txtFirstName.text!, lastName: txtLastName.text!, email: user.email!, password: txtPassword.text!,location: btnLocation.titleLabel!.text!)
-//        if let userImage = self.profileImageView.image,let url = self.imageURL{
-//            self.viewModel.uploadImage(userImage, imageURL: url)
-//        }
+        
+        if let url = self.imageURL {
+            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.indeterminate
+            loadingNotification.label.text = "Updating profile.."
+            
+            self.viewModel.uploadImage(self.profileImageView.image!, identifier: "\(user.id!)")
+        }
+        
     }
     
     @objc func editPassword(){
@@ -378,9 +395,9 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
-        let user = appDelegate.user!
-        viewModel.uploadImage(image!, identifier: "\(user.id!)")
+        
         self.profileImageView.image = image
+        self.imageURL = "Saved"
     }
 }
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -398,6 +415,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
               fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
           }
           self.profileImageView.image = image
-          self.imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? NSURL
+          self.imageURL = "Saved"
     }
 }

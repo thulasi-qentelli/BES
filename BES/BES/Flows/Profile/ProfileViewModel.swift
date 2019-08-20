@@ -15,6 +15,7 @@ class ProfileViewModel{
     let besService = BESService()
     var didGetStates : BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var didUpdateUser : BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var didUpdateProfileImage : BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var locations = [String]()
     
     func updateWith(id inputId:Int,firstName inputFirstName:String,lastName inputLastName:String,email inputEmail:String,password inputPassword:String,location inputLocation:String){
@@ -46,11 +47,12 @@ class ProfileViewModel{
     
     func uploadImage(_ inputImage:UIImage,identifier:String){
         besService.upload(image: inputImage,identifier: identifier)
-            .done{ success in
-                    print("uploaded successfully")
+            .done{ user in
+                print(user)
+                self.didUpdateProfileImage.accept(true)
              }.catch{ error in
                     print(error)
-                    print("Failed")
+                self.didUpdateProfileImage.accept(false)
         }
     }
     

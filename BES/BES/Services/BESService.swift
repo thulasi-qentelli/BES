@@ -489,8 +489,8 @@ class BESService{
     
     
     
-    func upload(image: UIImage,identifier:String) -> Promise<Bool> {
-        return Promise<Bool> { seal in
+    func upload(image: UIImage,identifier:String) -> Promise<User> {
+        return Promise<User> { seal in
             let url = String(format:"http://bes.qentelli.com:8085/bes/uploadImage?id=\(identifier)")
             
             if let data = image.jpegData(compressionQuality: 0.50){
@@ -503,9 +503,9 @@ class BESService{
                     switch result{
                     case .success(let upload, _, _):
                         upload.responseString { response in
-                            print(response)
-                            seal.fulfill(true)
-                            print("success in storing")
+                            let user = try? JSONDecoder().decode(User.self, from: response.data!)
+                            self.appdelegate.user = user!
+                            seal.fulfill(user!)
                         }
                     case .failure(let error):
                         print("Error in upload: \(error.localizedDescription)")
