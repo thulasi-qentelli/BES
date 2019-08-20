@@ -106,6 +106,11 @@ class SignUpViewController: UIViewController {
     
     func validationCheck(){
         
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
+        
         guard let firstName = firstName.text,let lastName = lastName.text,let email = email.text,let password = password.text,let confirmPassword = confirmPassword.text else{
             
             self.showAlertWith(title: "BES", message: "All Fields Are Mandatory", action: "OK")
@@ -123,6 +128,7 @@ class SignUpViewController: UIViewController {
             self.showAlertWith(title: "BES", message: "Given Passwords Donot Match", action: "OK")
             return
         }
+        
         
         self.activityIndicator.startAnimating()
         viewModel.signUpWith(firstName: firstName,lastName: lastName,email: email,password: password)

@@ -70,6 +70,10 @@ class ResetPasswordViewController: UIViewController {
     
     @objc func resend(){
         
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         
         if let emailId = self.emailId{
             self.activityIndicator.startAnimating()

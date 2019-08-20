@@ -114,6 +114,11 @@ class SignInViewController: UIViewController {
     
     func validationCheck(){
         
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
+        
         guard let email = self.txtEmail.text,let password = self.txtPassword.text else{
             
             self.showAlertWith(title:"BES",message: "All Fields Are Mandatory", action: "OK")
@@ -126,10 +131,6 @@ class SignInViewController: UIViewController {
             return
         }
         
-        if !Common.hasConnectivity() {
-            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
-            return
-        }
         SecAddSharedWebCredential("bes.qentelli.com:8085" as CFString, email as CFString, password as CFString) { (error) in
             print(error?.localizedDescription)
             DispatchQueue.main.async {

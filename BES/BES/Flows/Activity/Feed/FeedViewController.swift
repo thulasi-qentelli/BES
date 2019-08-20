@@ -46,10 +46,23 @@ class FeedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         viewModel.getFeeds()
+        if let userImage = appDelegate.user?.pic{
+            let urlString = userImage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            if let url  = URL(string: urlString!){
+                self.btnProfile.imageView!.sd_setImage(with:url){
+                    image,error,cache,d in
+                    if let unwrappedImage = image{
+                        self.btnProfile.setImage(unwrappedImage, for: .normal)
+                    }
+                }
+            }
+        }
     }
-    
     
 
     func setUpViews(){
@@ -105,7 +118,10 @@ class FeedViewController: UIViewController {
     }
     
     @objc func refresh(){
-        
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         self.viewModel.getFeeds()
     }
     
@@ -124,6 +140,11 @@ class FeedViewController: UIViewController {
     }
     
     @objc func likePost(sender:UIButton){
+        
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         
         var currentFeed = self.viewModel.feedDetails[sender.tag]
         guard let unwrappedUserHasLiked = currentFeed.userHasLiked else {return}

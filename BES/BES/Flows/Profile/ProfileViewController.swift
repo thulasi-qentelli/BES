@@ -20,6 +20,9 @@ class ProfileViewController: UIViewController {
     fileprivate var router    : ProfileRouter!
     let disposeBag = DisposeBag()
     
+    @IBOutlet weak var profileImgBtn: UIButton!
+    
+    
     var imagePickerOne: ImagePicker!
     @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -256,7 +259,7 @@ class ProfileViewController: UIViewController {
             self.txtLastName.backgroundColor = UIColor.white
             self.btnLastNameEdit.isHidden = true
             self.btnLocationEdit.setTitle("Edit", for: .normal)
-            
+            self.profileImgBtn.isHidden = true
             
             self.updateUser()
             return
@@ -267,18 +270,21 @@ class ProfileViewController: UIViewController {
         self.btnPasswordEdit.isHidden = false
         self.btnFirstNameEdit.isHidden = false
         self.btnLastNameEdit.isHidden = false
+        self.profileImgBtn.isHidden = false
+        
     }
     
     func updateUser(){
+        
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         
         let user = appDelegate.user!
         
         guard let firstName = txtFirstName.text,let lastName = txtLastName.text,let location = btnLocation.titleLabel!.text,let password = txtPassword.text else{
             self.showAlertWith(title: "BES", message: "All fields are mandatory", action: "Ok")
-            return
-        }
-        if !Common.hasConnectivity() {
-            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
             return
         }
         

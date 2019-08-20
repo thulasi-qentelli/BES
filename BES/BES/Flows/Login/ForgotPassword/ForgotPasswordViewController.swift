@@ -94,6 +94,11 @@ class ForgotPasswordViewController: UIViewController {
 
     func validationCheck(){
         
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
+        
         guard let email = txtEmail.text else{
             
             self.showAlertWith(title: "BES", message: "Please Enter Email", action: "OK")

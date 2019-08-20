@@ -10,7 +10,7 @@ import Foundation
 
 struct Message: Codable {
     let id: Int?
-    let message,fromuser,touser,createdDate,updatedDate: String?
+    let message,fromuser,touser,createdDate,updatedDate,userName,userPic: String?
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -20,15 +20,20 @@ struct Message: Codable {
         touser = try values.decodeIfPresent(String.self, forKey: .touser)
         createdDate = try values.decodeIfPresent(String.self, forKey: .createdDate)
         updatedDate = try values.decodeIfPresent(String.self, forKey: .updatedDate)
+        userName = try values.decodeIfPresent(String.self, forKey: .userName)
+        userPic = try values.decodeIfPresent(String.self, forKey: .userPic)
+        
     }
     
-    init(id:Int?,message:String,fromuser:String?,touser:String?,createdDate:String?,updatedDate:String?){
+    init(id:Int?,message:String,fromuser:String?,touser:String?,createdDate:String?,updatedDate:String?,userName:String?,userPic:String?){
         self.id = id
         self.message = message
         self.fromuser = fromuser
         self.touser = touser
         self.createdDate = createdDate
         self.updatedDate = updatedDate
+        self.userName = userName
+        self.userPic = userPic
     }
 }
 

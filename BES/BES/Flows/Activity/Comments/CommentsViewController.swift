@@ -103,12 +103,13 @@ class CommentsViewController: UIViewController {
     }
     
     @objc func sendComment(){
-        
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         if txtAddYourComment.text == nil{
             return
         }
-        
-
         self.viewModel.sendComment(with: txtAddYourComment.text!,for: self.postID!)
     }
 

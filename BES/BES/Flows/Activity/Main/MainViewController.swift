@@ -53,11 +53,7 @@ class MainViewController: UITabBarController {
         
         let tabBarList = [feedVC,locationVC,messagesVC,communicationsVC, invoiceVC, documentationVC]
         
-        self.tabBar.backgroundColor = UIColor(red:0.99, green:0.4, blue:0.1, alpha:1)
+        self.tabBar.backgroundColor = UIColor.white //UIColor(red:0.99, green:0.4, blue:0.1, alpha:1)
         viewControllers = tabBarList
     }
-
-   
-
-
 }

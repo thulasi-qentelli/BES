@@ -74,7 +74,10 @@ class MessagesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         viewModel.getMessages()
     }
     
@@ -93,7 +96,10 @@ class MessagesViewController: UIViewController {
     }
     
     @objc func refresh(){
-        
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         self.viewModel.getMessages()
     }
     

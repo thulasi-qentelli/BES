@@ -32,6 +32,7 @@
                 <outlet property="lblLocation" destination="xDY-O9-faQ" id="No8-If-GiL"/>
                 <outlet property="lblName" destination="ejc-ve-6qc" id="mMq-tc-UEX"/>
                 <outlet property="profileImageView" destination="30Z-b7-GOI" id="iHz-PN-y4d"/>
+                <outlet property="profileImgBtn" destination="fXj-3Q-UrQ" id="m1F-pN-Spk"/>
                 <outlet property="txtEmail" destination="blG-Js-l9G" id="35C-3S-RU9"/>
                 <outlet property="txtFirstName" destination="SqC-o3-kUF" id="WhR-VX-kux"/>
                 <outlet property="txtLastName" destination="VeV-cW-eVa" id="OLq-88-8PI"/>
@@ -346,7 +347,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXj-3Q-UrQ">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXj-3Q-UrQ">
                     <rect key="frame" x="157" y="74" width="100" height="100"/>
                     <connections>
                         <action selector="profileImageTapped:" destination="-1" eventType="touchUpInside" id="fAe-pP-ep4"/>

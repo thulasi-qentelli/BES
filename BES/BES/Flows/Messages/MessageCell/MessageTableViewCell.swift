@@ -25,9 +25,9 @@ class MessageTableViewCell: UITableViewCell {
         
         txtView.text = content
         timeStampLabel.text = ""
-        if let fromUser = message.fromuser, let createdDate =  message.createdDate {
-            let fromUserName = fromUser.components(separatedBy: "@").first ?? ""
-            timeStampLabel.text = "@" + fromUserName + ", " + createdDate
+        if let userName = message.userName, let createdDate =  message.createdDate {
+            let createdDateTime = createdDate.components(separatedBy: " ").last ?? ""
+            timeStampLabel.text = "@" + userName + ", " + createdDateTime
         }
     }
     

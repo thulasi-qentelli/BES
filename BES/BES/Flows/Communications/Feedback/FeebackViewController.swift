@@ -190,6 +190,11 @@ class FeebackViewController: UIViewController {
     
     @objc func sendFeedback(){
         
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         guard let user = appDelegate.user,let userEmail = user.email else {

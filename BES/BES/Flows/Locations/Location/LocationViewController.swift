@@ -79,6 +79,10 @@ class LocationViewController: UIViewController {
         super.viewDidLoad()
         
         setUpRx()
+        if !Common.hasConnectivity() {
+            self.view.makeToast(networkUnavailable, duration: 2.0, position: .center)
+            return
+        }
         viewModel.getLocations()
         headerView.dropShadow()
         

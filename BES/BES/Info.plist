@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -27,12 +27,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>BES wants to take pictures</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>BES wants to access your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>BES wants to access your location</string>
-	<key>NSCameraUsageDescription</key>
-	<string>BES wants to take pictures</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>BES wants to use your photos</string>
 	<key>UIAppFonts</key>
