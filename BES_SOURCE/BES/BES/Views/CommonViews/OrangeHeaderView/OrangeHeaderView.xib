@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrangeHeaderView" customModule="BES" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyz-AG-h3d">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2sF-yA-lyY">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <color key="backgroundColor" red="0.89124143119999999" green="0.4804035425" blue="0.22342813010000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="pVY-JU-S9t">
+                            <rect key="frame" x="-4" y="41" width="383" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="Vf1-bY-3jh"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="2sF-yA-lyY" firstAttribute="leading" secondItem="nyz-AG-h3d" secondAttribute="leading" id="2Og-OA-mBY"/>
+                        <constraint firstAttribute="trailing" secondItem="pVY-JU-S9t" secondAttribute="trailing" constant="-4" id="LXX-X3-xV4"/>
+                        <constraint firstItem="pVY-JU-S9t" firstAttribute="leading" secondItem="nyz-AG-h3d" secondAttribute="leading" constant="-4" id="M0Z-4F-GQb"/>
+                        <constraint firstAttribute="trailing" secondItem="2sF-yA-lyY" secondAttribute="trailing" id="can-uT-6Xf"/>
+                        <constraint firstAttribute="bottom" secondItem="pVY-JU-S9t" secondAttribute="bottom" id="lgF-Jv-Vkf"/>
+                        <constraint firstItem="2sF-yA-lyY" firstAttribute="top" secondItem="nyz-AG-h3d" secondAttribute="top" id="qp3-97-tFU"/>
+                        <constraint firstAttribute="bottom" secondItem="2sF-yA-lyY" secondAttribute="bottom" constant="31" id="soP-Ah-CaH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="nyz-AG-h3d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CgI-sG-9Fk"/>
+                <constraint firstAttribute="bottom" secondItem="nyz-AG-h3d" secondAttribute="bottom" id="Wpu-sR-i7j"/>
+                <constraint firstItem="nyz-AG-h3d" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="dBt-9U-GoV"/>
+                <constraint firstItem="nyz-AG-h3d" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="iOv-af-5Fs"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="308" y="-451.84729064039414"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Vector" width="770" height="84"/>
+    </resources>
+</document>

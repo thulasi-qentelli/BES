@@ -193,7 +193,6 @@ extension FeedViewController : UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: feedCellReuseIdentifier, for: indexPath) as! FeedTableCell
         
         let currentFeed = viewModel.feedDetails[indexPath.row]
-//        cell.txtBody.didClickDelegate = self
         cell.txtBody.tag = indexPath.row
         
         if let unwrappedExpandedRow = self.expandedRow{
