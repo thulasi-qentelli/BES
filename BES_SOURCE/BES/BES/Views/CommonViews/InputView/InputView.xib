@@ -19,14 +19,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-Oz-B1w">
-                    <rect key="frame" x="30" y="0.0" width="315" height="50"/>
+                    <rect key="frame" x="30" y="0.0" width="315" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="d5Z-Z6-bz1">
-                            <rect key="frame" x="15.000000000000002" y="15" width="26.666666666666671" height="7"/>
+                            <rect key="frame" x="15.000000000000002" y="15" width="26.666666666666671" height="15.666666666666664"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.55415454275249809" green="0.55415454275249809" blue="0.55415454275249809" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
@@ -35,10 +35,10 @@
                             </variation>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6KA-4E-kG9">
-                            <rect key="frame" x="265" y="0.0" width="50" height="50"/>
+                            <rect key="frame" x="265" y="0.0" width="50" height="60"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNavigationCheck" translatesAutoresizingMaskIntoConstraints="NO" id="EXR-BO-SoL">
-                                    <rect key="frame" x="17" y="17" width="16" height="16"/>
+                                    <rect key="frame" x="17" y="22" width="16" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="16" id="npR-YQ-11V"/>
                                         <constraint firstAttribute="height" constant="16" id="qsp-gN-bA1"/>
@@ -53,13 +53,13 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Place holder text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U3c-cE-rZn">
-                            <rect key="frame" x="15" y="22" width="235" height="18"/>
+                            <rect key="frame" x="15" y="30.666666666666671" width="235" height="19.333333333333329"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMo-Jo-uGG">
-                            <rect key="frame" x="0.0" y="0.0" width="265" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="265" height="60"/>
                             <connections>
                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="hZP-iw-9Qz"/>
                             </connections>

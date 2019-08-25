@@ -47,6 +47,18 @@
 		005BC730230DBCE000BCAC1A /* AcknowledgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BC72E230DBCE000BCAC1A /* AcknowledgeViewController.xib */; };
 		005BC734230DE72A00BCAC1A /* OrangeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005BC732230DE72A00BCAC1A /* OrangeHeaderView.swift */; };
 		005BC735230DE72A00BCAC1A /* OrangeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BC733230DE72A00BCAC1A /* OrangeHeaderView.xib */; };
+		00C9183D2311DB3100922DC7 /* LocationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C9183B2311DB3100922DC7 /* LocationTableCell.swift */; };
+		00C9183E2311DB3100922DC7 /* LocationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C9183C2311DB3100922DC7 /* LocationTableCell.xib */; };
+		00C918432311EC5200922DC7 /* ChipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C918402311EC5200922DC7 /* ChipView.xib */; };
+		00C918442311EC5200922DC7 /* ChipFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918412311EC5200922DC7 /* ChipFilterView.swift */; };
+		00C918452311EC5200922DC7 /* ChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918422311EC5200922DC7 /* ChipView.swift */; };
+		00C9184A2311ECF600922DC7 /* MapPlaceMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918472311ECF600922DC7 /* MapPlaceMark.swift */; };
+		00C9184B2311ECF600922DC7 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918482311ECF600922DC7 /* AnnotationView.swift */; };
+		00C9184C2311ECF600922DC7 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918492311ECF600922DC7 /* MapViewModel.swift */; };
+		00C9184F2311EEE300922DC7 /* CustomCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C9184D2311EEE300922DC7 /* CustomCalloutView.xib */; };
+		00C918502311EEE300922DC7 /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C9184E2311EEE300922DC7 /* CustomCalloutView.swift */; };
+		00C918532311F4CC00922DC7 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918512311F4CC00922DC7 /* FilterViewController.swift */; };
+		00C918542311F4CC00922DC7 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C918522311F4CC00922DC7 /* FilterViewController.xib */; };
 		00D343A2230F0DDB00555E32 /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D343A0230F0DDB00555E32 /* SideViewController.swift */; };
 		00D343A3230F0DDB00555E32 /* SideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D343A1230F0DDB00555E32 /* SideViewController.xib */; };
 		00D343A7230F0F7300555E32 /* SideProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D343A5230F0F7300555E32 /* SideProfileView.swift */; };
@@ -115,6 +127,18 @@
 		005BC732230DE72A00BCAC1A /* OrangeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrangeHeaderView.swift; sourceTree = "<group>"; };
 		005BC733230DE72A00BCAC1A /* OrangeHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrangeHeaderView.xib; sourceTree = "<group>"; };
 		008B5D06ED3F1B4039CA5DB2 /* Pods_BES.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BES.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00C9183B2311DB3100922DC7 /* LocationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableCell.swift; sourceTree = "<group>"; };
+		00C9183C2311DB3100922DC7 /* LocationTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableCell.xib; sourceTree = "<group>"; };
+		00C918402311EC5200922DC7 /* ChipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChipView.xib; sourceTree = "<group>"; };
+		00C918412311EC5200922DC7 /* ChipFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipFilterView.swift; sourceTree = "<group>"; };
+		00C918422311EC5200922DC7 /* ChipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipView.swift; sourceTree = "<group>"; };
+		00C918472311ECF600922DC7 /* MapPlaceMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapPlaceMark.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/MapModels/MapPlaceMark.swift; sourceTree = "<group>"; };
+		00C918482311ECF600922DC7 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnotationView.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/MapModels/AnnotationView.swift; sourceTree = "<group>"; };
+		00C918492311ECF600922DC7 /* MapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewModel.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/MapModels/MapViewModel.swift; sourceTree = "<group>"; };
+		00C9184D2311EEE300922DC7 /* CustomCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCalloutView.xib; path = ../../../../../../../../BES/BES/Flows/Locations/Location/LocationCell/CustomCalloutView.xib; sourceTree = "<group>"; };
+		00C9184E2311EEE300922DC7 /* CustomCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCalloutView.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/LocationCell/CustomCalloutView.swift; sourceTree = "<group>"; };
+		00C918512311F4CC00922DC7 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		00C918522311F4CC00922DC7 /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		00D343A0230F0DDB00555E32 /* SideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
 		00D343A1230F0DDB00555E32 /* SideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideViewController.xib; sourceTree = "<group>"; };
 		00D343A5230F0F7300555E32 /* SideProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideProfileView.swift; sourceTree = "<group>"; };
@@ -165,8 +189,12 @@
 		0055FBF223100C76003D4D41 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				00C9184E2311EEE300922DC7 /* CustomCalloutView.swift */,
+				00C9184D2311EEE300922DC7 /* CustomCalloutView.xib */,
 				0055FBFA23101033003D4D41 /* LocationTableViewCell.swift */,
 				0055FBFB23101033003D4D41 /* LocationTableViewCell.xib */,
+				00C9183B2311DB3100922DC7 /* LocationTableCell.swift */,
+				00C9183C2311DB3100922DC7 /* LocationTableCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -382,6 +410,28 @@
 			path = OrangeHeaderView;
 			sourceTree = "<group>";
 		};
+		00C9183F2311EC3100922DC7 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				00C918412311EC5200922DC7 /* ChipFilterView.swift */,
+				00C918422311EC5200922DC7 /* ChipView.swift */,
+				00C918402311EC5200922DC7 /* ChipView.xib */,
+				00C918512311F4CC00922DC7 /* FilterViewController.swift */,
+				00C918522311F4CC00922DC7 /* FilterViewController.xib */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		00C918462311ECE800922DC7 /* MapModels */ = {
+			isa = PBXGroup;
+			children = (
+				00C918482311ECF600922DC7 /* AnnotationView.swift */,
+				00C918472311ECF600922DC7 /* MapPlaceMark.swift */,
+				00C918492311ECF600922DC7 /* MapViewModel.swift */,
+			);
+			path = MapModels;
+			sourceTree = "<group>";
+		};
 		00D343A4230F0F5000555E32 /* SideProfileView */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +485,8 @@
 		00F21A28230EA8D8008D9976 /* Locations */ = {
 			isa = PBXGroup;
 			children = (
+				00C918462311ECE800922DC7 /* MapModels */,
+				00C9183F2311EC3100922DC7 /* Filters */,
 				0055FBF223100C76003D4D41 /* Cell */,
 				00F21A31230EA940008D9976 /* LocationsViewController.swift */,
 				00F21A32230EA940008D9976 /* LocationsViewController.xib */,
@@ -576,13 +628,17 @@
 				005BC735230DE72A00BCAC1A /* OrangeHeaderView.xib in Resources */,
 				0055FBFD23101033003D4D41 /* LocationTableViewCell.xib in Resources */,
 				005BC715230D119900BCAC1A /* ForgotPWDViewController.xib in Resources */,
+				00C918542311F4CC00922DC7 /* FilterViewController.xib in Resources */,
+				00C918432311EC5200922DC7 /* ChipView.xib in Resources */,
 				00D343AC230F134B00555E32 /* SideMenuCell.xib in Resources */,
 				00F21A34230EA940008D9976 /* LocationsViewController.xib in Resources */,
 				005BC730230DBCE000BCAC1A /* AcknowledgeViewController.xib in Resources */,
 				005BC6F4230D091900BCAC1A /* LaunchScreen.storyboard in Resources */,
 				0055FBF723100CB0003D4D41 /* FeedTableCell.xib in Resources */,
+				00C9183E2311DB3100922DC7 /* LocationTableCell.xib in Resources */,
 				005BC728230D9F5800BCAC1A /* ProfileHeaderView.xib in Resources */,
 				00F21A3C230EA95A008D9976 /* FeedbackViewController.xib in Resources */,
+				00C9184F2311EEE300922DC7 /* CustomCalloutView.xib in Resources */,
 				005BC70D230D117000BCAC1A /* SplashViewController.xib in Resources */,
 				00F21A45230EB6A4008D9976 /* ProfileDisplayView.xib in Resources */,
 				005BC71B230D16BC00BCAC1A /* InputView.xib in Resources */,
@@ -651,8 +707,10 @@
 				00F21A3F230EA967008D9976 /* InquiryViewController.swift in Sources */,
 				0055FBED230FEC18003D4D41 /* Message.swift in Sources */,
 				005BC714230D119900BCAC1A /* SignupViewController.swift in Sources */,
+				00C9184B2311ECF600922DC7 /* AnnotationView.swift in Sources */,
 				005BC6EA230D091800BCAC1A /* AppDelegate.swift in Sources */,
 				0055FBE1230FAE49003D4D41 /* APIWrapper.swift in Sources */,
+				00C918502311EEE300922DC7 /* CustomCalloutView.swift in Sources */,
 				00F21A3B230EA95A008D9976 /* FeedbackViewController.swift in Sources */,
 				005BC704230D0AB100BCAC1A /* SideMenuMainController.swift in Sources */,
 				0055FBDF230FAD9C003D4D41 /* EncodableExtension.swift in Sources */,
@@ -665,22 +723,28 @@
 				005BC701230D0A0900BCAC1A /* AppController.swift in Sources */,
 				005BC734230DE72A00BCAC1A /* OrangeHeaderView.swift in Sources */,
 				0055FBFC23101033003D4D41 /* LocationTableViewCell.swift in Sources */,
+				00C918532311F4CC00922DC7 /* FilterViewController.swift in Sources */,
 				005BC710230D117D00BCAC1A /* LoginViewController.swift in Sources */,
 				0055FBE3230FB653003D4D41 /* CommonFunctions.swift in Sources */,
 				0055FBE8230FB740003D4D41 /* Toast.swift in Sources */,
 				00F21A49230ECCB6008D9976 /* MessageTableViewCell.swift in Sources */,
 				0055FBEB230FB75E003D4D41 /* ImagePicker.swift in Sources */,
 				0055FBF123100B01003D4D41 /* Location.swift in Sources */,
+				00C9184C2311ECF600922DC7 /* MapViewModel.swift in Sources */,
 				0055FBF623100CB0003D4D41 /* FeedTableCell.swift in Sources */,
 				0055FBE5230FB669003D4D41 /* StringExtension.swift in Sources */,
+				00C918442311EC5200922DC7 /* ChipFilterView.swift in Sources */,
 				00F21A33230EA940008D9976 /* LocationsViewController.swift in Sources */,
 				005BC70C230D117000BCAC1A /* SplashViewController.swift in Sources */,
 				0055FBD8230FAD73003D4D41 /* ParameterDetail.swift in Sources */,
 				0055FBDA230FAD7B003D4D41 /* User.swift in Sources */,
+				00C918452311EC5200922DC7 /* ChipView.swift in Sources */,
 				005BC71A230D16BC00BCAC1A /* InputView.swift in Sources */,
 				0055FBE9230FB740003D4D41 /* Reachability.swift in Sources */,
 				00F21A37230EA94F008D9976 /* MessagesViewController.swift in Sources */,
 				00F21A26230E9AA8008D9976 /* MainTabbarView.swift in Sources */,
+				00C9184A2311ECF600922DC7 /* MapPlaceMark.swift in Sources */,
+				00C9183D2311DB3100922DC7 /* LocationTableCell.swift in Sources */,
 				0055FBEF231006A3003D4D41 /* Feed.swift in Sources */,
 				00F21A44230EB6A4008D9976 /* ProfileDisplayView.swift in Sources */,
 				00D343A2230F0DDB00555E32 /* SideViewController.swift in Sources */,

@@ -44,7 +44,7 @@ struct  MapViewModel {
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025))
         mapView.setRegion(region, animated: true)
         
-        let annatationImage = UIImage(named: "location_location")!
+        let annatationImage = UIImage(named: "location")!
         
         
         var totalAddress = ""
