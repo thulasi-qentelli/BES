@@ -12,15 +12,13 @@ import SDWebImage
 
 class FeedViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
-    @IBOutlet weak var profileView: ProfileDisplayView!
     var feeds: [Feed] = []
-    let feedCellReuseIdentifier = "FeedTableCell"
+    let feedCellReuseIdentifier = "FeedTableViewCell"
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        profileView.user = AppController.shared.user
-        setupUI()        
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,8 +86,9 @@ class FeedViewController: UIViewController {
     
     
     func setupUI() {
-        self.tblView.estimatedRowHeight = 60
+        self.tblView.estimatedRowHeight = 260
         self.tblView.rowHeight = UITableView.automaticDimension
+    
         self.tblView.register(UINib.init(nibName: feedCellReuseIdentifier, bundle: nil), forCellReuseIdentifier: feedCellReuseIdentifier)
     }
     
@@ -97,25 +96,21 @@ class FeedViewController: UIViewController {
 
 
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.feeds.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 130
+        return 80
     }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 60))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 80))
         view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
-        let titleLabel = UILabel(frame: CGRect(x: 30, y: 60, width: UIScreen.main.bounds.size.width - 60, height: 60))
-        titleLabel.text = "Feeds"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        let titleLabel = UILabel(frame: CGRect(x: 30, y: 20, width: UIScreen.main.bounds.size.width - 60, height: 60))
+        titleLabel.text = "Posts"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.backgroundColor = UIColor.clear
         view.addSubview(titleLabel)
         return view
@@ -123,58 +118,43 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
-        let cell = tableView.dequeueReusableCell(withIdentifier: feedCellReuseIdentifier, for: indexPath) as! FeedTableCell
-        
-        cell.txtBody.tag = indexPath.row
-        
-//        if let unwrappedExpandedRow = self.expandedRow{
-//            if unwrappedExpandedRow == indexPath.row{
-//                cell.isExpanded = true
-//            }
-//        }
-        
-        let textView = ReadMoreTextView()
-        textView.text = self.feeds[indexPath.row].content
-        
-        let size = CGSize(width:self.view.frame.width-116 , height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        
-        cell.configure(with: feeds[indexPath.row],textViewHeight: estimatedSize.height)
-        
-        cell.btnLike.tag = indexPath.row
-//        cell.btnLike.addTarget(self, action: #selector(likePost(sender:)), for: .touchUpInside)
-        
-        cell.btnComment.tag = indexPath.row
-//        cell.btnComment.addTarget(self, action: #selector(showComments(sender:)), for: .touchUpInside)
-        
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        
-        let currentFeed = self.feeds[indexPath.row]
-        var height : CGFloat = 0.0
-        
-        if let image = self.feeds[indexPath.row].image{
-            height = image.isEmpty ? 224 : 355.0
-        }else{
-            height = 224.0
+        let cell = tableView.dequeueReusableCell(withIdentifier: feedCellReuseIdentifier, for: indexPath) as! FeedTableViewCell
+        let feed = feeds[indexPath.row]
+        cell.getTextForReadmore(kStr: feed.content ?? "", numberOfLines: 3)
+        cell.readMoreBtn.isSelected = false
+        cell.profileImgPlaceholderView.isHidden = false
+        cell.nameLbl.text = feed.userName
+        if let urlString = feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+            if let url  = URL(string: urlString){
+                cell.profileImgView.sd_setImage(with:url, completed: nil)
+                cell.profileImgPlaceholderView.isHidden = true
+            }
         }
         
-//        guard let unwrappedExpandedRow = self.expandedRow else {return height}
-//        guard unwrappedExpandedRow == indexPath.row else {return height}
-        
-        let textView = ReadMoreTextView()
-        textView.text = feeds[indexPath.row].content
-        
-        let size = CGSize(width:self.view.frame.width-116 , height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        height = height-80+estimatedSize.height+20
-        
-        return height
-    }
+        if let urlString = feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+            if let url  = URL(string: urlString){
+                cell.imgView?.sd_setImage(with:url, completed: nil)
+                cell.imgHeight.constant = 100
+            }
+            else {
+                cell.imgHeight.constant = 0
+            }
+        }
+        else {
+             cell.imgHeight.constant = 0
+        }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        cell.readMoreFunction = { (sender, str) in
+            if sender.isSelected == true {
+                cell.getTextForReadmore(kStr: str, numberOfLines: 3)
+            } else {
+                cell.txtLbl.text = str + "                               "
+            }
+            sender.isSelected = !sender.isSelected
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
+        return cell
     }
 }
 

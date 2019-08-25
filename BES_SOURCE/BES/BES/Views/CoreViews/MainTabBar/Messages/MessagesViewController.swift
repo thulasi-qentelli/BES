@@ -12,16 +12,23 @@ import SDWebImage
 
 class MessagesViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
-     @IBOutlet weak var profileView: ProfileDisplayView!
-    var messages: [Message] = []
+    var messages: [String:[Message]] = [:]
     let cellReuseIdendifier = "MessageTableViewCell"
+    var keys:[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        profileView.user = AppController.shared.user
         setupUI()
         
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 80))
+        view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+        let titleLabel = UILabel(frame: CGRect(x: 30, y: 20, width: UIScreen.main.bounds.size.width - 60, height: 60))
+        titleLabel.text = "Messages"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        titleLabel.backgroundColor = UIColor.clear
+        view.addSubview(titleLabel)
+        self.tblView.tableHeaderView = view
         
     }
     
@@ -73,7 +80,18 @@ class MessagesViewController: UIViewController {
                 }
                 
                 if let _ = result, let kmess = (result as? [Message]) {
-                    self.messages = kmess
+                    
+                    let datesArray = kmess.compactMap { $0.dateShortForm }
+                    var dic = [String:[Message]]()
+                    datesArray.forEach {
+                        let dateKey = $0
+                        let filterArray = kmess.filter { $0.dateShortForm == dateKey }
+                        dic[$0] = filterArray//.sorted(){$0.timeShortForm < $1.timeShortForm}
+                    }
+                    let keysArr = dic.keys
+                    self.keys =  keysArr.sorted().reversed()
+                    self.messages = dic
+                    
                     self.tblView.reloadData()
                 }
             }
@@ -100,25 +118,27 @@ class MessagesViewController: UIViewController {
 
 extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return self.keys.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messages.count
+        return self.messages[self.keys[section]]?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 130
+        return 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 60))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 40))
         view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
-        let titleLabel = UILabel(frame: CGRect(x: 30, y: 60, width: UIScreen.main.bounds.size.width - 60, height: 60))
-        titleLabel.text = "Messages"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        let titleLabel = UILabel(frame: CGRect(x: 30, y: 0, width: UIScreen.main.bounds.size.width - 60, height: 40))
+        titleLabel.text = self.messages[self.keys[section]]?.first?.dateShortForm
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        titleLabel.textColor = UIColor.blue
         titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         return view
     }
@@ -126,10 +146,10 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier, for: indexPath) as! MessageTableViewCell
         
-        cell.messageLbl.text = messages[indexPath.row].message
-        cell.timeStampLbl.text = messages[indexPath.row].createdDate?.components(separatedBy: " ").last
+        cell.messageLbl.text = self.messages[self.keys[indexPath.section]]?[indexPath.row].message
+        cell.timeStampLbl.text = self.messages[self.keys[indexPath.section]]?[indexPath.row].createdDate?.components(separatedBy: " ").last
         
-        if let urlString = messages[indexPath.row].userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+        if let urlString = self.messages[self.keys[indexPath.section]]?[indexPath.row].userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
             if let url  = URL(string: urlString){
                 cell.profileImgView.sd_setImage(with:url, completed: nil)
             }

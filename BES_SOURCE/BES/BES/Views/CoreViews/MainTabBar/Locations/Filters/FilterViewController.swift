@@ -146,12 +146,15 @@ class FilterViewController: UIViewController {
     
     func filterLocations() {
         
-        let filteredLocations = locations.filter({
+        var filteredLocations = locations.filter({
             $0.regionsArray.contains(where: {filteredRegions.contains($0)}) ||
                 $0.servicesArraay.contains(where: {filteredServices.contains($0)}) ||
                 $0.basinsArray.contains(where: {filteredBasins.contains($0)})
         })
         
+        if filteredRegions.count == 0 && filteredServices.count == 0 && filteredBasins.count == 0 {
+            filteredLocations = locations
+        }
         getFilteredLocations(filteredLocations, filteredRegions, filteredServices, filteredBasins)
     }
     

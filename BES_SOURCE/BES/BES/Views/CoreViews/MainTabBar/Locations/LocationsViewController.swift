@@ -14,7 +14,6 @@ import MapKit
 
 class LocationsViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
-    @IBOutlet weak var profileView: ProfileDisplayView!
     var locations: [Location] = []
     var filteredLocations: [Location] = []
     let cellReuseIdendifier = "LocationTableCell"
@@ -29,7 +28,6 @@ class LocationsViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        profileView.user = AppController.shared.user
         self.mapView.isHidden = true
         setupUI()
     }
@@ -140,23 +138,20 @@ class LocationsViewController: UIViewController {
             
             let mapModel = MapViewModel(locations: self.locations, mapView: self.mapView)
             mapModel.loadDetails()
-//            self.setupFiletrs()
             
         }
         self.present(filterView, animated: true) {
             self.tblView.setContentOffset(.zero, animated: true)
         }
         
-            
-            
-            
+        
 //        self.tblView.isHidden = !self.tblView.isHidden
 //        self.mapView.isHidden = !self.mapView.isHidden
 //        sender.isSelected = !sender.isSelected
     }
     
     func setupUI() {
-        self.tblView.estimatedRowHeight = 60
+        self.tblView.estimatedRowHeight = 160
         self.tblView.rowHeight = UITableView.automaticDimension
         self.tblView.register(UINib.init(nibName: cellReuseIdendifier, bundle: nil), forCellReuseIdentifier: cellReuseIdendifier)
     }
@@ -165,25 +160,19 @@ class LocationsViewController: UIViewController {
 
 
 extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filteredLocations.count
     }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 130
+        return 80
     }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 60))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 80))
         view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
-        let titleLabel = UILabel(frame: CGRect(x: 30, y: 60, width: UIScreen.main.bounds.size.width - 60, height: 60))
+        let titleLabel = UILabel(frame: CGRect(x: 30, y: 20, width: UIScreen.main.bounds.size.width - 60, height: 60))
         titleLabel.text = "Locations"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.backgroundColor = UIColor.clear
         view.addSubview(titleLabel)
         return view
@@ -210,11 +199,6 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
-    }
-
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
 }
 

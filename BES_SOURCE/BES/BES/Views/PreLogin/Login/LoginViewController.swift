@@ -124,6 +124,7 @@ class LoginViewController: UIViewController {
                         }
                         
                         AppController.shared.user = result as? User
+                        saveUserDetails(user: result as! User)
                         AppController.shared.loadHomeView()
                     }
                 }

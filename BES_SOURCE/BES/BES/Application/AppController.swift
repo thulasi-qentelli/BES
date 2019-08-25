@@ -17,11 +17,22 @@ class AppController {
     var window: UIWindow?
     
     func loadLoginView() {
-        window?.rootViewController  =   nil
-        let loginVC                 =   LoginViewController()
-        let navigationController = UINavigationController(rootViewController: loginVC)
-        window?.rootViewController  =   navigationController
-        setNavigationBarAppearance()
+        if let user = getUserDetails() {
+            self.user = user
+            let VC1 =   MainTabbarViewController()
+            let VC2 =   SideViewController()
+            mainView   =   SSASideMenu(contentViewController: VC1, leftMenuViewController: VC2)
+            window?.rootViewController  =    mainView
+            setNavigationBarAppearance()
+            
+        }
+        else {
+            window?.rootViewController  =   nil
+            let loginVC                 =   LoginViewController()
+            let navigationController = UINavigationController(rootViewController: loginVC)
+            window?.rootViewController  =   navigationController
+            setNavigationBarAppearance()
+        }
     }
     
     func loadHomeView() {
@@ -54,4 +65,17 @@ func addTransitionEffect(view:UIView) {
 
 func GetAppDelegate() -> AppDelegate {
     return (UIApplication.shared.delegate as! AppDelegate)
+}
+
+func saveUserDetails(user:User) {
+    let dictionary = user.dictionary
+    UserDefaults.standard.set(dictionary, forKey: "LoginUserData")
+    UserDefaults.standard.synchronize()
+}
+func getUserDetails() -> User? {
+    if let dictionary = UserDefaults.standard.object(forKey: "LoginUserData") {
+        let user = User(JSON: dictionary as! [String: Any])
+        return user
+    }
+    return nil
 }

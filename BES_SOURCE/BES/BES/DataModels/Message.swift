@@ -11,6 +11,8 @@ class Message: NSObject, Mappable, Codable {
     var updatedDate: String?
     var userName: String?
     var userPic: String?
+    var dateShortForm:String?
+    var timeShortForm:String?
     
     override init() {
         super.init()
@@ -30,6 +32,12 @@ class Message: NSObject, Mappable, Codable {
         updatedDate <- map["updatedDate"]
         userName <- map["userName"]
         userPic <- map["userPic"]
+        
+        if let created = createdDate {
+            let splitArr = created.split(separator: " ")
+            dateShortForm =  String(splitArr.first ?? "")
+            timeShortForm = String(splitArr.last ?? "")
+        }
         
     }
 }

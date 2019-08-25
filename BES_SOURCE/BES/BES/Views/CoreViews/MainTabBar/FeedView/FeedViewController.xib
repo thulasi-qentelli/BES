@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedViewController" customModule="BES" customModuleProvider="target">
             <connections>
-                <outlet property="profileView" destination="FN9-Hz-0Dc" id="RKV-bX-JVV"/>
                 <outlet property="tblView" destination="bIe-wy-GGH" id="6wm-N6-SvJ"/>
                 <outlet property="view" destination="RtQ-VA-frj" id="MWo-0O-fKm"/>
             </connections>
@@ -38,25 +37,16 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjY-T0-4E1" customClass="OrangeHeaderView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="130" id="y3t-TS-BNX"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FN9-Hz-0Dc" customClass="ProfileDisplayView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="44" width="414" height="46"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="46" id="JPS-wb-yXu"/>
+                        <constraint firstAttribute="height" constant="80" id="y3t-TS-BNX"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685511830000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="FN9-Hz-0Dc" firstAttribute="top" secondItem="FUi-Is-TUV" secondAttribute="top" id="6iB-Pe-1k2"/>
                 <constraint firstAttribute="trailing" secondItem="I0d-wj-Lmh" secondAttribute="trailing" id="701-KS-mTo"/>
-                <constraint firstItem="FN9-Hz-0Dc" firstAttribute="trailing" secondItem="FUi-Is-TUV" secondAttribute="trailing" id="9oC-lG-pQL"/>
                 <constraint firstItem="cjY-T0-4E1" firstAttribute="top" secondItem="FUi-Is-TUV" secondAttribute="top" constant="-44" id="CUp-fh-ull"/>
                 <constraint firstItem="cjY-T0-4E1" firstAttribute="trailing" secondItem="FUi-Is-TUV" secondAttribute="trailing" id="GOp-yR-vlG"/>
                 <constraint firstItem="bIe-wy-GGH" firstAttribute="trailing" secondItem="FUi-Is-TUV" secondAttribute="trailing" id="JSu-XW-Msw"/>
@@ -64,7 +54,6 @@
                 <constraint firstItem="I0d-wj-Lmh" firstAttribute="leading" secondItem="RtQ-VA-frj" secondAttribute="leading" id="LXo-rc-itJ"/>
                 <constraint firstItem="I0d-wj-Lmh" firstAttribute="top" secondItem="RtQ-VA-frj" secondAttribute="top" id="TNR-Ga-9iu"/>
                 <constraint firstItem="FUi-Is-TUV" firstAttribute="bottom" secondItem="bIe-wy-GGH" secondAttribute="bottom" id="UJT-Ps-YdP"/>
-                <constraint firstItem="FN9-Hz-0Dc" firstAttribute="leading" secondItem="FUi-Is-TUV" secondAttribute="leading" id="fYf-JM-kXh"/>
                 <constraint firstItem="bIe-wy-GGH" firstAttribute="top" secondItem="I0d-wj-Lmh" secondAttribute="bottom" id="uha-uI-bBm"/>
                 <constraint firstItem="cjY-T0-4E1" firstAttribute="leading" secondItem="FUi-Is-TUV" secondAttribute="leading" id="zhh-y3-aeC"/>
             </constraints>

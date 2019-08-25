@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationsViewController" customModule="BES" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="pzl-17-Wje" id="2es-qT-EcE"/>
-                <outlet property="profileView" destination="Gdd-TY-fyE" id="U2Q-0K-1qB"/>
                 <outlet property="tblView" destination="Wd1-0V-fXa" id="K5M-uw-nnx"/>
                 <outlet property="view" destination="s32-IT-6j0" id="Ked-Ex-eWL"/>
             </connections>
@@ -24,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pzl-17-Wje">
-                    <rect key="frame" x="0.0" y="165" width="414" height="697"/>
+                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Xhe-pa-oHp"/>
                     </connections>
@@ -57,36 +56,26 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrJ-Dd-G6N" customClass="OrangeHeaderView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="130" id="BR8-Fd-8aK"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-TY-fyE" customClass="ProfileDisplayView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="44" width="414" height="46"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="46" id="1gZ-9T-hjU"/>
+                        <constraint firstAttribute="height" constant="80" id="BR8-Fd-8aK"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685511830000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="top" secondItem="JrJ-Dd-G6N" secondAttribute="bottom" constant="35" id="1HN-RG-CK7"/>
-                <constraint firstItem="Gdd-TY-fyE" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="1zx-8i-fZI"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="3ji-6j-Yeu"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="BZ8-5a-pJ4"/>
                 <constraint firstItem="pgC-1O-jBW" firstAttribute="leading" secondItem="s32-IT-6j0" secondAttribute="leading" id="Exj-Z6-KqY"/>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="OUp-fQ-1DM"/>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="Qaq-Ci-2Tn"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="top" secondItem="pgC-1O-jBW" secondAttribute="bottom" id="TpT-FM-zVj"/>
-                <constraint firstItem="Gdd-TY-fyE" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="V8Q-Vi-nIY"/>
                 <constraint firstItem="pgC-1O-jBW" firstAttribute="top" secondItem="s32-IT-6j0" secondAttribute="top" id="WI4-5v-cbc"/>
                 <constraint firstAttribute="trailing" secondItem="pgC-1O-jBW" secondAttribute="trailing" id="YSq-wp-yhJ"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="bottom" secondItem="GVd-gd-niy" secondAttribute="bottom" constant="6" id="aI1-L4-kOF"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="trailing" secondItem="GVd-gd-niy" secondAttribute="trailing" constant="6" id="iD9-2x-5ln"/>
-                <constraint firstItem="Gdd-TY-fyE" firstAttribute="top" secondItem="xEn-nP-f3c" secondAttribute="top" id="nZh-7W-8sy"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="q2w-y6-ZXK"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="top" secondItem="xEn-nP-f3c" secondAttribute="top" constant="-44" id="rM3-Me-nVO"/>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="bottom" secondItem="xEn-nP-f3c" secondAttribute="bottom" id="uPl-Lu-iTA"/>

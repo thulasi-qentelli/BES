@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessagesViewController" customModule="BES" customModuleProvider="target">
             <connections>
-                <outlet property="profileView" destination="4dt-zc-3Qi" id="fur-Pv-Aoh"/>
                 <outlet property="tblView" destination="Hch-75-04D" id="5nM-QK-ihj"/>
                 <outlet property="view" destination="zx7-MA-7Cu" id="YwN-RS-Z0S"/>
             </connections>
@@ -38,26 +37,16 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGX-ap-zqV" customClass="OrangeHeaderView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="130" id="Aaf-Eq-wuW"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dt-zc-3Qi" customClass="ProfileDisplayView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="44" width="375" height="46"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="46" id="pqt-KP-9y9"/>
+                        <constraint firstAttribute="height" constant="80" id="Aaf-Eq-wuW"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685511830000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="4dt-zc-3Qi" firstAttribute="leading" secondItem="x2c-nk-Zuh" secondAttribute="leading" id="0ZX-i3-BxZ"/>
-                <constraint firstItem="4dt-zc-3Qi" firstAttribute="trailing" secondItem="x2c-nk-Zuh" secondAttribute="trailing" id="1RD-Ig-nZZ"/>
                 <constraint firstItem="GGX-ap-zqV" firstAttribute="leading" secondItem="x2c-nk-Zuh" secondAttribute="leading" id="BAn-Nr-5KN"/>
-                <constraint firstItem="4dt-zc-3Qi" firstAttribute="top" secondItem="x2c-nk-Zuh" secondAttribute="top" id="EH4-Vn-vu4"/>
                 <constraint firstItem="Hch-75-04D" firstAttribute="trailing" secondItem="x2c-nk-Zuh" secondAttribute="trailing" id="H4k-E1-PuZ"/>
                 <constraint firstItem="Hch-75-04D" firstAttribute="top" secondItem="er5-Sq-ePh" secondAttribute="bottom" id="ItN-wo-UIZ"/>
                 <constraint firstItem="Hch-75-04D" firstAttribute="leading" secondItem="x2c-nk-Zuh" secondAttribute="leading" id="SoV-su-ep3"/>

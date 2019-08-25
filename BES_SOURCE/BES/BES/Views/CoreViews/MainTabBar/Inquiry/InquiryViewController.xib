@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InquiryViewController" customModule="BES" customModuleProvider="target">
             <connections>
-                <outlet property="profileView" destination="Om4-m1-xYt" id="kpy-y3-2I5"/>
                 <outlet property="tblView" destination="Yhq-qF-kTL" id="HDB-a3-XLa"/>
                 <outlet property="view" destination="AkM-t4-22h" id="QIC-fN-fmI"/>
             </connections>
@@ -38,17 +37,10 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNa-j8-ELK" customClass="OrangeHeaderView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="130" id="TCu-wf-4qP"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Om4-m1-xYt" customClass="ProfileDisplayView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="44" width="414" height="46"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="46" id="oyr-Ym-kHG"/>
+                        <constraint firstAttribute="height" constant="80" id="TCu-wf-4qP"/>
                     </constraints>
                 </view>
             </subviews>
@@ -56,11 +48,8 @@
             <constraints>
                 <constraint firstItem="nNa-j8-ELK" firstAttribute="trailing" secondItem="HrC-Od-gff" secondAttribute="trailing" id="8aB-j0-Ica"/>
                 <constraint firstItem="Yhq-qF-kTL" firstAttribute="trailing" secondItem="HrC-Od-gff" secondAttribute="trailing" id="B0x-We-ke5"/>
-                <constraint firstItem="Om4-m1-xYt" firstAttribute="trailing" secondItem="HrC-Od-gff" secondAttribute="trailing" id="I28-cA-X6l"/>
                 <constraint firstItem="Yhq-qF-kTL" firstAttribute="leading" secondItem="HrC-Od-gff" secondAttribute="leading" id="P5A-tD-lDy"/>
                 <constraint firstItem="Yhq-qF-kTL" firstAttribute="top" secondItem="3de-Bb-adx" secondAttribute="bottom" id="PGx-eX-HFq"/>
-                <constraint firstItem="Om4-m1-xYt" firstAttribute="top" secondItem="HrC-Od-gff" secondAttribute="top" id="PJu-RA-fA2"/>
-                <constraint firstItem="Om4-m1-xYt" firstAttribute="leading" secondItem="HrC-Od-gff" secondAttribute="leading" id="XFm-RY-ION"/>
                 <constraint firstItem="3de-Bb-adx" firstAttribute="top" secondItem="AkM-t4-22h" secondAttribute="top" id="YXI-PJ-vBg"/>
                 <constraint firstItem="HrC-Od-gff" firstAttribute="bottom" secondItem="Yhq-qF-kTL" secondAttribute="bottom" id="eds-4x-kwe"/>
                 <constraint firstItem="nNa-j8-ELK" firstAttribute="top" secondItem="HrC-Od-gff" secondAttribute="top" constant="-44" id="jpo-5K-D5e"/>

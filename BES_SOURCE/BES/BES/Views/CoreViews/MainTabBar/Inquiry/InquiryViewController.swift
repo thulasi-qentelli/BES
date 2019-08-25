@@ -10,14 +10,12 @@ import UIKit
 
 class InquiryViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
-    @IBOutlet weak var profileView: ProfileDisplayView!
     var messages: [Message] = []
     let cellReuseIdendifier = "MessageTableViewCell"
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        profileView.user = AppController.shared.user
         setupUI()
         
         
