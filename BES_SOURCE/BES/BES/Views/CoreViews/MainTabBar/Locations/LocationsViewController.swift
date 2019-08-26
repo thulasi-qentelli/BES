@@ -23,6 +23,8 @@ class LocationsViewController: UIViewController {
     var filteredServices:[String] = []
     var filteredBasins : [String] = []
     var isFilterPresented = false
+    var selectedLocation: Location?
+    var locationManager:CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,36 +38,7 @@ class LocationsViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
         
-        let logo = UIImage(named: "logo")
-        let imageView = UIImageView(image:logo)
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        self.navigationItem.titleView = imageView
-        
-        let menubutton = UIButton(type: .custom)
-        menubutton.setImage(UIImage(named: "menu"), for: .normal)
-        menubutton.addTarget(self, action: #selector(menuBtnAction), for: .touchUpInside)
-        
-        let barButton1 = UIBarButtonItem(customView: menubutton)
-        
-        let currWidth1 = barButton1.customView?.widthAnchor.constraint(equalToConstant: 28)
-        currWidth1?.isActive = true
-        let currHeight1 = barButton1.customView?.heightAnchor.constraint(equalToConstant: 28)
-        currHeight1?.isActive = true
-        self.navigationItem.leftBarButtonItem = barButton1
-        
-        
-        let lopgoutbutton = UIButton(type: .custom)
-        lopgoutbutton.setImage(UIImage(named: "logout_white_nav"), for: .normal)
-        lopgoutbutton.addTarget(self, action: #selector(logoutAction), for: .touchUpInside)
-        
-        let barButton2 = UIBarButtonItem(customView: lopgoutbutton)
-        
-        let currWidth2 = barButton2.customView?.widthAnchor.constraint(equalToConstant: 24)
-        currWidth2?.isActive = true
-        let currHeight2 = barButton2.customView?.heightAnchor.constraint(equalToConstant: 24)
-        currHeight2?.isActive = true
-        self.navigationItem.rightBarButtonItem = barButton2
+        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
         
         if isFilterPresented == false {
             
@@ -193,12 +166,30 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.locationAction = { loc in
             print("Location action")
+            self.selectedLocation = loc
+            self.determineMyCurrentLocation()
         }
         cell.phoneAction = { loc in
             print("Phone aciton")
+            self.selectedLocation = loc
+            if let phoneNumber = loc.phone,let phoneNumberUrl = URL(string: "tel://001\(phoneNumber)"){
+                UIApplication.shared.open(phoneNumberUrl, options: [:], completionHandler: nil)
+            }
         }
         
         return cell
+    }
+    
+    func determineMyCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingHeading()
+        }
     }
 }
 
@@ -266,4 +257,48 @@ extension LocationsViewController: MKMapViewDelegate {
     
 }
 
+
+extension LocationsViewController : CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let userLocation:CLLocation = locations.last! as CLLocation
+        manager.stopUpdatingLocation()
+        
+        print("user latitude = \(userLocation.coordinate.latitude)")
+        print("user longitude = \(userLocation.coordinate.longitude)")
+        
+        let fromLocation = (userLocation.coordinate.latitude,userLocation.coordinate.longitude)
+        
+        if let location = self.selectedLocation{
+            let toLocation = (location.latitude ?? "0,0",location.longitude ?? "0,0")
+            self.showRoute(fromLocation: fromLocation, toLocation: toLocation)
+            
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print("Error \(error)")
+    }
+    
+    func showRoute(fromLocation inputFromLocation:(Double,Double),toLocation inputToLocation:(String,String)){
+        
+        let from = (String(inputFromLocation.0),String(inputFromLocation.1))
+        // let from = ("44.328310","-105.452780")
+        
+        let directionsURL = String(format:"http://maps.apple.com/?saddr=%@,%@&daddr=%@,%@",from.0,from.1,inputToLocation.0,inputToLocation.1)
+        let urlString = directionsURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        guard let url = URL(string: urlString!) else {
+            return
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+}
 

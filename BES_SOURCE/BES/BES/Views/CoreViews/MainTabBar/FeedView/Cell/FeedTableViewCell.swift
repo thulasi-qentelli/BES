@@ -10,6 +10,7 @@ import UIKit
 
 class FeedTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var displayTextLbl: UILabel!
     @IBOutlet weak var txtLbl: UILabel!
     @IBOutlet weak var readMoreBtn: UIButton!
     @IBOutlet weak var imgHeight: NSLayoutConstraint!
@@ -43,6 +44,9 @@ class FeedTableViewCell: UITableViewCell {
         readMoreFunction(sender, string)
     }
     
+    @IBAction func likeBtnAction(_ sender: UIButton) {
+        
+    }
     func getTextForReadmore(kStr:String, numberOfLines:Int) {
         
         string = kStr
@@ -56,9 +60,7 @@ class FeedTableViewCell: UITableViewCell {
             finalArr.append(String(splitArray[i]))
             
             let subStr = finalArr.joined(separator: " ")
-            print(subStr)
             let newStr = String(subStr)
-            
             let kHeight = newStr.height(withConstrainedWidth: UIScreen.main.bounds.size.width - 60, font: self.txtLbl.font)
             
             if height == 0 {
@@ -75,6 +77,7 @@ class FeedTableViewCell: UITableViewCell {
                     self.readMoreBtn.isHidden = true
             }
             else if changes == numberOfLines {
+                finalArr.removeLast()
                 finalArr.removeLast()
                 finalArr.removeLast()
                 finalArr.removeLast()

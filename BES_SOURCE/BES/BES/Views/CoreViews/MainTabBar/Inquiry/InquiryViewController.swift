@@ -25,37 +25,7 @@ class InquiryViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
         
-        let logo = UIImage(named: "logo")
-        let imageView = UIImageView(image:logo)
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        self.navigationItem.titleView = imageView
-        
-        let menubutton = UIButton(type: .custom)
-        menubutton.setImage(UIImage(named: "menu"), for: .normal)
-        menubutton.addTarget(self, action: #selector(menuBtnAction), for: .touchUpInside)
-        
-        let barButton1 = UIBarButtonItem(customView: menubutton)
-        
-        let currWidth1 = barButton1.customView?.widthAnchor.constraint(equalToConstant: 28)
-        currWidth1?.isActive = true
-        let currHeight1 = barButton1.customView?.heightAnchor.constraint(equalToConstant: 28)
-        currHeight1?.isActive = true
-        self.navigationItem.leftBarButtonItem = barButton1
-        
-        
-        let lopgoutbutton = UIButton(type: .custom)
-        lopgoutbutton.setImage(UIImage(named: "logout_white_nav"), for: .normal)
-        lopgoutbutton.addTarget(self, action: #selector(logoutAction), for: .touchUpInside)
-        
-        let barButton2 = UIBarButtonItem(customView: lopgoutbutton)
-        
-        let currWidth2 = barButton2.customView?.widthAnchor.constraint(equalToConstant: 24)
-        currWidth2?.isActive = true
-        let currHeight2 = barButton2.customView?.heightAnchor.constraint(equalToConstant: 24)
-        currHeight2?.isActive = true
-        self.navigationItem.rightBarButtonItem = barButton2
-        
+        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
         
     }
     

@@ -12,7 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputView" customModule="BES" customModuleProvider="target">
             <connections>
+                <outlet property="accessoryImgBtn" destination="w1J-Oz-cY3" id="FeW-TH-RJk"/>
+                <outlet property="accessoryImgHeight" destination="qsp-gN-bA1" id="RhV-DA-KrA"/>
                 <outlet property="accessoryImgView" destination="EXR-BO-SoL" id="nv3-eC-Uqd"/>
+                <outlet property="accessoryImgWidth" destination="npR-YQ-11V" id="xEn-0D-IBv"/>
                 <outlet property="titleLbl" destination="d5Z-Z6-bz1" id="hh9-jx-zZq"/>
                 <outlet property="txtField" destination="U3c-cE-rZn" id="udr-W4-Gzb"/>
             </connections>
@@ -37,6 +40,12 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6KA-4E-kG9">
                             <rect key="frame" x="265" y="0.0" width="50" height="60"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1J-Oz-cY3">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="60"/>
+                                    <connections>
+                                        <action selector="accessoryImgAction:" destination="-1" eventType="touchUpInside" id="ZF8-v7-hWo"/>
+                                    </connections>
+                                </button>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNavigationCheck" translatesAutoresizingMaskIntoConstraints="NO" id="EXR-BO-SoL">
                                     <rect key="frame" x="17" y="22" width="16" height="16"/>
                                     <constraints>
@@ -48,8 +57,12 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="EXR-BO-SoL" firstAttribute="centerY" secondItem="6KA-4E-kG9" secondAttribute="centerY" id="6hI-gH-Mq3"/>
+                                <constraint firstAttribute="bottom" secondItem="w1J-Oz-cY3" secondAttribute="bottom" id="FgD-UC-67v"/>
                                 <constraint firstAttribute="width" constant="50" id="eyo-8h-9iz"/>
+                                <constraint firstAttribute="trailing" secondItem="w1J-Oz-cY3" secondAttribute="trailing" id="jsj-G8-ven"/>
+                                <constraint firstItem="w1J-Oz-cY3" firstAttribute="leading" secondItem="6KA-4E-kG9" secondAttribute="leading" id="lqM-0P-WER"/>
                                 <constraint firstItem="EXR-BO-SoL" firstAttribute="centerX" secondItem="6KA-4E-kG9" secondAttribute="centerX" id="m9S-QE-LXV"/>
+                                <constraint firstItem="w1J-Oz-cY3" firstAttribute="top" secondItem="6KA-4E-kG9" secondAttribute="top" id="urP-Mk-83q"/>
                             </constraints>
                         </view>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Place holder text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U3c-cE-rZn">

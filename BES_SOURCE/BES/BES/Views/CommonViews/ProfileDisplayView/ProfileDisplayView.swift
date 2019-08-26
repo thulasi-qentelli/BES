@@ -20,7 +20,6 @@ class ProfileDisplayView: UIView {
                 }
             }
             textLbl.text = user?.getName()
-            
         }
     }
     

@@ -19,7 +19,9 @@ class SideViewController: UIViewController {
     @IBOutlet weak var inquiry: SideMenuCell!
     @IBOutlet weak var logout: SideMenuCell!
     
-    
+    var menuTapped:(Int)->Void = { index in
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,23 +29,36 @@ class SideViewController: UIViewController {
         
       
         profileView.user = AppController.shared.user
-        home.btnClickAction = {
+        profileView.editTapped = {
+            let profileVC = ProfileViewController()
+            let nav = UINavigationController(rootViewController: profileVC)
+            self.present(nav, animated: true, completion: nil)
             
+        }
+        
+        home.btnClickAction = {
+            self.sideMenuViewController?.hideMenuViewController()
+            self.menuTapped(0)
         }
         locations.btnClickAction = {
-            
+            self.sideMenuViewController?.hideMenuViewController()
+            self.menuTapped(1)
         }
         messages.btnClickAction = {
-            
+            self.sideMenuViewController?.hideMenuViewController()
+            self.menuTapped(2)
         }
         feedback.btnClickAction = {
-            
+            self.sideMenuViewController?.hideMenuViewController()
+            self.menuTapped(3)
         }
         inquiry.btnClickAction = {
-            
+            self.sideMenuViewController?.hideMenuViewController()
+            self.menuTapped(4)
         }
         logout.btnClickAction = {
-            
+//            self.dismiss(animated: true, completion: nil)
+            self.menuTapped(5)
         }
     }
 

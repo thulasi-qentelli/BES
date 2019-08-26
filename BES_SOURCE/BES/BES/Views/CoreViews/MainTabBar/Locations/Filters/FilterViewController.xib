@@ -30,7 +30,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6p-KY-Orl">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6p-KY-Orl">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="MTp-Ck-Y4b"/>
@@ -40,13 +40,22 @@
                                 <action selector="closeBtnAction:" destination="-1" eventType="touchUpInside" id="E5d-0v-rYn"/>
                             </connections>
                         </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear" translatesAutoresizingMaskIntoConstraints="NO" id="g2r-0k-G5Y">
+                            <rect key="frame" x="18" y="18" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="PMQ-qm-a5k"/>
+                                <constraint firstAttribute="width" constant="24" id="jxt-Ro-Avp"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.95687168836593628" green="0.95685106515884399" blue="0.95685511827468872" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="tAu-qG-k8g" secondAttribute="trailing" id="8KU-pl-M4U"/>
                         <constraint firstItem="tAu-qG-k8g" firstAttribute="leading" secondItem="jz3-0e-fgE" secondAttribute="leading" id="MEA-nr-HDV"/>
                         <constraint firstItem="w6p-KY-Orl" firstAttribute="top" secondItem="jz3-0e-fgE" secondAttribute="top" id="NnH-h4-ZmT"/>
+                        <constraint firstItem="g2r-0k-G5Y" firstAttribute="centerY" secondItem="w6p-KY-Orl" secondAttribute="centerY" id="T2b-3A-7RH"/>
                         <constraint firstItem="tAu-qG-k8g" firstAttribute="top" secondItem="jz3-0e-fgE" secondAttribute="top" id="XEV-rj-SkX"/>
+                        <constraint firstItem="g2r-0k-G5Y" firstAttribute="centerX" secondItem="w6p-KY-Orl" secondAttribute="centerX" id="gma-DJ-zyw"/>
                         <constraint firstAttribute="bottom" secondItem="tAu-qG-k8g" secondAttribute="bottom" id="haF-UK-Ftg"/>
                         <constraint firstItem="w6p-KY-Orl" firstAttribute="leading" secondItem="jz3-0e-fgE" secondAttribute="leading" id="pbV-xx-LV5"/>
                         <constraint firstAttribute="height" constant="60" id="ub7-Wl-hH4"/>
@@ -69,8 +78,8 @@
                                     <rect key="frame" x="30" y="0.0" width="172" height="55"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMx-m4-DUQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="92" height="55"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="87" height="55"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <state key="normal" title="CLEAR ALL"/>
                                             <connections>
                                                 <action selector="clearAllBtnAction:" destination="-1" eventType="touchUpInside" id="LUO-RS-T2Q"/>
@@ -96,8 +105,8 @@
                                     <rect key="frame" x="212" y="0.0" width="172" height="55"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5D-qz-wFE">
-                                            <rect key="frame" x="103" y="0.0" width="69" height="55"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <rect key="frame" x="107" y="0.0" width="65" height="55"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <state key="normal" title="CANCEL"/>
                                             <connections>
                                                 <action selector="cancelBtnAction:" destination="-1" eventType="touchUpInside" id="99P-Hi-ipN"/>
@@ -186,4 +195,7 @@
             <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
         </view>
     </objects>
+    <resources>
+        <image name="clear" width="40" height="40"/>
+    </resources>
 </document>

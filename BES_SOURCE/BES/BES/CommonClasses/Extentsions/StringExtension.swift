@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 
 extension String {
+    
+    var date: Date? {
+        get {
+            let dateFormatterPrint = DateFormatter()
+            dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            return dateFormatterPrint.date(from: self)
+        }
+    }
     func isValidEmail() -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         

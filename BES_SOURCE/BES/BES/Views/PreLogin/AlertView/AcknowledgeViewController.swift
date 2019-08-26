@@ -70,14 +70,38 @@ class AcknowledgeViewController: UIViewController {
         case .Signup:
             titleLbl.text = "New\nAccount"
             alertTitleLbl.text = "Email Verification Required"
-            alertDetailLbl.text = "Am email has been sent to:\n\(self.email)\n\nPlease follow the instructions in the verification email to finish creating your BES account."
+            
+            
+            let attributedString = NSMutableAttributedString(string:"Am email has been sent to:\n")
+            
+            let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)]
+            let boldString1 = NSMutableAttributedString(string: self.email, attributes:attrs1)
+            
+            attributedString.append(boldString1)
+            
+            let attributedString1 = NSMutableAttributedString(string:"\n\nPlease follow the instructions in the verification email to finish creating your")
+            attributedString.append(attributedString1)
+            
+            let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)]
+            let boldString2 = NSMutableAttributedString(string: " BES", attributes:attrs2)
+            attributedString.append(boldString2)
+            
+            let attributedString2 = NSMutableAttributedString(string:" account.")
+            attributedString.append(attributedString2)
+            
+//            alertDetailLbl.text = "Am email has been sent to:\n\(self.email)\n\nPlease follow the instructions in the verification email to finish creating your BES account."
+            alertDetailLbl.attributedText = attributedString
             doneBtn.setTitle("DONE", for: .normal)
      
         }
     }
     @IBAction func btnAction(_ sender: UIButton) {
         if sender == clickHereBtn {
-            
+        
+//            self.type == .ForgotPassword {
+//                
+//            }
+//            
         }
         else if sender == doneBtn {
             self.navigationController?.popToRootViewController(animated: true)

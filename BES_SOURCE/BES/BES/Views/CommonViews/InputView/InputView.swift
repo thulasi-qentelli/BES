@@ -9,10 +9,33 @@ class InputView: UIView, UITextFieldDelegate {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var accessoryImgView: UIImageView!
     @IBOutlet weak var txtField: UITextField!
+    @IBOutlet weak var accessoryImgWidth: NSLayoutConstraint!
+    @IBOutlet weak var accessoryImgBtn: UIButton!
     
+    @IBOutlet weak var accessoryImgHeight: NSLayoutConstraint!
     var getUpdatedText:(String)->() = { string in
         
     }
+    
+    var accessoryAction:(UIButton)->Void = { sender in
+        
+    }
+    
+    @IBInspectable var accessoryImage: UIImage = UIImage(named: "iconNavigationCheck") ?? UIImage() {
+        didSet{
+            self.accessoryImgView.image = accessoryImage
+        }
+    }
+    
+    @IBInspectable var accessoryImageSize: CGFloat = 16{
+        didSet{
+            self.accessoryImgWidth.constant = accessoryImageSize
+            self.accessoryImgHeight.constant = accessoryImageSize
+            
+        }
+    }
+    
+    var isDropDown:Bool = false 
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -31,6 +54,7 @@ class InputView: UIView, UITextFieldDelegate {
         super.awakeFromNib()
     
         self.accessoryImgView.isHidden  =   true
+        self.accessoryImgBtn.isHidden = true
         self.txtField.delegate = self
     }
     
@@ -62,8 +86,8 @@ class InputView: UIView, UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if let text = textField.text,
-            let textRange = Range(range, in: text) {
+        
+        if let text = textField.text, let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
             getUpdatedText(updatedText)
@@ -72,4 +96,7 @@ class InputView: UIView, UITextFieldDelegate {
         return true
     }
     
+    @IBAction func accessoryImgAction(_ sender: UIButton) {
+        accessoryAction(sender)
+    }
 }

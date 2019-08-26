@@ -25,36 +25,7 @@ class FeedViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
         
-        let logo = UIImage(named: "logo")
-        let imageView = UIImageView(image:logo)
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        self.navigationItem.titleView = imageView
-        
-        let menubutton = UIButton(type: .custom)
-        menubutton.setImage(UIImage(named: "menu"), for: .normal)
-        menubutton.addTarget(self, action: #selector(menuBtnAction), for: .touchUpInside)
-        
-        let barButton1 = UIBarButtonItem(customView: menubutton)
-        
-        let currWidth1 = barButton1.customView?.widthAnchor.constraint(equalToConstant: 28)
-        currWidth1?.isActive = true
-        let currHeight1 = barButton1.customView?.heightAnchor.constraint(equalToConstant: 28)
-        currHeight1?.isActive = true
-        self.navigationItem.leftBarButtonItem = barButton1
-        
-        
-        let lopgoutbutton = UIButton(type: .custom)
-        lopgoutbutton.setImage(UIImage(named: "logout_white_nav"), for: .normal)
-        lopgoutbutton.addTarget(self, action: #selector(logoutAction), for: .touchUpInside)
-        
-        let barButton2 = UIBarButtonItem(customView: lopgoutbutton)
-        
-        let currWidth2 = barButton2.customView?.widthAnchor.constraint(equalToConstant: 24)
-        currWidth2?.isActive = true
-        let currHeight2 = barButton2.customView?.heightAnchor.constraint(equalToConstant: 24)
-        currHeight2?.isActive = true
-        self.navigationItem.rightBarButtonItem = barButton2
+        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
         
         let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
@@ -74,14 +45,6 @@ class FeedViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    @objc func menuBtnAction() {
-        presentLeftMenuViewController()
-    }
-    
-    @objc func logoutAction() {
-        AppController.shared.loadLoginView()
     }
     
     
@@ -119,8 +82,12 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
         let cell = tableView.dequeueReusableCell(withIdentifier: feedCellReuseIdentifier, for: indexPath) as! FeedTableViewCell
-        let feed = feeds[indexPath.row]
+        let feed = feeds[indexPath.row]    
+        
+        cell.timestampLbl.text = feed.createdDate?.date?.humanDisplayDaateFormat()
+        cell.displayTextLbl.text = ""
         cell.getTextForReadmore(kStr: feed.content ?? "", numberOfLines: 3)
+        cell.txtLbl.isHidden = false
         cell.readMoreBtn.isSelected = false
         cell.profileImgPlaceholderView.isHidden = false
         cell.nameLbl.text = feed.userName
@@ -130,25 +97,27 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.profileImgPlaceholderView.isHidden = true
             }
         }
-        
+        cell.imgHeight.constant = 0
         if let urlString = feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
             if let url  = URL(string: urlString){
-                cell.imgView?.sd_setImage(with:url, completed: nil)
-                cell.imgHeight.constant = 100
-            }
-            else {
-                cell.imgHeight.constant = 0
+                cell.imgView?.sd_setImage(with: url, completed: { (image, error, type, url) in
+                    cell.imgHeight.constant = image?.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
+                    tableView.beginUpdates()
+                    tableView.endUpdates()
+                })
             }
         }
-        else {
-             cell.imgHeight.constant = 0
-        }
-    
+        
+        
         cell.readMoreFunction = { (sender, str) in
             if sender.isSelected == true {
+                cell.displayTextLbl.text = ""
                 cell.getTextForReadmore(kStr: str, numberOfLines: 3)
+                cell.txtLbl.isHidden = false
             } else {
-                cell.txtLbl.text = str + "                               "
+                cell.displayTextLbl.text = str
+                cell.txtLbl.text =  str + "  Read More"
+                cell.txtLbl.isHidden = true
             }
             sender.isSelected = !sender.isSelected
             tableView.beginUpdates()
@@ -158,4 +127,10 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension UIImage {
+    func heightForWidth(width:CGFloat) -> CGFloat{
+    
+        return (width/self.size.width)*self.size.height
+    }
+}
 

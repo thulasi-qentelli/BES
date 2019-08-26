@@ -11,13 +11,18 @@ class ProfileHeaderView: UIView {
     @IBOutlet weak var profileSubIcon: UIImageView!
     @IBOutlet weak var textLbl: UILabel!
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var user:User? {
+        didSet {
+            if let urlString = AppController.shared.user?.pic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+                if let url  = URL(string: urlString){
+                    profileImgView.sd_setImage(with:url, completed: nil)
+                    profileImgPlaceholderView.isHidden = true
+                }
+            }
+        }
     }
-    */
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

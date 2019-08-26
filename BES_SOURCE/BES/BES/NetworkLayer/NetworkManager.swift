@@ -118,8 +118,14 @@ struct NetworkManager {
                             case .failure(let error):
                                 
                                 print(error)
-                                let errorMessage = self.handleNetworkResponse(response.response!)
-                                completion(nil, errorMessage)
+                                if let resp = response.response {
+                                    let errorMessage = self.handleNetworkResponse(resp)
+                                    completion(nil, errorMessage)
+                                }
+                                else {
+                                    completion(nil, "We are building... Please wait for some time.")
+                                }
+                                
                             }
                             
         }
@@ -174,9 +180,15 @@ struct NetworkManager {
                     else {
                         completion(nil,jsonString)
                     }
-                    
+                case.forgotPassword:
+                    completion(jsonString,nil)
                 case .saveUser:
-                    print("")
+                    if let user = User(JSONString: jsonString),user.id ?? 0 > 0 {
+                       completion(user,nil)
+                    }
+                    else {
+                        completion(nil,"User already exists.")
+                    }
                 default:
                     print("========================")
                     
@@ -185,10 +197,21 @@ struct NetworkManager {
                 print(error)
                 switch method {
                 case .login:
-                    print("")
                     if response.response?.statusCode == 400 {
-                        completion(nil, "Entered email and password are wrong.")
+                        completion(nil, "Please check entered email or password is.")
                     }
+                    else {
+                        let errorMessage = self.handleNetworkResponse(response.response!)
+                        completion(nil, errorMessage)
+                    }
+                case .forgotPassword:
+                    print(response.response?.statusCode)
+                    if response.response?.statusCode == 500 {
+                        completion(nil, "Please check entered email.")
+                    }
+//                    else if response.response?.statusCode == 400 {
+//                        completion(nil, "User does not exist with this email.")
+//                    }
                     else {
                         let errorMessage = self.handleNetworkResponse(response.response!)
                         completion(nil, errorMessage)

@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import Security
 
 class LoginViewController: UIViewController {
 
@@ -23,6 +24,8 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
         
+        userNameView.txtField.textContentType = .username
+        userNameView.txtField.keyboardType = .emailAddress
         userNameView.getUpdatedText = { string in
             if string.isValidEmail() {
                 self.userNameView.accessoryImgView.isHidden = false
@@ -31,14 +34,22 @@ class LoginViewController: UIViewController {
                 self.userNameView.accessoryImgView.isHidden = true
             }
         }
-        
+        passwordView.txtField.textContentType = .password
         passwordView.getUpdatedText = { string in
-            if string.count >= 6 {
+            if string.count > 0 {
+                self.passwordView.accessoryImgBtn.isHidden = false
                 self.passwordView.accessoryImgView.isHidden = false
             }
             else {
+                self.passwordView.accessoryImgBtn.isHidden = true
                 self.passwordView.accessoryImgView.isHidden = true
             }
+        }
+        passwordView.accessoryAction = { sender in
+            self.passwordView.txtField.isSecureTextEntry = sender.isSelected
+            self.passwordView.txtField.clearsOnBeginEditing = false
+            sender.isSelected = !sender.isSelected
+            
         }
     }
 
@@ -73,9 +84,7 @@ class LoginViewController: UIViewController {
     }
     */
     @IBAction func btnAction(_ sender: UIButton) {
-        
-        
-        
+                self.view.endEditing(true)
         if sender == signInBtn {
             guard let email = userNameView.txtField.text else {
                 self.view.makeToast("Please enter user name", duration: 1.0, position: .center)
@@ -106,31 +115,35 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            var parameters = ParameterDetail()
-            parameters.email = email
-            parameters.password = password
-            
-            if let parm = parameters.dictionary {
-                let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
-                loadingNotification.mode = MBProgressHUDMode.indeterminate
-                loadingNotification.label.text = "Please wait"
-                
-                NetworkManager().post(method: .login, parameters: parm) { (result, error) in
-                    DispatchQueue.main.async {
-                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                        if error != nil {
-                            self.view.makeToast(error, duration: 2.0, position: .center)
-                            return
+            SecAddSharedWebCredential("http://bes.qentelli.com:8085" as CFString, email as CFString, password as CFString) { (error) in
+                print(error?.localizedDescription)
+                DispatchQueue.main.async {
+                    var parameters = ParameterDetail()
+                    parameters.email = email
+                    parameters.password = password
+                    
+                    if let parm = parameters.dictionary {
+                        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        loadingNotification.mode = MBProgressHUDMode.indeterminate
+                        loadingNotification.label.text = "Please wait"
+                        
+                        NetworkManager().post(method: .login, parameters: parm) { (result, error) in
+                            DispatchQueue.main.async {
+                                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                                if error != nil {
+                                    self.view.makeToast(error, duration: 2.0, position: .center)
+                                    return
+                                }
+                                
+                                AppController.shared.user = result as? User
+                                saveUserDetails(user: result as! User)
+                                AppController.shared.loadHomeView()
+                            }
                         }
                         
-                        AppController.shared.user = result as? User
-                        saveUserDetails(user: result as! User)
-                        AppController.shared.loadHomeView()
                     }
                 }
-                
             }
-
             
         }
         else if sender == forgotPasswordBtn {

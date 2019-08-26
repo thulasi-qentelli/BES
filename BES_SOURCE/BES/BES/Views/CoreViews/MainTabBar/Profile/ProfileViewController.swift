@@ -8,15 +8,15 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     @IBOutlet weak var firstNameView: InputView!
     @IBOutlet weak var lastNameView: InputView!
+    @IBOutlet weak var locationView: InputView!
     @IBOutlet weak var emailView: InputView!
     @IBOutlet weak var passwordView: InputView!
-    @IBOutlet weak var confirmPasswordView: InputView!
     @IBOutlet weak var createAccountBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     
@@ -27,12 +27,14 @@ class SignupViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
         
+        profileHeaderView.user  = AppController.shared.user
         firstNameView.getUpdatedText = { string in
             self.firstNameView.accessoryImgView.isHidden = true
             if string.count > 0 {
                 self.firstNameView.accessoryImgView.isHidden = false
             }
         }
+        
         lastNameView.getUpdatedText = { string in
             self.lastNameView.accessoryImgView.isHidden = true
             if string.count > 0 {
@@ -40,67 +42,20 @@ class SignupViewController: UIViewController {
             }
         }
         
-        emailView.txtField.textContentType = .username
-        emailView.txtField.keyboardType = .emailAddress
-        
         emailView.getUpdatedText = { string in
             self.emailView.accessoryImgView.isHidden = true
             if string.isValidEmail(){
                 self.emailView.accessoryImgView.isHidden = false
             }
         }
-        passwordView.txtField.textContentType = .password
+        
         passwordView.getUpdatedText = { string in
-            if string.count > 0 {
-                self.passwordView.accessoryImgBtn.isHidden = false
+            self.passwordView.accessoryImgView.isHidden = true
+            if string.count >= 6 {
                 self.passwordView.accessoryImgView.isHidden = false
             }
-            else {
-                self.passwordView.accessoryImgBtn.isHidden = true
-                self.passwordView.accessoryImgView.isHidden = true
-            }
         }
-        passwordView.accessoryAction = { sender in
-            self.passwordView.txtField.isSecureTextEntry = sender.isSelected
-            self.passwordView.txtField.clearsOnBeginEditing = false
-            sender.isSelected = !sender.isSelected
-            
-        }
-        
-//        passwordView.getUpdatedText = { string in
-//            self.passwordView.accessoryImgView.isHidden = true
-//            self.confirmPasswordView.accessoryImgView.isHidden = true
-//            if string.count >= 6 {
-//                self.passwordView.accessoryImgView.isHidden = false
-//                if string == self.confirmPasswordView.txtField.text {
-//                    self.confirmPasswordView.accessoryImgView.isHidden = false
-//                }
-//            }
-//        }
-//        confirmPasswordView.getUpdatedText = { string in
-//            self.confirmPasswordView.accessoryImgView.isHidden = true
-//            if string.count >= 6, string == self.passwordView.txtField.text {
-//                self.confirmPasswordView.accessoryImgView.isHidden = false
-//            }
-//        }
-//
-        confirmPasswordView.txtField.textContentType = .password
-        confirmPasswordView.getUpdatedText = { string in
-            if string.count > 0 {
-                self.confirmPasswordView.accessoryImgBtn.isHidden = false
-                self.confirmPasswordView.accessoryImgView.isHidden = false
-            }
-            else {
-                self.confirmPasswordView.accessoryImgBtn.isHidden = true
-                self.confirmPasswordView.accessoryImgView.isHidden = true
-            }
-        }
-        confirmPasswordView.accessoryAction = { sender in
-            self.confirmPasswordView.txtField.isSecureTextEntry = sender.isSelected
-            self.confirmPasswordView.txtField.clearsOnBeginEditing = false
-            sender.isSelected = !sender.isSelected
-            
-        }
+       
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +87,7 @@ class SignupViewController: UIViewController {
 
     
     @objc func backBtnAction() {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setupUI() {
@@ -143,6 +98,9 @@ class SignupViewController: UIViewController {
         lastNameView.titleLbl.text = "Last Name"
         lastNameView.txtField.placeholder = "Enter last name"
         
+        locationView.titleLbl.text = "Location"
+        locationView.txtField.placeholder = "EnterLocation"
+        
         emailView.titleLbl.text = "Email address"
         emailView.txtField.placeholder = "Enter email address"
         emailView.txtField.keyboardType = .emailAddress
@@ -150,14 +108,19 @@ class SignupViewController: UIViewController {
         passwordView.titleLbl.text = "Password"
         passwordView.txtField.placeholder = "Enter password"
         passwordView.txtField.isSecureTextEntry = true
-        passwordView.txtField.clearsOnBeginEditing = false
-        confirmPasswordView.titleLbl.text = "Confirm password"
-        confirmPasswordView.txtField.placeholder = "Confirm password"
-        confirmPasswordView.txtField.isSecureTextEntry = true
-        confirmPasswordView.txtField.clearsOnBeginEditing = false
+        self.passwordView.txtField.clearsOnBeginEditing = false
+        profileHeaderView.textLbl.text = "UPDATE PROFILE\nPICTURE"
+        
+        if let user = AppController.shared.user {
+            firstNameView.txtField.text = user.firstName
+            lastNameView.txtField.text = user.lastName
+            locationView.txtField.text = user.location
+            emailView.txtField.text = user.email
+            passwordView.txtField.text = user.password
+        }
+ 
     }
     @IBAction func btnAction(_ sender: UIButton) {
-        self.view.endEditing(true)
         if sender == signInBtn {
             self.navigationController?.popToRootViewController(animated: true)
         }
@@ -166,6 +129,7 @@ class SignupViewController: UIViewController {
                 
                 let firstName = firstNameView.txtField.text!
                 let lastName = lastNameView.txtField.text!
+                let location = locationView.txtField.text!
                 let email = emailView.txtField.text!
                 let password = passwordView.txtField.text!
                 
@@ -175,6 +139,7 @@ class SignupViewController: UIViewController {
                 parameters.email = email
                 parameters.password = password
                 parameters.role = "user"
+                parameters.pic = ""
                 
                 if let parm = parameters.dictionary {
                     NetworkManager().post(method: .saveUser, parameters: parm) { (result, error) in
@@ -183,15 +148,12 @@ class SignupViewController: UIViewController {
                                 self.view.makeToast(error, duration: 2.0, position: .center)
                                 return
                             }
-                            
-                            let alertVC     =   AcknowledgeViewController()
-                            alertVC.type    =   .Signup
-                            alertVC.email   =   email
-                            self.navigationController?.pushViewController(alertVC, animated: true)
                         }
                     }
                 }
+                
             }
+            
         }
         
     }
@@ -213,14 +175,13 @@ class SignupViewController: UIViewController {
             emailView.txtField.becomeFirstResponder()
             return false
         }
+        
+        guard let location = locationView.txtField.text else {
+            return false
+        }
         guard let password = passwordView.txtField.text else {
             self.view.makeToast("Please enter password", duration: 1.0, position: .center)
             passwordView.txtField.becomeFirstResponder()
-            return false
-        }
-        guard let confirmPassword = confirmPasswordView.txtField.text else {
-            self.view.makeToast("Please confirm password", duration: 1.0, position: .center)
-            confirmPasswordView.txtField.becomeFirstResponder()
             return false
         }
         
@@ -236,7 +197,7 @@ class SignupViewController: UIViewController {
             return false
         }
         
-        if email.count < 1{
+        if email.count <= 0 {
             self.view.makeToast("Please enter email", duration: 1.0, position: .center)
             emailView.txtField.becomeFirstResponder()
             return false
@@ -254,19 +215,7 @@ class SignupViewController: UIViewController {
             return false
         }
         
-        if confirmPassword.count < 6 {
-            self.view.makeToast("Please confirm password", duration: 1.0, position: .center)
-            confirmPasswordView.txtField.becomeFirstResponder()
-            return false
-        }
-        
-        if password != confirmPassword {
-            self.view.makeToast("Passwords doesn't match.", duration: 1.0, position: .center)
-            confirmPasswordView.txtField.becomeFirstResponder()
-            return false
-        }
-        
         return true
     }
-    
+
 }

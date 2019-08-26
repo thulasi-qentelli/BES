@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000DBEA9231393F50064692E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000DBEA7231393F50064692E /* ProfileViewController.swift */; };
+		000DBEAA231393F50064692E /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000DBEA8231393F50064692E /* ProfileViewController.xib */; };
 		0055FBCE230FAC9A003D4D41 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0055FBCD230FAC9A003D4D41 /* NetworkManager.swift */; };
 		0055FBD8230FAD73003D4D41 /* ParameterDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0055FBD7230FAD73003D4D41 /* ParameterDetail.swift */; };
 		0055FBDA230FAD7B003D4D41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0055FBD9230FAD7B003D4D41 /* User.swift */; };
@@ -42,6 +44,7 @@
 		005BC730230DBCE000BCAC1A /* AcknowledgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BC72E230DBCE000BCAC1A /* AcknowledgeViewController.xib */; };
 		005BC734230DE72A00BCAC1A /* OrangeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005BC732230DE72A00BCAC1A /* OrangeHeaderView.swift */; };
 		005BC735230DE72A00BCAC1A /* OrangeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BC733230DE72A00BCAC1A /* OrangeHeaderView.xib */; };
+		00C76DF723140865004C43BF /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C76DF623140865004C43BF /* AuthenticationServices.framework */; };
 		00C8F9DD2312D86500C2378C /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F9DB2312D86500C2378C /* FeedTableViewCell.swift */; };
 		00C8F9DE2312D86500C2378C /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C8F9DC2312D86500C2378C /* FeedTableViewCell.xib */; };
 		00C9183D2311DB3100922DC7 /* LocationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C9183B2311DB3100922DC7 /* LocationTableCell.swift */; };
@@ -81,6 +84,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000DBEA7231393F50064692E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		000DBEA8231393F50064692E /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		0055FBCD230FAC9A003D4D41 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0055FBD7230FAD73003D4D41 /* ParameterDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterDetail.swift; sourceTree = "<group>"; };
 		0055FBD9230FAD7B003D4D41 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -119,6 +124,8 @@
 		005BC732230DE72A00BCAC1A /* OrangeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrangeHeaderView.swift; sourceTree = "<group>"; };
 		005BC733230DE72A00BCAC1A /* OrangeHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrangeHeaderView.xib; sourceTree = "<group>"; };
 		008B5D06ED3F1B4039CA5DB2 /* Pods_BES.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BES.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00C76DF523140865004C43BF /* BES.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BES.entitlements; sourceTree = "<group>"; };
+		00C76DF623140865004C43BF /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		00C8F9DB2312D86500C2378C /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		00C8F9DC2312D86500C2378C /* FeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		00C9183B2311DB3100922DC7 /* LocationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableCell.swift; sourceTree = "<group>"; };
@@ -163,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C76DF723140865004C43BF /* AuthenticationServices.framework in Frameworks */,
 				6FE5A2EA602FA0F75FE0522D /* Pods_BES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,6 +178,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000DBEA6231393BF0064692E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				000DBEA7231393F50064692E /* ProfileViewController.swift */,
+				000DBEA8231393F50064692E /* ProfileViewController.xib */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		0055FBDB230FAD8B003D4D41 /* Extentsions */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +238,7 @@
 		005BC6E8230D091800BCAC1A /* BES */ = {
 			isa = PBXGroup;
 			children = (
+				00C76DF523140865004C43BF /* BES.entitlements */,
 				005BC6FF230D09B100BCAC1A /* CommonClasses */,
 				005BC6FE230D09AA00BCAC1A /* Views */,
 				005BC6FD230D097400BCAC1A /* DataModels */,
@@ -453,6 +471,7 @@
 		00F21A22230E6DC5008D9976 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				000DBEA6231393BF0064692E /* Profile */,
 				00F21A2B230EA8FE008D9976 /* Inquiry */,
 				00F21A2A230EA8F5008D9976 /* Feedback */,
 				00F21A29230EA8EB008D9976 /* Messages */,
@@ -550,6 +569,7 @@
 		A5142102CEAFAAC54B3648A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00C76DF623140865004C43BF /* AuthenticationServices.framework */,
 				008B5D06ED3F1B4039CA5DB2 /* Pods_BES.framework */,
 			);
 			name = Frameworks;
@@ -589,6 +609,14 @@
 				TargetAttributes = {
 					005BC6E5230D091800BCAC1A = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.AutoFillCredentialProvider = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -631,6 +659,7 @@
 				00C9184F2311EEE300922DC7 /* CustomCalloutView.xib in Resources */,
 				005BC70D230D117000BCAC1A /* SplashViewController.xib in Resources */,
 				00F21A45230EB6A4008D9976 /* ProfileDisplayView.xib in Resources */,
+				000DBEAA231393F50064692E /* ProfileViewController.xib in Resources */,
 				005BC71B230D16BC00BCAC1A /* InputView.xib in Resources */,
 				005BC72B230DA82900BCAC1A /* Assets.xcassets in Resources */,
 				00F21A30230EA92F008D9976 /* FeedViewController.xib in Resources */,
@@ -730,6 +759,7 @@
 				005BC71A230D16BC00BCAC1A /* InputView.swift in Sources */,
 				0055FBE9230FB740003D4D41 /* Reachability.swift in Sources */,
 				00F21A37230EA94F008D9976 /* MessagesViewController.swift in Sources */,
+				000DBEA9231393F50064692E /* ProfileViewController.swift in Sources */,
 				00F21A26230E9AA8008D9976 /* MainTabbarView.swift in Sources */,
 				00C9184A2311ECF600922DC7 /* MapPlaceMark.swift in Sources */,
 				00C9183D2311DB3100922DC7 /* LocationTableCell.swift in Sources */,
@@ -875,6 +905,7 @@
 			baseConfigurationReference = C0F567F34FCF16D8094431BD /* Pods-BES.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BES/BES.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR36QVSY4P;
 				INFOPLIST_FILE = BES/Info.plist;
@@ -894,6 +925,7 @@
 			baseConfigurationReference = FE6276E075ED6C8C746EAF17 /* Pods-BES.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BES/BES.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR36QVSY4P;
 				INFOPLIST_FILE = BES/Info.plist;

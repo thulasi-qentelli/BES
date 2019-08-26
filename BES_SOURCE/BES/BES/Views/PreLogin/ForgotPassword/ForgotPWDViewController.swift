@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ForgotPWDViewController: UIViewController {
 
     @IBOutlet weak var emailView: InputView!
     @IBOutlet weak var sendLinkBtn: UIButton!
     @IBOutlet weak var resendBtn: UIButton!
-    @IBOutlet weak var backBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,19 +86,29 @@ class ForgotPWDViewController: UIViewController {
         }
         print(email)
         
-        if sender == sendLinkBtn {
-            let alertVC     =   AcknowledgeViewController()
-            alertVC.type    =   .ForgotPassword
-            self.navigationController?.pushViewController(alertVC, animated: true)
-        }
-        else if sender == resendBtn {
-
-            let alertVC     =   AcknowledgeViewController()
-            alertVC.type    =   .ForgotPassword
-            self.navigationController?.pushViewController(alertVC, animated: true)
-        }
-        else if sender == backBtn {
-            self.navigationController?.popViewController(animated: true)
+        var parameters = ParameterDetail()
+        parameters.email = email
+        parameters.path = "resetpassword/\(email)"
+        
+        if let parm = parameters.dictionary {
+            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.indeterminate
+            loadingNotification.label.text = "Please wait"
+            
+            NetworkManager().post(method: .forgotPassword, parameters: parm) { (result, error) in
+                DispatchQueue.main.async {
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                    if error != nil {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                        return
+                    }
+                    
+                    let alertVC     =   AcknowledgeViewController()
+                    alertVC.type    =   .ForgotPassword
+                    self.navigationController?.pushViewController(alertVC, animated: true)
+                }
+            }
+            
         }
     }
     

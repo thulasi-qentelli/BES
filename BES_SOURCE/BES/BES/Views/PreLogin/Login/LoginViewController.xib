@@ -68,6 +68,12 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="VfJ-LO-ANO"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="accessoryImage" value="visibility"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="accessoryImageSize">
+                                    <real key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sm-Pk-GS0">
                             <rect key="frame" x="0.0" y="475" width="414" height="40"/>
@@ -212,5 +218,6 @@
     </objects>
     <resources>
         <image name="logo" width="240" height="240"/>
+        <image name="visibility" width="40" height="40"/>
     </resources>
 </document>

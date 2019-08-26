@@ -13,6 +13,10 @@ class SideProfileView: UIView {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var roleLbl: UILabel!
     
+    var editTapped:()->Void = {
+        
+    }
+    
     var user:User? {
         didSet {
             if let urlString = AppController.shared.user?.pic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
@@ -72,6 +76,7 @@ class SideProfileView: UIView {
     }
     
     @IBAction func btnAction(_ sender: UIButton) {
+        editTapped()
     }
     
 }

@@ -136,7 +136,7 @@ class FilterViewController: UIViewController {
     @IBAction func clearAllBtnAction(_ sender: Any) {
         filteredRegions = []
         filteredServices = []
-        filteredServices = []
+        filteredBasins = []
         setupFiltersUI()
     }
     
