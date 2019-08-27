@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RatingView" customModule="BES" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLbl" destination="d5Z-Z6-bz1" id="hh9-jx-zZq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-Oz-B1w">
+                    <rect key="frame" x="30" y="0.0" width="315" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Rate your service / experience" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d5Z-Z6-bz1">
+                            <rect key="frame" x="15" y="0.0" width="71" height="60"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Qee-R5-IRf">
+                            <rect key="frame" x="140" y="12.666666666666664" width="160" height="35"/>
+                            <subviews>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJA-Jc-Xre">
+                                    <rect key="frame" x="0.0" y="0.0" width="28" height="35"/>
+                                    <state key="normal" image="ic_star_border"/>
+                                    <state key="selected" image="ic_star"/>
+                                    <connections>
+                                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="pSC-4H-nka"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLR-s5-IdP">
+                                    <rect key="frame" x="33" y="0.0" width="28" height="35"/>
+                                    <state key="normal" image="ic_star_border"/>
+                                    <state key="selected" image="ic_star"/>
+                                    <connections>
+                                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="0Kw-1C-AE4"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gx-d4-Ft0">
+                                    <rect key="frame" x="66" y="0.0" width="28" height="35"/>
+                                    <state key="normal" image="ic_star_border"/>
+                                    <state key="selected" image="ic_star"/>
+                                    <connections>
+                                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="eQA-nB-iwU"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yx3-DE-MPJ">
+                                    <rect key="frame" x="99" y="0.0" width="28" height="35"/>
+                                    <state key="normal" image="ic_star_border"/>
+                                    <state key="selected" image="ic_star"/>
+                                    <connections>
+                                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="ZSN-fq-CRC"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FV-Yz-y9V">
+                                    <rect key="frame" x="132" y="0.0" width="28" height="35"/>
+                                    <state key="normal" image="ic_star_border"/>
+                                    <state key="selected" image="ic_star"/>
+                                    <connections>
+                                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="pxM-h8-qfP"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="265-ij-gb4"/>
+                                <constraint firstAttribute="width" constant="160" id="Ovo-6r-5Jm"/>
+                            </constraints>
+                            <viewLayoutGuide key="safeArea" id="kyf-h0-N1O"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="d5Z-Z6-bz1" firstAttribute="top" secondItem="iRN-Oz-B1w" secondAttribute="top" id="2Id-s9-qDv"/>
+                        <constraint firstItem="d5Z-Z6-bz1" firstAttribute="leading" secondItem="iRN-Oz-B1w" secondAttribute="leading" constant="15" id="CQe-UJ-erO"/>
+                        <constraint firstItem="Qee-R5-IRf" firstAttribute="centerY" secondItem="iRN-Oz-B1w" secondAttribute="centerY" id="NLB-fs-NSc"/>
+                        <constraint firstAttribute="bottom" secondItem="d5Z-Z6-bz1" secondAttribute="bottom" id="hrs-MM-j9m"/>
+                        <constraint firstAttribute="trailing" secondItem="Qee-R5-IRf" secondAttribute="trailing" constant="15" id="qYT-L6-ODj"/>
+                        <constraint firstItem="Qee-R5-IRf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d5Z-Z6-bz1" secondAttribute="trailing" constant="6" id="sqx-1c-da4"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="iRN-Oz-B1w" secondAttribute="bottom" id="2sF-44-NLM"/>
+                <constraint firstItem="iRN-Oz-B1w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H6y-9e-dli"/>
+                <constraint firstItem="iRN-Oz-B1w" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Nfl-67-UyH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iRN-Oz-B1w" secondAttribute="trailing" constant="30" id="RXf-DZ-kjG"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="308" y="-451.47783251231527"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_star" width="30" height="29"/>
+        <image name="ic_star_border" width="30" height="29"/>
+    </resources>
+</document>

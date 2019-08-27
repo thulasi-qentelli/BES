@@ -184,7 +184,7 @@ class SignupViewController: UIViewController {
                 parameters.role = "user"
                 
                 if let parm = parameters.dictionary {
-                    NetworkManager().post(method: .saveUser, parameters: parm) { (result, error) in
+                    NetworkManager().post(method: .saveUser, parameters: parm, isURLEncode: false) { (result, error) in
                         DispatchQueue.main.async {
                             if error != nil {
                                 self.view.makeToast(error, duration: 2.0, position: .center)
@@ -293,9 +293,10 @@ class SignupViewController: UIViewController {
 extension SignupViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
-        
-        self.profileHeaderView.profileImgView.image = image
-        self.profileHeaderView.profileImgPlaceholderView.isHidden = true
-        self.imageURL = "Saved"
+        if let kImage = image {
+            self.profileHeaderView.profileImgView.image = image
+            self.profileHeaderView.profileImgPlaceholderView.isHidden = true
+            self.imageURL = "Saved"
+        }
     }
 }

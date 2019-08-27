@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import MBProgressHUD
 
 class ProfileViewController: UIViewController {
 
@@ -32,6 +33,7 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
         
+
         profileHeaderView.user  = AppController.shared.user
         
         profileHeaderView.profileImageTapped = {
@@ -65,6 +67,9 @@ class ProfileViewController: UIViewController {
         }
         emailView.accessoryImgView.isHidden  =   false
         emailView.accessoryImgBtn.isHidden = false
+        emailView.txtField.textColor = UIColor.lightGray
+        emailView.txtField.isEnabled = false
+        emailView.actionBtn.isEnabled = false
         emailView.getUpdatedText = { string in
             self.emailView.accessoryImgView.isHidden = true
             if string.isValidEmail(){
@@ -190,7 +195,7 @@ class ProfileViewController: UIViewController {
         }
         else if sender == createAccountBtn {
             if validateData() {
-                
+                self.view.endEditing(true)
                 let firstName = firstNameView.txtField.text!
                 let lastName = lastNameView.txtField.text!
                 let location = locationView.txtField.text!
@@ -203,34 +208,52 @@ class ProfileViewController: UIViewController {
                 parameters.lastName = lastName
                 parameters.email = email
                 parameters.password = password
-                parameters.role = AppController.shared.user?.role ?? ""
+                parameters.role = AppController.shared.user?.role
                 parameters.location = location
+                parameters.pic = AppController.shared.user?.pic
                 
                 if let parm = parameters.dictionary {
+                    let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    loadingNotification.mode = MBProgressHUDMode.indeterminate
+                    loadingNotification.label.text = "Please wait.."
+
                     NetworkManager().put(method: .updateUser, parameters: parm, isURLEncode: false) { (result, error) in
                         DispatchQueue.main.async {
+                            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                             if error != nil {
                                 self.view.makeToast(error, duration: 2.0, position: .center)
                                 return
                             }
                             
                             if let url = self.imageURL {
-                                
-                                
                                 if let user = result as? User {
+                                    let loadingNotification1 = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    loadingNotification1.mode = MBProgressHUDMode.indeterminate
+                                    loadingNotification1.label.text = "Please wait.."
                                     NetworkManager().uploadImage(method: .uploadImage, parameters: ["id": "\(user.id!)"], image: self.profileHeaderView.profileImgView.image!, completion: { (imgResult, imgError) in
-                                        if imgError != nil {
-                                            self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
+                                        DispatchQueue.main.async {
+                                            
+                                            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                                            if imgError != nil {
+                                                self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
+                                                return
+                                            }
+                                            
+                                            AppController.shared.user = user
+                                            self.getAuthUser(user: user)
+                                            
+                                            self.view.makeToast("User profile updated successfully.", duration: 2.0, position: .center)
                                         }
-                                        
-                                       self.view.makeToast("User profile updated successfully.", duration: 2.0, position: .center)
-                                        self.dismiss(animated: true, completion: nil)
                                     })
                                 }
                             }
                             else {
+                                if let user = result as? User {
+                                    AppController.shared.user = user
+                                    self.getAuthUser(user: user)
+                                }
+                                
                                 self.view.makeToast("User profile updated successfully.", duration: 2.0, position: .center)
-                                self.dismiss(animated: true, completion: nil)
                             }
                         }
                     }
@@ -240,6 +263,32 @@ class ProfileViewController: UIViewController {
             
         }
         
+    }
+    
+    func getAuthUser(user:User) {
+        var parameters = ParameterDetail()
+        parameters.email = user.email
+        parameters.password = user.password
+        
+        if let parm = parameters.dictionary {
+            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.indeterminate
+            loadingNotification.label.text = "Please wait.."
+            
+            NetworkManager().post(method: .login, parameters: parm) { (result, error) in
+                DispatchQueue.main.async {
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                    if error != nil {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                        return
+                    }
+                    
+                    AppController.shared.user = result as? User
+                    saveAuthToken(token: AppController.shared.user!.token!)
+                    saveUserDetails(user: result as! User)
+                }
+            }
+        }
     }
     
     func validateData() -> Bool {
@@ -308,10 +357,11 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
-        
-        self.profileHeaderView.profileImgView.image = image
-        self.profileHeaderView.profileImgPlaceholderView.isHidden = true
-        self.imageURL = "Saved"
+        if let kImage = image {
+            self.profileHeaderView.profileImgView.image = image
+            self.profileHeaderView.profileImgPlaceholderView.isHidden = true
+            self.imageURL = "Saved"
+        }
     }
 }
 

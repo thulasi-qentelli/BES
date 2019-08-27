@@ -44,6 +44,9 @@
 		005BC730230DBCE000BCAC1A /* AcknowledgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BC72E230DBCE000BCAC1A /* AcknowledgeViewController.xib */; };
 		005BC734230DE72A00BCAC1A /* OrangeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005BC732230DE72A00BCAC1A /* OrangeHeaderView.swift */; };
 		005BC735230DE72A00BCAC1A /* OrangeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BC733230DE72A00BCAC1A /* OrangeHeaderView.xib */; };
+		00B843652314FC0B00336EFF /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B843632314FC0B00336EFF /* RatingView.swift */; };
+		00B843662314FC0B00336EFF /* RatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00B843642314FC0B00336EFF /* RatingView.xib */; };
+		00B84368231538FC00336EFF /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B84367231538FC00336EFF /* FeedViewModel.swift */; };
 		00C76DF723140865004C43BF /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C76DF623140865004C43BF /* AuthenticationServices.framework */; };
 		00C8F9DD2312D86500C2378C /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C8F9DB2312D86500C2378C /* FeedTableViewCell.swift */; };
 		00C8F9DE2312D86500C2378C /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C8F9DC2312D86500C2378C /* FeedTableViewCell.xib */; };
@@ -134,6 +137,9 @@
 		005BC732230DE72A00BCAC1A /* OrangeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrangeHeaderView.swift; sourceTree = "<group>"; };
 		005BC733230DE72A00BCAC1A /* OrangeHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrangeHeaderView.xib; sourceTree = "<group>"; };
 		008B5D06ED3F1B4039CA5DB2 /* Pods_BES.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BES.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00B843632314FC0B00336EFF /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		00B843642314FC0B00336EFF /* RatingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingView.xib; sourceTree = "<group>"; };
+		00B84367231538FC00336EFF /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		00C76DF523140865004C43BF /* BES.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BES.entitlements; sourceTree = "<group>"; };
 		00C76DF623140865004C43BF /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		00C8F9DB2312D86500C2378C /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -490,6 +496,8 @@
 		00CF89FB2314BD46006889A6 /* RatingView */ = {
 			isa = PBXGroup;
 			children = (
+				00B843632314FC0B00336EFF /* RatingView.swift */,
+				00B843642314FC0B00336EFF /* RatingView.xib */,
 			);
 			path = RatingView;
 			sourceTree = "<group>";
@@ -550,6 +558,7 @@
 				0055FBF323100C82003D4D41 /* Cell */,
 				00F21A2D230EA92F008D9976 /* FeedViewController.swift */,
 				00F21A2E230EA92F008D9976 /* FeedViewController.xib */,
+				00B84367231538FC00336EFF /* FeedViewModel.swift */,
 			);
 			path = FeedView;
 			sourceTree = "<group>";
@@ -712,6 +721,7 @@
 				00CF89EF2314637D006889A6 /* TableSectionHeaderView.xib in Resources */,
 				00C918432311EC5200922DC7 /* ChipView.xib in Resources */,
 				00D343AC230F134B00555E32 /* SideMenuCell.xib in Resources */,
+				00B843662314FC0B00336EFF /* RatingView.xib in Resources */,
 				00F21A34230EA940008D9976 /* LocationsViewController.xib in Resources */,
 				005BC730230DBCE000BCAC1A /* AcknowledgeViewController.xib in Resources */,
 				00CF89FA2314BA76006889A6 /* CommentInputView.xib in Resources */,
@@ -815,6 +825,7 @@
 				005BC710230D117D00BCAC1A /* LoginViewController.swift in Sources */,
 				0055FBE3230FB653003D4D41 /* CommonFunctions.swift in Sources */,
 				0055FBE8230FB740003D4D41 /* Toast.swift in Sources */,
+				00B843652314FC0B00336EFF /* RatingView.swift in Sources */,
 				00F21A49230ECCB6008D9976 /* MessageTableViewCell.swift in Sources */,
 				0055FBEB230FB75E003D4D41 /* ImagePicker.swift in Sources */,
 				0055FBF123100B01003D4D41 /* Location.swift in Sources */,
@@ -830,6 +841,7 @@
 				00C8F9DD2312D86500C2378C /* FeedTableViewCell.swift in Sources */,
 				005BC71A230D16BC00BCAC1A /* InputView.swift in Sources */,
 				0055FBE9230FB740003D4D41 /* Reachability.swift in Sources */,
+				00B84368231538FC00336EFF /* FeedViewModel.swift in Sources */,
 				00F21A37230EA94F008D9976 /* MessagesViewController.swift in Sources */,
 				000DBEA9231393F50064692E /* ProfileViewController.swift in Sources */,
 				00F21A26230E9AA8008D9976 /* MainTabbarView.swift in Sources */,

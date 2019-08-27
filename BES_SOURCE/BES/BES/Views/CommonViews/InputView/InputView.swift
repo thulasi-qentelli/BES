@@ -12,6 +12,7 @@ class InputView: UIView, UITextFieldDelegate {
     @IBOutlet weak var accessoryImgWidth: NSLayoutConstraint!
     @IBOutlet weak var accessoryImgBtn: UIButton!
     
+    @IBOutlet weak var actionBtn: UIButton!
     @IBOutlet weak var accessoryImgHeight: NSLayoutConstraint!
     var getUpdatedText:(String)->() = { string in
         

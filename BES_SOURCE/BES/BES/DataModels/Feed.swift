@@ -22,6 +22,7 @@ class Feed: NSObject, Mappable, Codable {
     var comments: [Comment]?
     var likes: [Like]?
     var likecount: Int?
+    var likedUsers:[String]?
     
     
     override init() {
@@ -45,6 +46,10 @@ class Feed: NSObject, Mappable, Codable {
         comments <- map["comments"]
         likes <- map["likes"]
         likecount <- map["likecount"]
+        
+        if let kLikes = likes {
+            self.likedUsers =  kLikes.map{$0.email ?? ""}
+        }
         
     }
 }

@@ -75,7 +75,6 @@ class SideViewController: UIViewController {
                     if error != nil {
                         return
                     }
-                    
                     AppController.shared.user = result as? User
                     saveUserDetails(user: result as! User)
                     self.profileView.user = AppController.shared.user

@@ -31,6 +31,9 @@
                         <constraint firstAttribute="height" constant="44" id="Epm-yc-YN4"/>
                     </constraints>
                 </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame" translatesAutoresizingMaskIntoConstraints="NO" id="pLF-NQ-Or9">
+                    <rect key="frame" x="160" y="64" width="244" height="400"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXR-aC-D8N" customClass="TableSectionHeaderView" customModule="BES" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="44" width="414" height="90"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -82,7 +85,7 @@
                                             <real key="value" value="32"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Select Category"/>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter Category"/>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Select Category"/>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isDropDown" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
@@ -105,7 +108,7 @@
                                             <real key="value" value="32"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Select Location"/>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter Location "/>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Select Location "/>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isDropDown" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
@@ -264,6 +267,7 @@
                             </constraints>
                         </stackView>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="dYG-zg-mg0" firstAttribute="leading" secondItem="H3B-7j-1e6" secondAttribute="leading" id="2Fs-14-pWG"/>
                         <constraint firstAttribute="trailing" secondItem="dYG-zg-mg0" secondAttribute="trailing" id="6od-10-72g"/>
@@ -284,8 +288,11 @@
             <constraints>
                 <constraint firstItem="nNa-j8-ELK" firstAttribute="trailing" secondItem="HrC-Od-gff" secondAttribute="trailing" id="8aB-j0-Ica"/>
                 <constraint firstItem="H3B-7j-1e6" firstAttribute="top" secondItem="DXR-aC-D8N" secondAttribute="bottom" id="IX7-1T-NBb"/>
+                <constraint firstItem="pLF-NQ-Or9" firstAttribute="leading" secondItem="HrC-Od-gff" secondAttribute="leading" constant="160" id="OMq-IA-Jx8"/>
+                <constraint firstItem="HrC-Od-gff" firstAttribute="trailing" secondItem="pLF-NQ-Or9" secondAttribute="trailing" constant="10" id="PMn-IX-o5q"/>
                 <constraint firstItem="H3B-7j-1e6" firstAttribute="width" secondItem="AkM-t4-22h" secondAttribute="width" id="Q8i-UU-0Mb"/>
                 <constraint firstItem="3de-Bb-adx" firstAttribute="top" secondItem="AkM-t4-22h" secondAttribute="top" id="YXI-PJ-vBg"/>
+                <constraint firstItem="pLF-NQ-Or9" firstAttribute="top" secondItem="HrC-Od-gff" secondAttribute="top" constant="20" id="crr-V6-GTm"/>
                 <constraint firstItem="H3B-7j-1e6" firstAttribute="leading" secondItem="HrC-Od-gff" secondAttribute="leading" id="dSi-5s-HZS"/>
                 <constraint firstItem="DXR-aC-D8N" firstAttribute="leading" secondItem="HrC-Od-gff" secondAttribute="leading" id="hUF-yx-mlx"/>
                 <constraint firstItem="nNa-j8-ELK" firstAttribute="top" secondItem="HrC-Od-gff" secondAttribute="top" constant="-44" id="jpo-5K-D5e"/>
@@ -302,6 +309,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Frame" width="400" height="400"/>
         <image name="expand_more_24px" width="40" height="40"/>
     </resources>
 </document>

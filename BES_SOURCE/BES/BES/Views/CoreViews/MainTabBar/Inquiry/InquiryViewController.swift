@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import MBProgressHUD
 
 class InquiryViewController: UIViewController {
 
@@ -28,6 +29,20 @@ class InquiryViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
         
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        
+        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
+        
+        categoryView.txtField.text = ""
+        locationView.txtField.text = ""
+        phoneView.txtField.text = ""
+        commentsView.txtView.text = ""
+        
         locationView.accessoryImgView.isHidden  =   false
         locationView.accessoryImgBtn.isHidden = false
         locationView.accessoryAction = { sender in
@@ -44,15 +59,18 @@ class InquiryViewController: UIViewController {
             self.categoryDropDown.show()
         }
         
+        phoneView.getUpdatedText = { string in
+            
+            print(string)
+            
+            if let number = Int(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) {
+                // Do something with this number
+                print(number)
+            }
+        }
+        
         getLocations()
         getCategories()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = false
-        
-        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
         
     }
     
@@ -79,7 +97,7 @@ class InquiryViewController: UIViewController {
             self.locationView.txtField.text = item
         }
         
-        self.categoryDropDown.anchorView = self.locationView.txtField
+        self.categoryDropDown.anchorView = self.categoryView.txtField
         self.categoryDropDown.textColor = UIColor.black
         self.categoryDropDown.textFont = UIFont.systemFont(ofSize: 15)
         self.categoryDropDown.backgroundColor = UIColor.white
@@ -122,22 +140,100 @@ class InquiryViewController: UIViewController {
     }
     
     @IBAction func submitTapped(_ sender: UIButton) {
-        categoryView.txtField.text = ""
-        locationView.txtField.text = ""
-        phoneView.txtField.text = ""
-        commentsView.txtView.text = ""
+        self.view.endEditing(true)
         
-        let alertVC     =   AcknowledgeViewController()
-        alertVC.type    =   .Inquiry
-        self.navigationController?.pushViewController(alertVC, animated: true)
+        guard let category = categoryView.txtField.text else {
+            self.view.makeToast("Please select category", duration: 1.0, position: .center)
+            return
+        }
+        
+        if category.count <= 0 {
+            self.view.makeToast("Please select category", duration: 1.0, position: .center)
+            return
+        }
+        guard let state = locationView.txtField.text else {
+            self.view.makeToast("Please select location", duration: 1.0, position: .center)
+            return
+        }
+        
+        if state.count <= 0 {
+            self.view.makeToast("Please select location", duration: 1.0, position: .center)
+            return
+        }
+        
+        guard let phone = phoneView.txtField.text else {
+            self.view.makeToast("Please enter phone number", duration: 1.0, position: .center)
+            phoneView.txtField.becomeFirstResponder()
+            return
+        }
+        
+        guard let comments = commentsView.txtView.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
+            self.view.makeToast("Please add your comments", duration: 1.0, position: .center)
+            commentsView.txtView.becomeFirstResponder()
+            return
+        }
+        
+        guard let number = Int(phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) else{
+            // Do something with this number
+            self.view.makeToast("Please enter valid phone number", duration: 1.0, position: .center)
+            phoneView.txtField.becomeFirstResponder()
+            return
+        }
+        
+        if "\(number)".count != 10 {
+            self.view.makeToast("Please enter valid phone number", duration: 1.0, position: .center)
+            phoneView.txtField.becomeFirstResponder()
+            return
+        }
+        
+        if comments.count <= 0 {
+            self.view.makeToast("Please add your comments", duration: 1.0, position: .center)
+            commentsView.txtField.becomeFirstResponder()
+            return
+        }
+        
+        var parameters = ParameterDetail()
+        parameters.email = AppController.shared.user?.email
+        parameters.location = state
+        parameters.category = category
+        parameters.comments = comments
+        parameters.phonenumber = "\(number)"
+        
+        if let parm = parameters.dictionary {
+            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.indeterminate
+            loadingNotification.label.text = "Please wait.."
+            
+            NetworkManager().post(method: .saveInquiry, parameters: parm, isURLEncode: false) { (result, error) in
+                DispatchQueue.main.async {
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                    if error != nil {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                        return
+                    }
+                    
+                    self.categoryView.txtField.text = ""
+                    self.locationView.txtField.text = ""
+                    self.phoneView.txtField.text = ""
+                    self.commentsView.txtView.text = ""
+                    
+                    let alertVC     =   AcknowledgeViewController()
+                    alertVC.type    =   .Inquiry
+                    self.navigationController?.pushViewController(alertVC, animated: true)
+                }
+            }
+        }
     }
     
     @IBAction func cancelTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
         categoryView.txtField.text = ""
         locationView.txtField.text = ""
         phoneView.txtField.text = ""
         commentsView.txtView.text = ""
     }
+    
+    
 }
 
 

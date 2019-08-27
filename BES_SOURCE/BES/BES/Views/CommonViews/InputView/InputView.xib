@@ -16,6 +16,7 @@
                 <outlet property="accessoryImgHeight" destination="qsp-gN-bA1" id="RhV-DA-KrA"/>
                 <outlet property="accessoryImgView" destination="EXR-BO-SoL" id="nv3-eC-Uqd"/>
                 <outlet property="accessoryImgWidth" destination="npR-YQ-11V" id="xEn-0D-IBv"/>
+                <outlet property="actionBtn" destination="UMo-Jo-uGG" id="Ndy-hE-gVb"/>
                 <outlet property="titleLbl" destination="d5Z-Z6-bz1" id="hh9-jx-zZq"/>
                 <outlet property="txtField" destination="U3c-cE-rZn" id="udr-W4-Gzb"/>
             </connections>

@@ -44,10 +44,17 @@
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" smartDashesType="no"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skQ-SU-gn8">
+                            <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
+                            <connections>
+                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="JRI-Sz-77N"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="d5Z-Z6-bz1" firstAttribute="top" secondItem="iRN-Oz-B1w" secondAttribute="top" constant="15" id="2Id-s9-qDv"/>
+                        <constraint firstAttribute="trailing" secondItem="skQ-SU-gn8" secondAttribute="trailing" id="5TR-yv-s0g"/>
                         <constraint firstItem="7Db-bm-Gak" firstAttribute="centerY" secondItem="U3c-cE-rZn" secondAttribute="centerY" id="6ei-cu-0eF"/>
                         <constraint firstItem="d5Z-Z6-bz1" firstAttribute="leading" secondItem="iRN-Oz-B1w" secondAttribute="leading" constant="15" id="CQe-UJ-erO"/>
                         <constraint firstItem="7Db-bm-Gak" firstAttribute="leading" secondItem="iRN-Oz-B1w" secondAttribute="leading" constant="15" id="GJ0-g1-15y"/>
@@ -55,6 +62,9 @@
                         <constraint firstAttribute="bottom" secondItem="U3c-cE-rZn" secondAttribute="bottom" constant="10" id="MsV-ac-bcQ"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d5Z-Z6-bz1" secondAttribute="trailing" constant="15" id="QCQ-qN-Uh0"/>
                         <constraint firstItem="U3c-cE-rZn" firstAttribute="leading" secondItem="7Db-bm-Gak" secondAttribute="trailing" constant="4" id="Rf5-OM-XMQ"/>
+                        <constraint firstAttribute="bottom" secondItem="skQ-SU-gn8" secondAttribute="bottom" id="awg-Ar-l0t"/>
+                        <constraint firstItem="skQ-SU-gn8" firstAttribute="top" secondItem="iRN-Oz-B1w" secondAttribute="top" id="gZB-Al-Krz"/>
+                        <constraint firstItem="skQ-SU-gn8" firstAttribute="leading" secondItem="iRN-Oz-B1w" secondAttribute="leading" id="gmc-Hh-FpU"/>
                         <constraint firstItem="U3c-cE-rZn" firstAttribute="top" secondItem="d5Z-Z6-bz1" secondAttribute="bottom" id="lI8-kq-pSf"/>
                         <constraint firstItem="U3c-cE-rZn" firstAttribute="top" secondItem="d5Z-Z6-bz1" secondAttribute="bottom" id="vh1-gf-5Kf"/>
                     </constraints>

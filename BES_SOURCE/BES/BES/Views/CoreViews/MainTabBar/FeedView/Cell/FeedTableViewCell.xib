@@ -222,6 +222,7 @@
                 <outlet property="profileImgPlaceholderView" destination="6ZD-Hu-X2A" id="Ksa-xB-k2R"/>
                 <outlet property="profileImgView" destination="MKP-Eh-pqW" id="Pec-gr-n23"/>
                 <outlet property="readMoreBtn" destination="kfV-d3-qao" id="ddS-Nn-6rd"/>
+                <outlet property="thumUpImgView" destination="orh-zr-o84" id="Wcp-Ay-1Gt"/>
                 <outlet property="timestampLbl" destination="OhD-7L-dep" id="waC-OD-105"/>
                 <outlet property="txtLbl" destination="hli-KP-RFy" id="g6d-dJ-PyV"/>
             </connections>

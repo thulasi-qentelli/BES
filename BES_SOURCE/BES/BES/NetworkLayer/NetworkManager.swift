@@ -31,6 +31,8 @@ public enum Method: String {
     case getUser = "bes/getUserById"
     case getStates = "states/getStates"
     case getCategories = "category/getCategories"
+    case saveInquiry = "Enquiry/saveEnquiry"
+    case saveFeedback = "feedback/saveFeedback"
 }
 
 enum NetworkEnvironment: String {
@@ -111,7 +113,7 @@ struct NetworkManager {
                                         completion(nil, jsonString)
                                     }
                                 case .getUser:
-                                    if let user = User(JSONString: jsonString) {
+                                    if let user = User(JSONString: jsonString), let id = user.id, id>0 {
                                         completion(user,nil)
                                     }
                                     else {
@@ -174,7 +176,7 @@ struct NetworkManager {
         var request = URLRequest(url: try! urlString!.asURL())
         request.httpMethod = HTTPMethod.post.rawValue
         
-        if let auth = getAuthToken()  {
+        if let auth = getAuthToken(), method != .login, method != .saveUser, method != .forgotPassword  {
             request.addValue(auth, forHTTPHeaderField: "Authorization")
         }
         
@@ -208,7 +210,7 @@ struct NetworkManager {
                 
                 switch method {
                 case .login:
-                    if let user = User(JSONString: jsonString) {
+                    if let user = User(JSONString: jsonString),user.id ?? 0 > 0  {
                         completion(user,nil)
                     }
                     else {
@@ -223,6 +225,23 @@ struct NetworkManager {
                     else {
                         completion(nil,"User already exists.")
                     }
+                case .saveInquiry:
+                    print(response.response?.statusCode)
+                    if response.response?.statusCode == 200 {
+                        completion("success", nil)
+                    }
+                    else {
+                        completion(nil, "Feedback not submitted due to unknown error. Pleasetry later")
+                    }
+                case .saveFeedback:
+                    print(response.response?.statusCode)
+                    if response.response?.statusCode == 200 {
+                        completion("success", nil)
+                    }
+                    else {
+                        completion(nil, "Feedback not submitted due to unknown error. Pleasetry later")
+                    }
+                    
                 default:
                     print("========================")
                     
@@ -235,7 +254,7 @@ struct NetworkManager {
                         completion(nil, "User doesn't exists.")
                     }
                     else if response.response?.statusCode == 400 {
-                        completion(nil, "Please check entered email or password is.")
+                        completion(nil, "Enter valid Email or Password.")
                     }
                     else {
                         let errorMessage = self.handleNetworkResponse(response.response!)
@@ -244,7 +263,7 @@ struct NetworkManager {
                 case .forgotPassword:
                     print(response.response?.statusCode)
                     if response.response?.statusCode == 500 {
-                        completion(nil, "Please check entered email.")
+                        completion(nil, "Enter valid Email.")
                     }
 //                    else if response.response?.statusCode == 400 {
 //                        completion(nil, "User does not exist with this email.")
@@ -253,6 +272,7 @@ struct NetworkManager {
                         let errorMessage = self.handleNetworkResponse(response.response!)
                         completion(nil, errorMessage)
                     }
+                    
                 default:
                     print("========================")
                     let errorMessage = self.handleNetworkResponse(response.response!)
@@ -317,7 +337,7 @@ struct NetworkManager {
                 
                 switch method {
                 case .updateUser:
-                    if let user = User(JSONString: jsonString) {
+                    if let user = User(JSONString: jsonString),user.id ?? 0 > 0  {
                         completion(user,nil)
                     }
                     else {
@@ -353,7 +373,7 @@ struct NetworkManager {
             if let data = image.jpegData(compressionQuality: 0.50){
                 
                 Alamofire.upload(multipartFormData: { (multipartFormData) in
-                    multipartFormData.append(data, withName: "imageFile", fileName: "profile_image_\(String(describing: parameters["id"])).jpeg", mimeType: "image/jpeg")
+                    multipartFormData.append(data, withName: "imageFile", fileName: "profile_image_\(parameters["id"]!).jpeg", mimeType: "image/jpeg")
                     
                 }, usingThreshold: UInt64.init(), to: URL(string: url)!, method: .post, headers: nil) { (result) in
                     
@@ -368,11 +388,11 @@ struct NetworkManager {
                             let jsonString = String(data: responseData, encoding: String.Encoding.utf8) ?? ""
                             print(jsonString)
                             
-                            if let user = User(JSONString: jsonString) {
+                            if let user = User(JSONString: jsonString), let id = user.id, id > 0 {
                                 completion(user,nil)
                             }
                             else {
-                                completion(nil,jsonString)
+                                completion(nil,"Error while uploading profile image. Please try later.")
                             }
                         }
                        

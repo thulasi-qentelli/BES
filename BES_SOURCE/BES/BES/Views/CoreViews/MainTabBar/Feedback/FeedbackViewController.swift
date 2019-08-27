@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import DropDown
+import MBProgressHUD
 
 class FeedbackViewController: UIViewController {
-    @IBOutlet weak var tblView: UITableView!
-    var messages: [Message] = []
-    let cellReuseIdendifier = "MessageTableViewCell"
+
+    @IBOutlet weak var categoryView: InputView!
+    @IBOutlet weak var ratingView: RatingView!
+    @IBOutlet weak var commentsView: CommentInputView!
+    
+    var categories:[String] = []
+    let categoryDropDown = DropDown()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +34,22 @@ class FeedbackViewController: UIViewController {
         
         AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
         
+        categoryView.txtField.text = ""
+        ratingView.selectedRating = 0
+        commentsView.txtView.text = ""
+        
+      
+        
+        categoryView.accessoryImgView.isHidden  =   false
+        categoryView.accessoryImgBtn.isHidden = false
+        categoryView.accessoryAction = { sender in
+            self.view.endEditing(true)
+            self.categoryDropDown.dataSource = self.categories
+            self.categoryDropDown.show()
+        }
+        
+        getCategories()
+        
     }
     
     @objc func menuBtnAction() {
@@ -39,56 +62,102 @@ class FeedbackViewController: UIViewController {
     
     
     func setupUI() {
-        self.tblView.estimatedRowHeight = 60
-        self.tblView.rowHeight = UITableView.automaticDimension
-        self.tblView.register(UINib.init(nibName: cellReuseIdendifier, bundle: nil), forCellReuseIdentifier: cellReuseIdendifier)
-    }
-    
-}
-
-
-extension FeedbackViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messages.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 130
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 60))
-        view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
-        let titleLabel = UILabel(frame: CGRect(x: 30, y: 60, width: UIScreen.main.bounds.size.width - 60, height: 60))
-        titleLabel.text = "Feedback"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        titleLabel.backgroundColor = UIColor.clear
-        view.addSubview(titleLabel)
-        return view
+        self.categoryDropDown.anchorView = self.categoryView.txtField
+        self.categoryDropDown.textColor = UIColor.black
+        self.categoryDropDown.textFont = UIFont.systemFont(ofSize: 15)
+        self.categoryDropDown.backgroundColor = UIColor.white
+        self.categoryDropDown.selectionBackgroundColor = UIColor(red:0.99, green:0.4, blue:0.1, alpha:1)
+        self.categoryDropDown.cellHeight = 60
+        self.categoryDropDown.cornerRadius = 10
+        self.categoryDropDown.width = UIScreen.main.bounds.size.width - 60
+        self.categoryDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.categoryView.txtField.text = item
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier, for: indexPath) as! MessageTableViewCell
-        
-        cell.messageLbl.text = messages[indexPath.row].message
-        cell.timeStampLbl.text = messages[indexPath.row].createdDate?.components(separatedBy: " ").last
-        
-        if let urlString = messages[indexPath.row].userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-            if let url  = URL(string: urlString){
-                cell.profileImgView.sd_setImage(with:url, completed: nil)
+    func getCategories() {
+        NetworkManager().get(method: .getCategories, parameters: [:]) { (result, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    self.view.makeToast(error, duration: 2.0, position: .center)
+                    return
+                }
+                self.categories = (result as! [Category]).map{$0.service?.trimmingCharacters(in: NSCharacterSet.whitespaces) ?? ""}
+                self.categoryDropDown.dataSource = self.categories.sorted()
             }
         }
-        return cell
+        self.categoryDropDown.dataSource = self.categories.sorted()
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    @IBAction func submitTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
         
+        guard let category = categoryView.txtField.text else {
+            self.view.makeToast("Please select feedback type", duration: 1.0, position: .center)
+            return
+        }
+        
+        if category.count <= 0 {
+            self.view.makeToast("Please select feedback type", duration: 1.0, position: .center)
+            return
+        }
+        
+        if self.ratingView.selectedRating == 0 {
+            self.view.makeToast("Please rate your service / experience.", duration: 1.0, position: .center)
+            return
+        }
+        
+        guard let comments = commentsView.txtView.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
+            self.view.makeToast("Please add your comments", duration: 1.0, position: .center)
+            commentsView.txtView.becomeFirstResponder()
+            return
+        }
+        
+        if comments.count <= 0 {
+            self.view.makeToast("Please add your comments", duration: 1.0, position: .center)
+            commentsView.txtView.becomeFirstResponder()
+            return
+        }
+        
+        var parameters = ParameterDetail()
+        parameters.useremail = AppController.shared.user?.email
+        parameters.category = category
+        parameters.content = comments
+        parameters.rating = "\(ratingView.selectedRating)"
+        
+        if let parm = parameters.dictionary {
+            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.indeterminate
+            loadingNotification.label.text = "Please wait.."
+            
+            NetworkManager().post(method: .saveFeedback, parameters: parm, isURLEncode: false) { (result, error) in
+                DispatchQueue.main.async {
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                    if error != nil {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                        return
+                    }
+                    
+                    self.categoryView.txtField.text = ""
+                    self.ratingView.selectedRating = 0
+                    self.commentsView.txtView.text = ""
+                    
+                    let alertVC     =   AcknowledgeViewController()
+                    alertVC.type    =   .Feedback
+                    self.navigationController?.pushViewController(alertVC, animated: true)
+                }
+            }
+        }
     }
+    
+    @IBAction func cancelTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
+        categoryView.txtField.text = ""
+        ratingView.selectedRating = 0
+        commentsView.txtView.text = ""
+    }
+    
 }
 
 

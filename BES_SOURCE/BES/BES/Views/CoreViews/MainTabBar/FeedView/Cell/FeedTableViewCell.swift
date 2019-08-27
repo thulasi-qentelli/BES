@@ -23,6 +23,7 @@ class FeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var likedLbl: UILabel!
     @IBOutlet weak var commentsLbl: UILabel!
+    @IBOutlet weak var thumUpImgView: UIImageView!
     
     var readMoreFunction:(UIButton, String)->Void = { (sender, str) in
     

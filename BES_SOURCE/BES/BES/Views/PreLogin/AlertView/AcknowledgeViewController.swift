@@ -65,14 +65,14 @@ class AcknowledgeViewController: UIViewController {
         switch type {
         case .Feedback:
             titleLbl.text = "Feedback"
-            alertTitleLbl.text = "Form submitted sucessfully"
+            alertTitleLbl.text = "Form submitted successfully"
             alertDetailLbl.text = "Thanks for letting us know.\nYour feedback improves the quality of BES app."
             clickHereHeightConstraint.constant = 0
             doneBtn.setTitle("BACK TO HOME", for: .normal)
         case .Inquiry:
             titleLbl.text = "Inquiry"
-            alertTitleLbl.text = "Form submitted sucessfully"
-            alertDetailLbl.text = "Thanks for inquiy.\nSomeone will contact you innext 24 to 48 hours."
+            alertTitleLbl.text = "Form submitted successfully"
+            alertDetailLbl.text = "Thanks for inquiy.\nSomeone will contact you in next 24 to 48 hours."
             clickHereHeightConstraint.constant = 0
             doneBtn.setTitle("BACK TO HOME", for: .normal)
         case .ForgotPassword:

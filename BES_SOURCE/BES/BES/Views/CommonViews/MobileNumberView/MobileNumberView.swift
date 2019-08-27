@@ -70,9 +70,6 @@ class MobileNumberView: UIView, UITextFieldDelegate {
         return view
     }
     
-    @IBAction func btnAction(_ sender: UIButton) {
-          self.txtField.becomeFirstResponder()
-    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -80,10 +77,19 @@ class MobileNumberView: UIView, UITextFieldDelegate {
         if let text = textField.text, let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
-            getUpdatedText(updatedText)
+            let str = updatedText.applyPatternOnNumbers(pattern: "(###) ###-####", replacmentCharacter: "#")
+            
+            if str.count < 15 {
+                textField.text = str
+                getUpdatedText(str)
+            }
+            
+            return false
         }
-        
         return true
     }
 
+    @IBAction func btnAction(_ sender: UIButton) {
+        self.txtField.becomeFirstResponder()
+    }
 }

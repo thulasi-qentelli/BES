@@ -20,6 +20,7 @@ class ForgotPWDViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupUI()
+        emailView.txtField.keyboardType = .emailAddress
         emailView.getUpdatedText = { string in
             if string.isValidEmail() {
                 self.emailView.accessoryImgView.isHidden = false
@@ -93,9 +94,9 @@ class ForgotPWDViewController: UIViewController {
         if let parm = parameters.dictionary {
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
-            loadingNotification.label.text = "Please wait"
+            loadingNotification.label.text = "Please wait.."
             
-            NetworkManager().post(method: .forgotPassword, parameters: parm) { (result, error) in
+            NetworkManager().post(method: .forgotPassword, parameters: parm, isURLEncode: true) { (result, error) in
                 DispatchQueue.main.async {
                     MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                     if error != nil {

@@ -12,7 +12,11 @@ import UIKit
 class AppController {
     static let shared = AppController()
     private init(){}
-    var user:User?
+    var user:User? {
+        didSet {
+            (self.mainView.leftMenuViewController as? SideViewController)?.profileView.user = user
+        }
+    }
     var mainView   =   SSASideMenu()
     var window: UIWindow?
     

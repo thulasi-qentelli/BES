@@ -99,7 +99,7 @@ class LocationsViewController: UIViewController {
         if showLoader {
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
-            loadingNotification.label.text = "Please wait"
+            loadingNotification.label.text = "Please wait.."
         }
         
         filteredRegions = []

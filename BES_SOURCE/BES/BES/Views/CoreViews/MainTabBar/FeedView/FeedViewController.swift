@@ -59,7 +59,7 @@ class FeedViewController: UIViewController {
         if showLoader {
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
-            loadingNotification.label.text = "Please wait"
+            loadingNotification.label.text = "Please wait.."
         }
         
         NetworkManager().get(method: .getAllFeeds, parameters: [:]) { (result, error) in
@@ -123,6 +123,12 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.profileImgPlaceholderView.isHidden = false
         cell.nameLbl.text = feed.userName
     
+        cell.thumUpImgView.image = UIImage(named: "thumb_up")
+        
+        if feed.likedUsers?.contains(AppController.shared.user?.email ?? "") ?? false {
+            cell.thumUpImgView.image = UIImage(named: "thumb_up_orange")
+        }
+        
         
         //Profile Image
         if let urlString = feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
