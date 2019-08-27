@@ -62,15 +62,15 @@ class FeedbackViewController: UIViewController {
     
     
     func setupUI() {
-        
-        self.categoryDropDown.anchorView = self.categoryView.txtField
+                
+        self.categoryDropDown.anchorView = self.categoryView.anchorRefView
         self.categoryDropDown.textColor = UIColor.black
         self.categoryDropDown.textFont = UIFont.systemFont(ofSize: 15)
         self.categoryDropDown.backgroundColor = UIColor.white
         self.categoryDropDown.selectionBackgroundColor = UIColor(red:0.99, green:0.4, blue:0.1, alpha:1)
         self.categoryDropDown.cellHeight = 60
         self.categoryDropDown.cornerRadius = 10
-        self.categoryDropDown.width = UIScreen.main.bounds.size.width - 60
+        
         self.categoryDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.categoryView.txtField.text = item
         }
@@ -84,10 +84,11 @@ class FeedbackViewController: UIViewController {
                     return
                 }
                 self.categories = (result as! [Category]).map{$0.service?.trimmingCharacters(in: NSCharacterSet.whitespaces) ?? ""}
-                self.categoryDropDown.dataSource = self.categories.sorted()
+                self.categories = self.categories.sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+                self.categoryDropDown.dataSource = self.categories
             }
         }
-        self.categoryDropDown.dataSource = self.categories.sorted()
+        self.categoryDropDown.dataSource = self.categories
     }
     
     @IBAction func submitTapped(_ sender: UIButton) {

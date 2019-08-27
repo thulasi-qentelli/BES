@@ -6,6 +6,7 @@ class InputView: UIView, UITextFieldDelegate {
 
     var view: UIView!
     
+    @IBOutlet weak var anchorRefView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var accessoryImgView: UIImageView!
     @IBOutlet weak var txtField: UITextField!
@@ -111,13 +112,11 @@ class InputView: UIView, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         
-        if let text = textField.text, let textRange = Range(range, in: text) {
-            let updatedText = text.replacingCharacters(in: textRange,
-                                                       with: string)
-            getUpdatedText(updatedText)
-        }
+        let updatedText = NSMutableString(string: textField.text ?? "").replacingCharacters(in: range, with: string)
+        getUpdatedText(updatedText)
         
-        return true
+        textField.text = updatedText
+        return false
     }
     
     @IBAction func accessoryImgAction(_ sender: UIButton) {

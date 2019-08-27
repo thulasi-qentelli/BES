@@ -43,6 +43,7 @@ class CommentInputView: UIView, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.txtView.delegate = self
+        self.txtField.isUserInteractionEnabled = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,19 +70,15 @@ class CommentInputView: UIView, UITextViewDelegate {
     
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if let text = textView.text, let textRange = Range(range, in: text) {
-            let updatedText = text.replacingCharacters(in: textRange,
-                                                       with: text)
-            getUpdatedText(updatedText)
-            
-            if updatedText.count > 0 {
-                self.txtField.isHidden = true
-            }
-            else {
-                self.txtField.isHidden = false
-            }
-        }
+        let updatedText = NSMutableString(string: textView.text).replacingCharacters(in: range, with: text)
+        getUpdatedText(updatedText)
         
+        if updatedText.count <= 0{
+            self.txtField.isHidden = false
+        }
+        else {
+            self.txtField.isHidden = true
+        }
         return true
     }
 }

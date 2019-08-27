@@ -17,6 +17,7 @@
                 <outlet property="accessoryImgView" destination="EXR-BO-SoL" id="nv3-eC-Uqd"/>
                 <outlet property="accessoryImgWidth" destination="npR-YQ-11V" id="xEn-0D-IBv"/>
                 <outlet property="actionBtn" destination="UMo-Jo-uGG" id="Ndy-hE-gVb"/>
+                <outlet property="anchorRefView" destination="3jr-Fx-2Ya" id="93V-iI-jm1"/>
                 <outlet property="titleLbl" destination="d5Z-Z6-bz1" id="hh9-jx-zZq"/>
                 <outlet property="txtField" destination="U3c-cE-rZn" id="udr-W4-Gzb"/>
             </connections>
@@ -26,6 +27,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jr-Fx-2Ya">
+                    <rect key="frame" x="30" y="59" width="315" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="N7V-Bq-YyI"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-Oz-B1w">
                     <rect key="frame" x="30" y="0.0" width="315" height="60"/>
                     <subviews>
@@ -105,6 +113,9 @@
                 <constraint firstItem="iRN-Oz-B1w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H6y-9e-dli"/>
                 <constraint firstItem="iRN-Oz-B1w" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Nfl-67-UyH"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iRN-Oz-B1w" secondAttribute="trailing" constant="30" id="RXf-DZ-kjG"/>
+                <constraint firstItem="3jr-Fx-2Ya" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="Wem-xC-XHu"/>
+                <constraint firstItem="iRN-Oz-B1w" firstAttribute="bottom" secondItem="3jr-Fx-2Ya" secondAttribute="bottom" id="mWb-S2-4b2"/>
+                <constraint firstAttribute="trailing" secondItem="3jr-Fx-2Ya" secondAttribute="trailing" constant="30" id="x3g-U0-zvx"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

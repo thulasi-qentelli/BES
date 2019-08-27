@@ -85,26 +85,24 @@ class InquiryViewController: UIViewController {
     
     func setupUI() {
 
-        self.locationDropDown.anchorView = self.locationView.txtField
+        self.locationDropDown.anchorView = self.locationView.anchorRefView
         self.locationDropDown.textColor = UIColor.black
         self.locationDropDown.textFont = UIFont.systemFont(ofSize: 15)
         self.locationDropDown.backgroundColor = UIColor.white
         self.locationDropDown.selectionBackgroundColor = UIColor(red:0.99, green:0.4, blue:0.1, alpha:1)
         self.locationDropDown.cellHeight = 60
         self.locationDropDown.cornerRadius = 10
-        self.locationDropDown.width = UIScreen.main.bounds.size.width - 60
         self.locationDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.locationView.txtField.text = item
         }
         
-        self.categoryDropDown.anchorView = self.categoryView.txtField
+        self.categoryDropDown.anchorView = self.categoryView.anchorRefView
         self.categoryDropDown.textColor = UIColor.black
         self.categoryDropDown.textFont = UIFont.systemFont(ofSize: 15)
         self.categoryDropDown.backgroundColor = UIColor.white
         self.categoryDropDown.selectionBackgroundColor = UIColor(red:0.99, green:0.4, blue:0.1, alpha:1)
         self.categoryDropDown.cellHeight = 60
         self.categoryDropDown.cornerRadius = 10
-        self.categoryDropDown.width = UIScreen.main.bounds.size.width - 60
         self.categoryDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.categoryView.txtField.text = item
         }
@@ -119,10 +117,11 @@ class InquiryViewController: UIViewController {
                     return
                 }
                 self.locations = (result as! [State]).map{$0.statename?.trimmingCharacters(in: NSCharacterSet.whitespaces) ?? ""}
-                self.locationDropDown.dataSource = self.locations.sorted()
+                self.locations = self.locations.sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+                self.locationDropDown.dataSource = self.locations
             }
         }
-        self.locationDropDown.dataSource = self.locations.sorted()
+        self.locationDropDown.dataSource = self.locations
     }
     
     func getCategories() {
@@ -133,10 +132,11 @@ class InquiryViewController: UIViewController {
                     return
                 }
                 self.categories = (result as! [Category]).map{$0.service?.trimmingCharacters(in: NSCharacterSet.whitespaces) ?? ""}
-                self.categoryDropDown.dataSource = self.categories.sorted()
+                self.categories = self.categories.sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+                self.categoryDropDown.dataSource = self.categories
             }
         }
-        self.categoryDropDown.dataSource = self.categories.sorted()
+        self.categoryDropDown.dataSource = self.categories
     }
     
     @IBAction func submitTapped(_ sender: UIButton) {

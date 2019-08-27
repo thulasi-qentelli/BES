@@ -79,7 +79,13 @@ class FilterViewController: UIViewController {
         
         var yPos = 80 + height1 + 20
         
-        let titleLabel2 = UILabel(frame: CGRect(x: 30, y: yPos, width: UIScreen.main.bounds.size.width - 60, height: 40))
+        
+        let imagView1 = UIImageView(frame: CGRect(x: 30, y: yPos + 5, width: UIScreen.main.bounds.size.width - 60, height: 1))
+        imagView1.backgroundColor = UIColor.lightGray
+        self.acrollView.addSubview(imagView1)
+        
+        
+        let titleLabel2 = UILabel(frame: CGRect(x: 30, y: yPos + 20, width: UIScreen.main.bounds.size.width - 60, height: 40))
         titleLabel2.text = "All Services"
         titleLabel2.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel2.backgroundColor = UIColor.clear
@@ -94,7 +100,11 @@ class FilterViewController: UIViewController {
         
         yPos = yPos + height2 + 20
         
-        let titleLabel3 = UILabel(frame: CGRect(x: 30, y: yPos, width: UIScreen.main.bounds.size.width - 60, height: 40))
+        let imagView2 = UIImageView(frame: CGRect(x: 30, y: yPos + 5, width: UIScreen.main.bounds.size.width - 60, height: 1))
+        imagView2.backgroundColor = UIColor.lightGray
+        self.acrollView.addSubview(imagView2)
+        
+        let titleLabel3 = UILabel(frame: CGRect(x: 30, y: yPos + 20, width: UIScreen.main.bounds.size.width - 60, height: 40))
         titleLabel3.text = "All Basins"
         titleLabel3.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel3.backgroundColor = UIColor.clear
@@ -107,7 +117,11 @@ class FilterViewController: UIViewController {
         self.acrollView.addSubview(chipView3)
         chipView3.frame = CGRect(x: 30, y: yPos, width: self.view.frame.size.width - 60, height: height3)
         
-        yPos = yPos + height3 + 80
+        yPos = yPos + height3 + 50
+        
+        let imagView3 = UIImageView(frame: CGRect(x: 30, y: yPos - 25, width: UIScreen.main.bounds.size.width - 60, height: 1))
+        imagView3.backgroundColor = UIColor.lightGray
+        self.acrollView.addSubview(imagView3)
         
         self.acrollView.contentSize = CGSize(width: self.view.frame.size.width, height: yPos)
         

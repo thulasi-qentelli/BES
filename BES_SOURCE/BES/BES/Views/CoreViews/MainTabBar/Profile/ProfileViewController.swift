@@ -40,6 +40,8 @@ class ProfileViewController: UIViewController {
             self.imagePickerOne.present(from: self.profileHeaderView.profileImgView)
         }
         
+        profileHeaderView.profileSubIcon.image = UIImage(named: "EditProfileImage")
+//        profileHeaderView.profileSubIcon.backgroundColor = UIColor.gray
         
         firstNameView.accessoryImgView.isHidden  =   false
         firstNameView.accessoryImgBtn.isHidden = false
@@ -134,10 +136,11 @@ class ProfileViewController: UIViewController {
                     return
                 }
                 self.locations = (result as! [State]).map{$0.statename?.trimmingCharacters(in: NSCharacterSet.whitespaces) ?? ""}
-                self.locationDropDown.dataSource = self.locations.sorted()
+                self.locations = self.locations.sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+                self.locationDropDown.dataSource = self.locations
             }
         }
-        self.locationDropDown.dataSource = self.locations.sorted()
+        self.locationDropDown.dataSource = self.locations
     }
     
     @objc func backBtnAction() {

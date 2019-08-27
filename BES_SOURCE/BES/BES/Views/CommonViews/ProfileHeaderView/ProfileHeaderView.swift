@@ -40,6 +40,9 @@ class ProfileHeaderView: UIView {
         self.profileImgView.layer.borderWidth   =   4.0
         self.profileImgView.layer.borderColor   =   UIColor.white.cgColor
         self.profileImgView.layer.masksToBounds =   true
+        self.profileSubIcon.layer.cornerRadius  = self.profileSubIcon.frame.size.width/2.0
+        self.profileSubIcon.layer.masksToBounds = true
+
   
     }
     
