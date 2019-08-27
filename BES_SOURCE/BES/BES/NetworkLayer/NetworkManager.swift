@@ -23,9 +23,14 @@ public enum Method: String {
     case login = "bes/mobileLogin"
     case forgotPassword = "bes/forgotPassword"
     case saveUser = "bes/saveUser"
+    case updateUser = "bes/updateUser"
     case getMessagesByEmail = "message/getMessagesByEmail"
     case getAllFeeds = "feed/getFeeds"
     case getAllLocations = "location/getLocation"
+    case uploadImage = "bes/uploadImage"
+    case getUser = "bes/getUserById"
+    case getStates = "states/getStates"
+    case getCategories = "category/getCategories"
 }
 
 enum NetworkEnvironment: String {
@@ -63,16 +68,11 @@ struct NetworkManager {
         }
         var url =  String(format:"\(environment.rawValue)\(method.rawValue)?\(parameters.urlEncodeString)")
         let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-//        var headers = HTTPHeaders.init()
-//        headers["Content-Type"]   = "application/json"
-    
         
         var request = URLRequest(url: try! urlString!.asURL())
-//        request.allHTTPHeaderFields = headers
         request.httpMethod = HTTPMethod.get.rawValue
         
-        if let auth = AppController.shared.user?.token {
-//            headers["Authorization"] = auth
+        if let auth = getAuthToken() {
             request.addValue(auth, forHTTPHeaderField: "Authorization")
         }
         
@@ -110,6 +110,27 @@ struct NetworkManager {
                                     else {
                                         completion(nil, jsonString)
                                     }
+                                case .getUser:
+                                    if let user = User(JSONString: jsonString) {
+                                        completion(user,nil)
+                                    }
+                                    else {
+                                        completion(nil,jsonString)
+                                    }
+                                case .getStates:
+                                    if let states = Mapper<State>().mapArray(JSONString: jsonString) {
+                                        completion(states,nil)
+                                    }
+                                    else {
+                                        completion(nil, jsonString)
+                                    }
+                                case .getCategories:
+                                    if let states = Mapper<Category>().mapArray(JSONString: jsonString) {
+                                        completion(states,nil)
+                                    }
+                                    else {
+                                        completion(nil, jsonString)
+                                    }
                                     
                                 default:
                                     print("========================")
@@ -142,13 +163,25 @@ struct NetworkManager {
             url = String(format:"\(environment.rawValue)\(method.rawValue)?\(parameters.urlEncodeString)")
         }
         let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        var headers = HTTPHeaders.init()
-        headers["Content-Type"]   = "application/json"
+//        var headers = HTTPHeaders.init()
+//        headers["Content-Type"]   = "application/json"
+//
+//        var request = URLRequest(url: try! urlString!.asURL())
+//        request.httpMethod = HTTPMethod.post.rawValue
+//        request.allHTTPHeaderFields = headers
+        
         
         var request = URLRequest(url: try! urlString!.asURL())
         request.httpMethod = HTTPMethod.post.rawValue
-        request.allHTTPHeaderFields = headers
-        if isURLEncode {
+        
+        if let auth = getAuthToken()  {
+            request.addValue(auth, forHTTPHeaderField: "Authorization")
+        }
+        
+        if !isURLEncode {
+            var headers = HTTPHeaders.init()
+            headers["Content-Type"]   = "application/json"
+            
             var  jsonData = NSData()
             
             do {
@@ -157,6 +190,7 @@ struct NetworkManager {
                 print(error.localizedDescription)
             }
             
+            request.allHTTPHeaderFields = headers
             request.httpBody = jsonData as Data
         }
         
@@ -197,7 +231,10 @@ struct NetworkManager {
                 print(error)
                 switch method {
                 case .login:
-                    if response.response?.statusCode == 400 {
+                    if response.response?.statusCode == 500 {
+                        completion(nil, "User doesn't exists.")
+                    }
+                    else if response.response?.statusCode == 400 {
                         completion(nil, "Please check entered email or password is.")
                     }
                     else {
@@ -226,6 +263,124 @@ struct NetworkManager {
             
         }
         
+    }
+   
+    
+    func put(method: Method, parameters: Parameters,isURLEncode:Bool = true ,completion: @escaping (_ resopnse: Any?,_ error: String?)->()){
+        if !Common.hasConnectivity() {
+            completion(nil,networkUnavailable)
+            return
+        }
+        var url = String(format:"\(environment.rawValue)\(method.rawValue)")
+        
+        if isURLEncode {
+            url = String(format:"\(environment.rawValue)\(method.rawValue)?\(parameters.urlEncodeString)")
+        }
+        let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+
+        
+        var request = URLRequest(url: try! urlString!.asURL())
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        if let auth = getAuthToken()  {
+            request.addValue(auth, forHTTPHeaderField: "Authorization")
+        }
+        
+        if !isURLEncode {
+            
+            var headers = HTTPHeaders.init()
+            headers["Content-Type"]   = "application/json"
+            
+            var  jsonData = NSData()
+            
+            do {
+                jsonData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) as NSData
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            request.allHTTPHeaderFields = headers
+            request.httpBody = jsonData as Data
+        }
+        
+        Alamofire.request(request).validate().responseData { response in
+            
+            switch response.result {
+            case .success:
+                guard let responseData = response.data else {
+                    completion(nil, NetworkResponse.noData.rawValue)
+                    return
+                }
+                
+                let jsonString = String(data: responseData, encoding: String.Encoding.utf8) ?? ""
+                print(jsonString)
+                
+                switch method {
+                case .updateUser:
+                    if let user = User(JSONString: jsonString) {
+                        completion(user,nil)
+                    }
+                    else {
+                        completion(nil,jsonString)
+                    }
+        
+                default:
+                    print("========================")
+                    
+                }
+            case .failure(let error):
+                print(error)
+                switch method {
+                default:
+                    print("========================")
+                    let errorMessage = self.handleNetworkResponse(response.response!)
+                    completion(nil, errorMessage)
+                    
+                }
+            }
+            
+        }
+        
+    }
+    func uploadImage(method: Method, parameters: Parameters,image: UIImage,completion: @escaping (_ resopnse: Any?,_ error: String?)->()) {
+        
+        if !Common.hasConnectivity() {
+            completion(nil,networkUnavailable)
+            return
+        }
+        let url = String(format:"\(environment.rawValue)\(method.rawValue)?\(parameters.urlEncodeString)")
+        
+            if let data = image.jpegData(compressionQuality: 0.50){
+                
+                Alamofire.upload(multipartFormData: { (multipartFormData) in
+                    multipartFormData.append(data, withName: "imageFile", fileName: "profile_image_\(String(describing: parameters["id"])).jpeg", mimeType: "image/jpeg")
+                    
+                }, usingThreshold: UInt64.init(), to: URL(string: url)!, method: .post, headers: nil) { (result) in
+                    
+                    switch result{
+                    case .success(let upload, _, _):
+                        upload.responseString { response in
+                            guard let responseData = response.data else {
+                                completion(nil, NetworkResponse.noData.rawValue)
+                                return
+                            }
+                            
+                            let jsonString = String(data: responseData, encoding: String.Encoding.utf8) ?? ""
+                            print(jsonString)
+                            
+                            if let user = User(JSONString: jsonString) {
+                                completion(user,nil)
+                            }
+                            else {
+                                completion(nil,jsonString)
+                            }
+                        }
+                       
+                    case .failure(let error):
+                        completion(nil, error.localizedDescription)
+                    }
+                }
+            }
     }
 }
 

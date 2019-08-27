@@ -34,7 +34,7 @@ class FeedbackViewController: UIViewController {
     }
     
     @objc func logoutAction() {
-        AppController.shared.loadLoginView()
+        AppController.shared.logoutAction()
     }
     
     

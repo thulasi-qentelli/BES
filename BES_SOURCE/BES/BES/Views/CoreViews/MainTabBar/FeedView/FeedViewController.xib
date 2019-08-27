@@ -21,6 +21,9 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame" translatesAutoresizingMaskIntoConstraints="NO" id="mhe-DD-DIs">
+                    <rect key="frame" x="160" y="64" width="244" height="400"/>
+                </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I0d-wj-Lmh">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                     <color key="backgroundColor" red="0.89124143119999999" green="0.4804035425" blue="0.22342813010000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -54,6 +57,9 @@
                 <constraint firstItem="I0d-wj-Lmh" firstAttribute="leading" secondItem="RtQ-VA-frj" secondAttribute="leading" id="LXo-rc-itJ"/>
                 <constraint firstItem="I0d-wj-Lmh" firstAttribute="top" secondItem="RtQ-VA-frj" secondAttribute="top" id="TNR-Ga-9iu"/>
                 <constraint firstItem="FUi-Is-TUV" firstAttribute="bottom" secondItem="bIe-wy-GGH" secondAttribute="bottom" id="UJT-Ps-YdP"/>
+                <constraint firstItem="FUi-Is-TUV" firstAttribute="trailing" secondItem="mhe-DD-DIs" secondAttribute="trailing" constant="10" id="ebJ-9x-lkQ"/>
+                <constraint firstItem="mhe-DD-DIs" firstAttribute="leading" secondItem="FUi-Is-TUV" secondAttribute="leading" constant="160" id="mio-Va-Kuy"/>
+                <constraint firstItem="mhe-DD-DIs" firstAttribute="top" secondItem="FUi-Is-TUV" secondAttribute="top" constant="20" id="uEz-yA-vZw"/>
                 <constraint firstItem="bIe-wy-GGH" firstAttribute="top" secondItem="I0d-wj-Lmh" secondAttribute="bottom" id="uha-uI-bBm"/>
                 <constraint firstItem="cjY-T0-4E1" firstAttribute="leading" secondItem="FUi-Is-TUV" secondAttribute="leading" id="zhh-y3-aeC"/>
             </constraints>
@@ -61,4 +67,7 @@
             <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
         </view>
     </objects>
+    <resources>
+        <image name="Frame" width="400" height="400"/>
+    </resources>
 </document>

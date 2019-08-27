@@ -59,6 +59,16 @@
 		00C918502311EEE300922DC7 /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C9184E2311EEE300922DC7 /* CustomCalloutView.swift */; };
 		00C918532311F4CC00922DC7 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918512311F4CC00922DC7 /* FilterViewController.swift */; };
 		00C918542311F4CC00922DC7 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C918522311F4CC00922DC7 /* FilterViewController.xib */; };
+		00CF89EE2314637D006889A6 /* TableSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF89EC2314637D006889A6 /* TableSectionHeaderView.swift */; };
+		00CF89EF2314637D006889A6 /* TableSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CF89ED2314637D006889A6 /* TableSectionHeaderView.xib */; };
+		00CF89F12314857D006889A6 /* LocationPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF89F02314857D006889A6 /* LocationPopView.swift */; };
+		00CF89F323148590006889A6 /* LocationPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CF89F223148590006889A6 /* LocationPopView.xib */; };
+		00CF89F52314B2F1006889A6 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF89F42314B2F1006889A6 /* StateModel.swift */; };
+		00CF89F92314BA76006889A6 /* CommentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF89F72314BA76006889A6 /* CommentInputView.swift */; };
+		00CF89FA2314BA76006889A6 /* CommentInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CF89F82314BA76006889A6 /* CommentInputView.xib */; };
+		00CF89FF2314C717006889A6 /* MobileNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CF89FD2314C717006889A6 /* MobileNumberView.xib */; };
+		00CF8A002314C717006889A6 /* MobileNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF89FE2314C717006889A6 /* MobileNumberView.swift */; };
+		00CF8A022314D8A7006889A6 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF8A012314D8A7006889A6 /* CategoryModel.swift */; };
 		00D343A2230F0DDB00555E32 /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D343A0230F0DDB00555E32 /* SideViewController.swift */; };
 		00D343A3230F0DDB00555E32 /* SideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D343A1230F0DDB00555E32 /* SideViewController.xib */; };
 		00D343A7230F0F7300555E32 /* SideProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D343A5230F0F7300555E32 /* SideProfileView.swift */; };
@@ -140,6 +150,16 @@
 		00C9184E2311EEE300922DC7 /* CustomCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCalloutView.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/LocationCell/CustomCalloutView.swift; sourceTree = "<group>"; };
 		00C918512311F4CC00922DC7 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		00C918522311F4CC00922DC7 /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		00CF89EC2314637D006889A6 /* TableSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSectionHeaderView.swift; sourceTree = "<group>"; };
+		00CF89ED2314637D006889A6 /* TableSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableSectionHeaderView.xib; sourceTree = "<group>"; };
+		00CF89F02314857D006889A6 /* LocationPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPopView.swift; sourceTree = "<group>"; };
+		00CF89F223148590006889A6 /* LocationPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationPopView.xib; sourceTree = "<group>"; };
+		00CF89F42314B2F1006889A6 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		00CF89F72314BA76006889A6 /* CommentInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentInputView.swift; sourceTree = "<group>"; };
+		00CF89F82314BA76006889A6 /* CommentInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentInputView.xib; sourceTree = "<group>"; };
+		00CF89FD2314C717006889A6 /* MobileNumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobileNumberView.xib; sourceTree = "<group>"; };
+		00CF89FE2314C717006889A6 /* MobileNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobileNumberView.swift; sourceTree = "<group>"; };
+		00CF8A012314D8A7006889A6 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		00D343A0230F0DDB00555E32 /* SideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
 		00D343A1230F0DDB00555E32 /* SideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideViewController.xib; sourceTree = "<group>"; };
 		00D343A5230F0F7300555E32 /* SideProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideProfileView.swift; sourceTree = "<group>"; };
@@ -204,6 +224,8 @@
 				00C9184D2311EEE300922DC7 /* CustomCalloutView.xib */,
 				00C9183B2311DB3100922DC7 /* LocationTableCell.swift */,
 				00C9183C2311DB3100922DC7 /* LocationTableCell.xib */,
+				00CF89F02314857D006889A6 /* LocationPopView.swift */,
+				00CF89F223148590006889A6 /* LocationPopView.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -277,6 +299,8 @@
 				0055FBEC230FEC18003D4D41 /* Message.swift */,
 				0055FBEE231006A3003D4D41 /* Feed.swift */,
 				0055FBF023100B01003D4D41 /* Location.swift */,
+				00CF89F42314B2F1006889A6 /* StateModel.swift */,
+				00CF8A012314D8A7006889A6 /* CategoryModel.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -364,6 +388,10 @@
 		005BC716230D168300BCAC1A /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				00CF89FC2314C6F3006889A6 /* MobileNumberView */,
+				00CF89FB2314BD46006889A6 /* RatingView */,
+				00CF89F62314BA54006889A6 /* CommentInputView */,
+				00CF89EB23146336006889A6 /* TableSectionHeaderView */,
 				00D343A9230F131300555E32 /* SideMenuCell */,
 				00D343A4230F0F5000555E32 /* SideProfileView */,
 				00F21A41230EB674008D9976 /* ProfileDisplayView */,
@@ -439,6 +467,40 @@
 				00C918492311ECF600922DC7 /* MapViewModel.swift */,
 			);
 			path = MapModels;
+			sourceTree = "<group>";
+		};
+		00CF89EB23146336006889A6 /* TableSectionHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				00CF89EC2314637D006889A6 /* TableSectionHeaderView.swift */,
+				00CF89ED2314637D006889A6 /* TableSectionHeaderView.xib */,
+			);
+			path = TableSectionHeaderView;
+			sourceTree = "<group>";
+		};
+		00CF89F62314BA54006889A6 /* CommentInputView */ = {
+			isa = PBXGroup;
+			children = (
+				00CF89F72314BA76006889A6 /* CommentInputView.swift */,
+				00CF89F82314BA76006889A6 /* CommentInputView.xib */,
+			);
+			path = CommentInputView;
+			sourceTree = "<group>";
+		};
+		00CF89FB2314BD46006889A6 /* RatingView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RatingView;
+			sourceTree = "<group>";
+		};
+		00CF89FC2314C6F3006889A6 /* MobileNumberView */ = {
+			isa = PBXGroup;
+			children = (
+				00CF89FE2314C717006889A6 /* MobileNumberView.swift */,
+				00CF89FD2314C717006889A6 /* MobileNumberView.xib */,
+			);
+			path = MobileNumberView;
 			sourceTree = "<group>";
 		};
 		00D343A4230F0F5000555E32 /* SideProfileView */ = {
@@ -647,16 +709,19 @@
 				005BC735230DE72A00BCAC1A /* OrangeHeaderView.xib in Resources */,
 				005BC715230D119900BCAC1A /* ForgotPWDViewController.xib in Resources */,
 				00C918542311F4CC00922DC7 /* FilterViewController.xib in Resources */,
+				00CF89EF2314637D006889A6 /* TableSectionHeaderView.xib in Resources */,
 				00C918432311EC5200922DC7 /* ChipView.xib in Resources */,
 				00D343AC230F134B00555E32 /* SideMenuCell.xib in Resources */,
 				00F21A34230EA940008D9976 /* LocationsViewController.xib in Resources */,
 				005BC730230DBCE000BCAC1A /* AcknowledgeViewController.xib in Resources */,
+				00CF89FA2314BA76006889A6 /* CommentInputView.xib in Resources */,
 				005BC6F4230D091900BCAC1A /* LaunchScreen.storyboard in Resources */,
 				00C9183E2311DB3100922DC7 /* LocationTableCell.xib in Resources */,
 				005BC728230D9F5800BCAC1A /* ProfileHeaderView.xib in Resources */,
 				00C8F9DE2312D86500C2378C /* FeedTableViewCell.xib in Resources */,
 				00F21A3C230EA95A008D9976 /* FeedbackViewController.xib in Resources */,
 				00C9184F2311EEE300922DC7 /* CustomCalloutView.xib in Resources */,
+				00CF89F323148590006889A6 /* LocationPopView.xib in Resources */,
 				005BC70D230D117000BCAC1A /* SplashViewController.xib in Resources */,
 				00F21A45230EB6A4008D9976 /* ProfileDisplayView.xib in Resources */,
 				000DBEAA231393F50064692E /* ProfileViewController.xib in Resources */,
@@ -665,6 +730,7 @@
 				00F21A30230EA92F008D9976 /* FeedViewController.xib in Resources */,
 				00D343A8230F0F7300555E32 /* SideProfileView.xib in Resources */,
 				005BC720230D5F1A00BCAC1A /* SignupViewController.xib in Resources */,
+				00CF89FF2314C717006889A6 /* MobileNumberView.xib in Resources */,
 				00F21A4A230ECCB6008D9976 /* MessageTableViewCell.xib in Resources */,
 				00D343A3230F0DDB00555E32 /* SideViewController.xib in Resources */,
 				00F21A38230EA94F008D9976 /* MessagesViewController.xib in Resources */,
@@ -724,6 +790,7 @@
 				0055FBCE230FAC9A003D4D41 /* NetworkManager.swift in Sources */,
 				0055FBDE230FAD9C003D4D41 /* DateExtension.swift in Sources */,
 				00F21A3F230EA967008D9976 /* InquiryViewController.swift in Sources */,
+				00CF89F12314857D006889A6 /* LocationPopView.swift in Sources */,
 				0055FBED230FEC18003D4D41 /* Message.swift in Sources */,
 				005BC714230D119900BCAC1A /* SignupViewController.swift in Sources */,
 				00C9184B2311ECF600922DC7 /* AnnotationView.swift in Sources */,
@@ -731,12 +798,16 @@
 				0055FBE1230FAE49003D4D41 /* APIWrapper.swift in Sources */,
 				00C918502311EEE300922DC7 /* CustomCalloutView.swift in Sources */,
 				00F21A3B230EA95A008D9976 /* FeedbackViewController.swift in Sources */,
+				00CF8A002314C717006889A6 /* MobileNumberView.swift in Sources */,
 				005BC704230D0AB100BCAC1A /* SideMenuMainController.swift in Sources */,
+				00CF8A022314D8A7006889A6 /* CategoryModel.swift in Sources */,
 				0055FBDF230FAD9C003D4D41 /* EncodableExtension.swift in Sources */,
 				005BC72F230DBCE000BCAC1A /* AcknowledgeViewController.swift in Sources */,
 				005BC71F230D5F1A00BCAC1A /* ForgotPWDViewController.swift in Sources */,
+				00CF89EE2314637D006889A6 /* TableSectionHeaderView.swift in Sources */,
 				00F21A2F230EA92F008D9976 /* FeedViewController.swift in Sources */,
 				00D343A7230F0F7300555E32 /* SideProfileView.swift in Sources */,
+				00CF89F52314B2F1006889A6 /* StateModel.swift in Sources */,
 				005BC729230D9F5800BCAC1A /* ProfileHeaderView.swift in Sources */,
 				005BC701230D0A0900BCAC1A /* AppController.swift in Sources */,
 				005BC734230DE72A00BCAC1A /* OrangeHeaderView.swift in Sources */,
@@ -755,6 +826,7 @@
 				0055FBD8230FAD73003D4D41 /* ParameterDetail.swift in Sources */,
 				0055FBDA230FAD7B003D4D41 /* User.swift in Sources */,
 				00C918452311EC5200922DC7 /* ChipView.swift in Sources */,
+				00CF89F92314BA76006889A6 /* CommentInputView.swift in Sources */,
 				00C8F9DD2312D86500C2378C /* FeedTableViewCell.swift in Sources */,
 				005BC71A230D16BC00BCAC1A /* InputView.swift in Sources */,
 				0055FBE9230FB740003D4D41 /* Reachability.swift in Sources */,

@@ -34,6 +34,9 @@
                         <constraint firstAttribute="height" constant="44" id="OxS-Zz-uPc"/>
                     </constraints>
                 </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame" translatesAutoresizingMaskIntoConstraints="NO" id="9bo-FF-VlW">
+                    <rect key="frame" x="160" y="64" width="244" height="400"/>
+                </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1h-em-iOV">
                     <rect key="frame" x="0.0" y="54" width="414" height="808"/>
                     <subviews>
@@ -123,6 +126,13 @@ Settings</string>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="8R5-J2-zcC"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isDropDown" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="accessoryImage" value="expand_more_24px"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="accessoryImageSize">
+                                            <real key="value" value="32"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5r-Hf-1L5">
                                     <rect key="frame" x="0.0" y="430" width="414" height="20"/>
@@ -151,6 +161,12 @@ Settings</string>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="aKM-jd-8wD"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="accessoryImage" value="visibility"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="accessoryImageSize">
+                                            <real key="value" value="20"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7f-do-dHu">
                                     <rect key="frame" x="0.0" y="590" width="414" height="40"/>
@@ -270,14 +286,17 @@ Settings</string>
             </subviews>
             <color key="backgroundColor" red="0.95687168836593628" green="0.95685106515884399" blue="0.95685511827468872" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9bo-FF-VlW" secondAttribute="trailing" constant="10" id="3Vf-TN-OBX"/>
                 <constraint firstItem="gYR-qb-6uW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="51M-DY-056"/>
                 <constraint firstItem="T52-7U-DwH" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="QFo-PB-LXa"/>
+                <constraint firstItem="9bo-FF-VlW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="RaA-Nr-NO0"/>
                 <constraint firstItem="gYR-qb-6uW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-44" id="XXa-TM-ao6"/>
                 <constraint firstItem="w1h-em-iOV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="ZbL-dm-n3a"/>
                 <constraint firstItem="T52-7U-DwH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="d4X-nO-nnv"/>
                 <constraint firstItem="gYR-qb-6uW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="eTZ-Kr-jmW"/>
                 <constraint firstItem="w1h-em-iOV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="g6r-Px-M7e"/>
                 <constraint firstItem="T52-7U-DwH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lLW-fF-p2N"/>
+                <constraint firstItem="9bo-FF-VlW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="160" id="m8V-Lp-nMI"/>
                 <constraint firstItem="w1h-em-iOV" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="rbq-ua-cmK"/>
                 <constraint firstItem="w1h-em-iOV" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="u4f-Kh-Qon"/>
             </constraints>
@@ -285,4 +304,9 @@ Settings</string>
             <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
         </view>
     </objects>
+    <resources>
+        <image name="Frame" width="400" height="400"/>
+        <image name="expand_more_24px" width="40" height="40"/>
+        <image name="visibility" width="40" height="40"/>
+    </resources>
 </document>

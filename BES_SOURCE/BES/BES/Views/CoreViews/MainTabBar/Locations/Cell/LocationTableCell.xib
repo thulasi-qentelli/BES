@@ -218,7 +218,7 @@ Home grey icon for tabor</string>
                 <outlet property="servicesLbl" destination="8BP-u4-GCF" id="eHy-Q0-FVe"/>
                 <outlet property="titleLbl" destination="J9T-4G-GqF" id="cjh-bs-eTW"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="138.95089285714286"/>
+            <point key="canvasLocation" x="233" y="139"/>
         </tableViewCell>
     </objects>
     <resources>

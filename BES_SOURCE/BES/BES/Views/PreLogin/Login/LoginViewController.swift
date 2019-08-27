@@ -49,7 +49,6 @@ class LoginViewController: UIViewController {
             self.passwordView.txtField.isSecureTextEntry = sender.isSelected
             self.passwordView.txtField.clearsOnBeginEditing = false
             sender.isSelected = !sender.isSelected
-            
         }
     }
 
@@ -136,8 +135,9 @@ class LoginViewController: UIViewController {
                                 }
                                 
                                 AppController.shared.user = result as? User
+                                saveAuthToken(token: AppController.shared.user!.token!)
                                 saveUserDetails(user: result as! User)
-                                AppController.shared.loadHomeView()
+                                AppController.shared.loadStartView()
                             }
                         }
                         

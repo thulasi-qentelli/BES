@@ -213,9 +213,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="commentsLbl" destination="ZnE-CF-Nht" id="x0H-ar-Idz"/>
                 <outlet property="displayTextLbl" destination="2q1-hU-7eC" id="VJy-J0-Z86"/>
                 <outlet property="imgHeight" destination="Gsx-kc-T8G" id="EHt-UP-jUa"/>
                 <outlet property="imgView" destination="3Iz-KK-K6z" id="tjA-3N-k7j"/>
+                <outlet property="likedLbl" destination="hqQ-KT-4Jg" id="xJC-uV-0UQ"/>
                 <outlet property="nameLbl" destination="SIP-IE-sOS" id="PiR-my-dAv"/>
                 <outlet property="profileImgPlaceholderView" destination="6ZD-Hu-X2A" id="Ksa-xB-k2R"/>
                 <outlet property="profileImgView" destination="MKP-Eh-pqW" id="Pec-gr-n23"/>

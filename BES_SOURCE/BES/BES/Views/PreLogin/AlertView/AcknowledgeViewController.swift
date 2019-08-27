@@ -10,6 +10,8 @@ import UIKit
 enum AcknowledgeType {
     case Signup
     case ForgotPassword
+    case Inquiry
+    case Feedback
 }
 class AcknowledgeViewController: UIViewController {
 
@@ -61,6 +63,18 @@ class AcknowledgeViewController: UIViewController {
     
     func setupUI() {
         switch type {
+        case .Feedback:
+            titleLbl.text = "Feedback"
+            alertTitleLbl.text = "Form submitted sucessfully"
+            alertDetailLbl.text = "Thanks for letting us know.\nYour feedback improves the quality of BES app."
+            clickHereHeightConstraint.constant = 0
+            doneBtn.setTitle("BACK TO HOME", for: .normal)
+        case .Inquiry:
+            titleLbl.text = "Inquiry"
+            alertTitleLbl.text = "Form submitted sucessfully"
+            alertDetailLbl.text = "Thanks for inquiy.\nSomeone will contact you innext 24 to 48 hours."
+            clickHereHeightConstraint.constant = 0
+            doneBtn.setTitle("BACK TO HOME", for: .normal)
         case .ForgotPassword:
             titleLbl.text = "Forgot\nPassword?"
             alertTitleLbl.text = "Password reset sent"

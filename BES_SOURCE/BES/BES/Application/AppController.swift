@@ -16,15 +16,14 @@ class AppController {
     var mainView   =   SSASideMenu()
     var window: UIWindow?
     
-    func loadLoginView() {
+    func loadStartView() {
         if let user = getUserDetails() {
             self.user = user
             let VC1 =   MainTabbarViewController()
             let VC2 =   SideViewController()
             VC2.menuTapped = { index in
                 if index == 5 {
-                    clearUserDetails()
-                    AppController.shared.loadLoginView()
+                    self.logoutAction()
                 } else {
                     VC1.selectedIndex = index
                 }
@@ -44,21 +43,6 @@ class AppController {
         }
     }
     
-    func loadHomeView() {
-        let VC1 =   MainTabbarViewController()
-        let VC2 =   SideViewController()
-        VC2.menuTapped = { index in
-            if index == 6 {
-                
-            } else {
-                VC1.selectedIndex = index
-            }
-            
-        }
-        mainView   =   SSASideMenu(contentViewController: VC1, leftMenuViewController: VC2)
-        window?.rootViewController  =    mainView        
-        setNavigationBarAppearance()
-    }
     func setNavigationBarAppearance () {
         UINavigationBar.appearance().tintColor = UIColor.white
 //        UINavigationBar.appearance().barTintColor = UIColor.orange
@@ -107,8 +91,20 @@ class AppController {
     }
     
     @objc func logoutAction() {
-        clearUserDetails()
-        AppController.shared.loadLoginView()
+        
+        let alert = UIAlertController(title: "BES", message: "Are You Sure Want to Logout!", preferredStyle:.alert)
+        let yesButton = UIAlertAction(title: "Yes", style: .default) { (action) in
+            clearAuthToken()
+            clearUserDetails()
+            AppController.shared.loadStartView()
+        }
+        let noButton = UIAlertAction(title: "Cancel", style: .default) { (action) in
+            
+        }
+        alert.addAction(yesButton)
+        alert.addAction(noButton)
+        
+        self.mainView.contentViewController?.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -141,5 +137,20 @@ func getUserDetails() -> User? {
 }
 func clearUserDetails() {
     UserDefaults.standard.removeObject(forKey: "LoginUserData")
+    UserDefaults.standard.synchronize()
+}
+
+func saveAuthToken(token:String) {
+    UserDefaults.standard.set(token, forKey: "AuthTokenForUser")
+    UserDefaults.standard.synchronize()
+}
+func getAuthToken() -> String? {
+    if let value = UserDefaults.standard.object(forKey: "AuthTokenForUser") {
+        return value as? String
+    }
+    return nil
+}
+func clearAuthToken() {
+    UserDefaults.standard.removeObject(forKey: "AuthTokenForUser")
     UserDefaults.standard.synchronize()
 }

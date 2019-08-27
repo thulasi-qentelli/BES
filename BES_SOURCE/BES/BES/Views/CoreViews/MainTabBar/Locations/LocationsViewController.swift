@@ -12,6 +12,7 @@ import SDWebImage
 import CoreLocation
 import MapKit
 
+
 class LocationsViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
     var locations: [Location] = []
@@ -22,9 +23,10 @@ class LocationsViewController: UIViewController {
     var filteredRegions:[String] = []
     var filteredServices:[String] = []
     var filteredBasins : [String] = []
-    var isFilterPresented = false
     var selectedLocation: Location?
     var locationManager:CLLocationManager!
+    let refreshControl = UIRefreshControl()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,7 @@ class LocationsViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.mapView.isHidden = true
         setupUI()
+        loadLocations(showLoader: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,94 +42,91 @@ class LocationsViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         
         AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
-        
-        if isFilterPresented == false {
-            
-            filteredRegions = []
-            filteredBasins = []
-            filteredServices = []
-            
-            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
-            loadingNotification.mode = MBProgressHUDMode.indeterminate
-            loadingNotification.label.text = "Please wait"
-            
-            NetworkManager().get(method: .getAllLocations, parameters: [:]) { (result, error) in
-                DispatchQueue.main.async {
-                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                    if error != nil {
-                        self.view.makeToast(error, duration: 2.0, position: .center)
-                        return
-                    }
-                    
-                    if let _ = result, let kmess = (result as? [Location]) {
-                        self.locations = kmess
-                        self.locations.sort(by: { (loc1, loc2) -> Bool in
-                            loc1.getTitle() < loc2.getTitle()
-                        })
-                        self.filteredLocations = self.locations
-                        self.tblView.reloadData()
-                        let mapModel = MapViewModel(locations: self.locations, mapView: self.mapView)
-                        mapModel.loadDetails()
-                        self.setupFiletrs()
-                        
-                    }
-                }
-            }
-        }
-        else {
-            isFilterPresented = false
-        }
     }
-    
-    func setupFiletrs() {
-        
-        
-        
-    }
+
     
     @objc func menuBtnAction() {
         presentLeftMenuViewController()
     }
     
     @objc func logoutAction() {
-        AppController.shared.loadLoginView()
+        AppController.shared.logoutAction()
     }
     
     @IBAction func mapSwitchTapped(_ sender: UIButton) {
         
-        isFilterPresented = true
-        
-        let filterView = FilterViewController()
-        filterView.locations = self.locations
-        filterView.filteredRegions = self.filteredRegions
-        filterView.filteredServices = self.filteredServices
-        filterView.filteredBasins = self.filteredBasins
-        
-        filterView.getFilteredLocations = { (loc,filReg,filSer,filBas) in
-            self.filteredLocations = loc
-            self.filteredRegions = filReg
-            self.filteredServices = filSer
-            self.filteredBasins = filBas
-            self.tblView.reloadData()
-            
-            let mapModel = MapViewModel(locations: self.locations, mapView: self.mapView)
-            mapModel.loadDetails()
-            
-        }
-        self.present(filterView, animated: true) {
-            self.tblView.setContentOffset(.zero, animated: true)
-        }
-        
-        
 //        self.tblView.isHidden = !self.tblView.isHidden
-//        self.mapView.isHidden = !self.mapView.isHidden
-//        sender.isSelected = !sender.isSelected
+        if self.filteredLocations.count>0 {
+            let indexPath = NSIndexPath(row: 0, section: 0)
+            self.tblView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
+        } else {
+            self.tblView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
+        }
+        
+        addTransitionEffect(view: self.mapView)
+        self.mapView.isHidden = !self.mapView.isHidden
+        if self.mapView.isHidden == false {
+            let mapModel = MapViewModel(locations: self.filteredLocations, mapView: self.mapView)
+            mapModel.loadDetails()
+        }
+        sender.isSelected = !sender.isSelected
     }
     
     func setupUI() {
         self.tblView.estimatedRowHeight = 160
         self.tblView.rowHeight = UITableView.automaticDimension
         self.tblView.register(UINib.init(nibName: cellReuseIdendifier, bundle: nil), forCellReuseIdentifier: cellReuseIdendifier)
+        
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        
+        if #available(iOS 10.0, *) {
+            self.tblView.refreshControl = refreshControl
+        } else {
+            self.tblView.backgroundView = refreshControl
+        }
+        
+        
+        
+    }
+    
+    @objc func refresh(_ refreshControl: UIRefreshControl) {
+        // Do your job, when done:
+        self.refreshControl.endRefreshing()
+        loadLocations(showLoader: true)
+    }
+    
+    func loadLocations(showLoader:Bool) {
+        if showLoader {
+            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.indeterminate
+            loadingNotification.label.text = "Please wait"
+        }
+        
+        filteredRegions = []
+        filteredBasins = []
+        filteredServices = []
+        
+        NetworkManager().get(method: .getAllLocations, parameters: [:]) { (result, error) in
+            DispatchQueue.main.async {
+                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                self.refreshControl.endRefreshing()
+                if error != nil {
+                    self.view.makeToast(error, duration: 2.0, position: .center)
+                    return
+                }
+                
+                if let _ = result, let kmess = (result as? [Location]) {
+                    self.locations = kmess
+                    self.locations.sort(by: { (loc1, loc2) -> Bool in
+                        loc1.getTitle() < loc2.getTitle()
+                    })
+                    self.filteredLocations = self.locations
+                    self.tblView.reloadData()
+                    let mapModel = MapViewModel(locations: self.filteredLocations, mapView: self.mapView)
+                    mapModel.loadDetails()
+                }
+            }
+        }
     }
     
 }
@@ -137,17 +137,40 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
         return self.filteredLocations.count
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return 90
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 80))
-        view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
-        let titleLabel = UILabel(frame: CGRect(x: 30, y: 20, width: UIScreen.main.bounds.size.width - 60, height: 60))
-        titleLabel.text = "Locations"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        titleLabel.backgroundColor = UIColor.clear
-        view.addSubview(titleLabel)
+        let view = TableSectionHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 90))
+        view.titleLbl.text = "Locations"
+        view.backgroundColor = self.view.backgroundColor
+        view.filterBtnAction = {
+            let filterView = FilterViewController()
+            filterView.locations = self.locations
+            filterView.filteredRegions = self.filteredRegions
+            filterView.filteredServices = self.filteredServices
+            filterView.filteredBasins = self.filteredBasins
+            
+            filterView.getFilteredLocations = { (loc,filReg,filSer,filBas) in
+                self.filteredLocations = loc
+                self.filteredRegions = filReg
+                self.filteredServices = filSer
+                self.filteredBasins = filBas
+                self.tblView.reloadData()
+                
+                let mapModel = MapViewModel(locations: self.filteredLocations, mapView: self.mapView)
+                mapModel.loadDetails()
+                
+            }
+            self.present(filterView, animated: true) {
+                if self.filteredLocations.count>0 {
+                    let indexPath = NSIndexPath(row: 0, section: 0)
+                    self.tblView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
+                } else {
+                    self.tblView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
+                }
+            }
+        }
         return view
     }
     
@@ -222,15 +245,40 @@ extension LocationsViewController: MKMapViewDelegate {
         }
         let starbucksAnnotation = view.annotation as! MapPlaceMark
         markerOrder = starbucksAnnotation
-        let views = Bundle.main.loadNibNamed("CustomCalloutView", owner: nil, options: nil)
-        let calloutView = views?[0] as! CustomCalloutView
-        calloutView.starbucksName.text = starbucksAnnotation.title
-        calloutView.starbucksAddress.text = starbucksAnnotation.address
+        
+        
+        let views = Bundle.main.loadNibNamed("LocationPopView", owner: nil, options: nil)
+        let calloutView = views?[0] as! LocationPopView
+        
+        calloutView.titleLbl.text = starbucksAnnotation.location.getTitle()
+        calloutView.addressLbl.text = starbucksAnnotation.location.getAddress()
+        calloutView.phoneLbl.text = starbucksAnnotation.location.phone
+        calloutView.regionLbl.text = starbucksAnnotation.location.region
+        calloutView.servicesLbl.text = starbucksAnnotation.location.services
+        calloutView.basinLbl.text = starbucksAnnotation.location.basins
+        calloutView.location = starbucksAnnotation.location
+        calloutView.locationAction = { loc in
+            print("Location action")
+            self.selectedLocation = loc
+            self.determineMyCurrentLocation()
+        }
+        calloutView.phoneAction = { loc in
+            print("Phone aciton")
+            self.selectedLocation = loc
+            if let phoneNumber = loc.phone,let phoneNumberUrl = URL(string: "tel://001\(phoneNumber)"){
+                UIApplication.shared.open(phoneNumberUrl, options: [:], completionHandler: nil)
+            }
+        }
+
+//        let views = Bundle.main.loadNibNamed("CustomCalloutView", owner: nil, options: nil)
+//        let calloutView = views?[0] as! CustomCalloutView
+//        calloutView.starbucksName.text = starbucksAnnotation.title
+//        calloutView.starbucksAddress.text = starbucksAnnotation.address
         
         calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height*0.52)
         view.addSubview(calloutView)
         mapView.setCenter((view.annotation?.coordinate)!, animated: true)
-        calloutView.iconbtn.addTarget(self, action: #selector(popup), for: .touchUpInside)
+//        calloutView.iconbtn.addTarget(self, action: #selector(popup), for: .touchUpInside)
         
     }
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {

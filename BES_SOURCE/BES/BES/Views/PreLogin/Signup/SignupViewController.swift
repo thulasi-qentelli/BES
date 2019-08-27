@@ -20,6 +20,8 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var createAccountBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     
+    var imagePickerOne: ImagePicker!
+    var imageURL : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,9 @@ class SignupViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
         
+        profileHeaderView.profileImageTapped = {
+            self.imagePickerOne.present(from: self.profileHeaderView.profileImgView)
+        }
         firstNameView.getUpdatedText = { string in
             self.firstNameView.accessoryImgView.isHidden = true
             if string.count > 0 {
@@ -137,6 +142,8 @@ class SignupViewController: UIViewController {
     
     func setupUI() {
         
+        self.imagePickerOne = ImagePicker(presentationController: self, delegate: self)
+        
         firstNameView.titleLbl.text = "First Name"
         firstNameView.txtField.placeholder = "Enter first name"
         
@@ -184,10 +191,18 @@ class SignupViewController: UIViewController {
                                 return
                             }
                             
-                            let alertVC     =   AcknowledgeViewController()
-                            alertVC.type    =   .Signup
-                            alertVC.email   =   email
-                            self.navigationController?.pushViewController(alertVC, animated: true)
+                            if let user = result as? User {
+                                NetworkManager().uploadImage(method: .uploadImage, parameters: ["id": "\(user.id!)"], image: self.profileHeaderView.profileImgView.image!, completion: { (imgResult, imgError) in
+                                    if imgError != nil {
+                                        self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
+                                    }
+                                    
+                                    let alertVC     =   AcknowledgeViewController()
+                                    alertVC.type    =   .Signup
+                                    alertVC.email   =   email
+                                    self.navigationController?.pushViewController(alertVC, animated: true)
+                                })
+                            }                            
                         }
                     }
                 }
@@ -224,6 +239,10 @@ class SignupViewController: UIViewController {
             return false
         }
         
+        guard let url = imageURL else {
+            self.view.makeToast("Please upload profile picture", duration: 1.0, position: .center)
+            return false
+        }
         if firstName.count < 1 {
             self.view.makeToast("Please enter first name", duration: 1.0, position: .center)
             firstNameView.txtField.becomeFirstResponder()
@@ -269,4 +288,14 @@ class SignupViewController: UIViewController {
         return true
     }
     
+}
+
+extension SignupViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        
+        self.profileHeaderView.profileImgView.image = image
+        self.profileHeaderView.profileImgPlaceholderView.isHidden = true
+        self.imageURL = "Saved"
+    }
 }

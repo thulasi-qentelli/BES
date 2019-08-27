@@ -11,6 +11,10 @@ class ProfileHeaderView: UIView {
     @IBOutlet weak var profileSubIcon: UIImageView!
     @IBOutlet weak var textLbl: UILabel!
     
+    var profileImageTapped:()->Void = {
+        
+    }
+    
     var user:User? {
         didSet {
             if let urlString = AppController.shared.user?.pic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
@@ -62,6 +66,7 @@ class ProfileHeaderView: UIView {
     }
     
     @IBAction func btnAction(_ sender: UIButton) {
+        profileImageTapped()
     }
     
 }

@@ -11,5 +11,7 @@ target 'BES' do
   pod 'DropDown'
   pod 'MBProgressHUD'
   pod 'IQKeyboardManager'
+  pod 'SimpleImageViewer'
+  pod 'DropDown'
 
 end

@@ -2,24 +2,17 @@
 import UIKit
 
 @IBDesignable
-class InputView: UIView, UITextFieldDelegate {
+class MobileNumberView: UIView, UITextFieldDelegate {
 
     var view: UIView!
     
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var accessoryImgView: UIImageView!
     @IBOutlet weak var txtField: UITextField!
-    @IBOutlet weak var accessoryImgWidth: NSLayoutConstraint!
-    @IBOutlet weak var accessoryImgBtn: UIButton!
     
-    @IBOutlet weak var accessoryImgHeight: NSLayoutConstraint!
     var getUpdatedText:(String)->() = { string in
         
     }
     
-    var accessoryAction:(UIButton)->Void = { sender in
-        
-    }
     
     @IBInspectable var titleText: String = "Title"{
         didSet{
@@ -34,26 +27,7 @@ class InputView: UIView, UITextFieldDelegate {
         }
     }
     
-    @IBInspectable var accessoryImage: UIImage = UIImage(named: "iconNavigationCheck") ?? UIImage() {
-        didSet{
-            self.accessoryImgView.image = accessoryImage
-        }
-    }
-    
-    @IBInspectable var accessoryImageSize: CGFloat = 16{
-        didSet{
-            self.accessoryImgWidth.constant = accessoryImageSize
-            self.accessoryImgHeight.constant = accessoryImageSize
-            
-        }
-    }
-    
-    @IBInspectable var isDropDown: Bool = false {
-        didSet{
-            self.accessoryImgView.isHidden  =   false
-            self.accessoryImgBtn.isHidden = false
-        }
-    }
+  
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -71,8 +45,6 @@ class InputView: UIView, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
     
-        self.accessoryImgView.isHidden  =   true
-        self.accessoryImgBtn.isHidden = true
         self.txtField.delegate = self
     }
     
@@ -92,19 +64,14 @@ class InputView: UIView, UITextFieldDelegate {
     func loadViewFromNib() -> UIView {
         
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "InputView", bundle: bundle)
+        let nib = UINib(nibName: "MobileNumberView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         
         return view
     }
     
     @IBAction func btnAction(_ sender: UIButton) {
-        if isDropDown == true {
-            accessoryAction(sender)
-        }
-        else {
-            self.txtField.becomeFirstResponder()
-        }
+          self.txtField.becomeFirstResponder()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -118,8 +85,5 @@ class InputView: UIView, UITextFieldDelegate {
         
         return true
     }
-    
-    @IBAction func accessoryImgAction(_ sender: UIButton) {
-        accessoryAction(sender)
-    }
+
 }

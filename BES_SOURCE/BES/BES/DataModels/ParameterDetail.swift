@@ -10,6 +10,9 @@ struct ParameterDetail: Codable {
     var lastName: String?
     var role:String?
     var pic: String?
+    var location: String?
+    var id: String?
+    var userId:String?
     
     init() {
     }

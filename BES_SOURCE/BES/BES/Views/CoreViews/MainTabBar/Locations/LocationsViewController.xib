@@ -22,8 +22,19 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame" translatesAutoresizingMaskIntoConstraints="NO" id="1WQ-qx-MiR">
+                    <rect key="frame" x="160" y="64" width="244" height="400"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wd1-0V-fXa">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="bcX-O3-GsW"/>
+                        <outlet property="delegate" destination="-1" id="Kg8-af-1Cv"/>
+                    </connections>
+                </tableView>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pzl-17-Wje">
-                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
+                    <rect key="frame" x="0.0" y="134" width="414" height="728"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Xhe-pa-oHp"/>
                     </connections>
@@ -35,14 +46,6 @@
                         <constraint firstAttribute="height" constant="44" id="dLN-m5-afO"/>
                     </constraints>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wd1-0V-fXa">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="bcX-O3-GsW"/>
-                        <outlet property="delegate" destination="-1" id="Kg8-af-1Cv"/>
-                    </connections>
-                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVd-gd-niy">
                     <rect key="frame" x="348" y="796" width="60" height="60"/>
                     <constraints>
@@ -65,19 +68,22 @@
             </subviews>
             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685511830000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="pzl-17-Wje" firstAttribute="top" secondItem="JrJ-Dd-G6N" secondAttribute="bottom" constant="35" id="1HN-RG-CK7"/>
+                <constraint firstItem="pzl-17-Wje" firstAttribute="top" secondItem="JrJ-Dd-G6N" secondAttribute="bottom" constant="54" id="1HN-RG-CK7"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="3ji-6j-Yeu"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="BZ8-5a-pJ4"/>
                 <constraint firstItem="pgC-1O-jBW" firstAttribute="leading" secondItem="s32-IT-6j0" secondAttribute="leading" id="Exj-Z6-KqY"/>
+                <constraint firstItem="1WQ-qx-MiR" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" constant="160" id="MxV-O0-x6W"/>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="OUp-fQ-1DM"/>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="Qaq-Ci-2Tn"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="top" secondItem="pgC-1O-jBW" secondAttribute="bottom" id="TpT-FM-zVj"/>
                 <constraint firstItem="pgC-1O-jBW" firstAttribute="top" secondItem="s32-IT-6j0" secondAttribute="top" id="WI4-5v-cbc"/>
                 <constraint firstAttribute="trailing" secondItem="pgC-1O-jBW" secondAttribute="trailing" id="YSq-wp-yhJ"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="bottom" secondItem="GVd-gd-niy" secondAttribute="bottom" constant="6" id="aI1-L4-kOF"/>
+                <constraint firstItem="1WQ-qx-MiR" firstAttribute="top" secondItem="xEn-nP-f3c" secondAttribute="top" constant="20" id="dWJ-DT-ZCi"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="trailing" secondItem="GVd-gd-niy" secondAttribute="trailing" constant="6" id="iD9-2x-5ln"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="q2w-y6-ZXK"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="top" secondItem="xEn-nP-f3c" secondAttribute="top" constant="-44" id="rM3-Me-nVO"/>
+                <constraint firstItem="xEn-nP-f3c" firstAttribute="trailing" secondItem="1WQ-qx-MiR" secondAttribute="trailing" constant="10" id="ry5-4u-Xin"/>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="bottom" secondItem="xEn-nP-f3c" secondAttribute="bottom" id="uPl-Lu-iTA"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="bottom" secondItem="Wd1-0V-fXa" secondAttribute="bottom" id="ulK-Iw-reW"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="vB6-HB-vWq"/>
@@ -87,6 +93,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Frame" width="400" height="400"/>
         <image name="List_view_icon" width="32" height="32"/>
         <image name="Map_view_icon" width="32" height="32"/>
     </resources>

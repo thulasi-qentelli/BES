@@ -10,6 +10,7 @@ import UIKit
 
 class FeedTableViewCell: UITableViewCell {
 
+    var feed: Feed?
     @IBOutlet weak var displayTextLbl: UILabel!
     @IBOutlet weak var txtLbl: UILabel!
     @IBOutlet weak var readMoreBtn: UIButton!
@@ -20,9 +21,18 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var timestampLbl: UILabel!
     
+    @IBOutlet weak var likedLbl: UILabel!
+    @IBOutlet weak var commentsLbl: UILabel!
     
     var readMoreFunction:(UIButton, String)->Void = { (sender, str) in
     
+    }
+    var imageViewTapAction:(UIImageView)->Void = { sender in
+        
+    }
+    
+    var likeBtnTap:(Feed)->Void = { feed in
+        
     }
     
     var string = ""
@@ -32,6 +42,9 @@ class FeedTableViewCell: UITableViewCell {
 //        getTextForReadmore(numberOfLines: 3)
         profileImgView.layer.cornerRadius = 25
         profileImgView.layer.masksToBounds = true
+        self.imgView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        self.imgView.addGestureRecognizer(tapGesture)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,7 +58,12 @@ class FeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func likeBtnAction(_ sender: UIButton) {
-        
+        if let kFeed = self.feed {
+            likeBtnTap(kFeed)
+        }
+    }
+    @objc func imageViewTapped() {
+        imageViewTapAction(self.imgView)
     }
     func getTextForReadmore(kStr:String, numberOfLines:Int) {
         

@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 
+
 class SideViewController: UIViewController {
 
     @IBOutlet weak var profileView: SideProfileView!
@@ -28,11 +29,14 @@ class SideViewController: UIViewController {
         // Do any additional setup after loading the view.
         
       
+        
+      
         profileView.user = AppController.shared.user
         profileView.editTapped = {
             let profileVC = ProfileViewController()
             let nav = UINavigationController(rootViewController: profileVC)
             self.present(nav, animated: true, completion: nil)
+            self.sideMenuViewController?.hideMenuViewController()
             
         }
         
@@ -59,6 +63,25 @@ class SideViewController: UIViewController {
         logout.btnClickAction = {
 //            self.dismiss(animated: true, completion: nil)
             self.menuTapped(5)
+        }
+        
+        var parameters = ParameterDetail()
+        parameters.userId = "\(AppController.shared.user!.id!)"
+        
+        if let parm = parameters.dictionary {
+            
+            NetworkManager().get(method: .getUser, parameters: parm) { (result, error) in
+                DispatchQueue.main.async {
+                    if error != nil {
+                        return
+                    }
+                    
+                    AppController.shared.user = result as? User
+                    saveUserDetails(user: result as! User)
+                    self.profileView.user = AppController.shared.user
+                }
+            }
+            
         }
     }
 

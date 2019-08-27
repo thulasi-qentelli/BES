@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window          =   UIWindow(frame: UIScreen.main.bounds)
         appController   =   AppController.shared
         appController!.window   =   window
-        appController!.loadLoginView()
+        appController!.loadStartView()
         window?.makeKeyAndVisible()
         
         return true

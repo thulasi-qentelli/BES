@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -24,27 +24,30 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shQ-qj-7vJ">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                     <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame" translatesAutoresizingMaskIntoConstraints="NO" id="Fhn-Vm-teu">
+                            <rect key="frame" x="160" y="40" width="244" height="400"/>
+                        </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cea-Qe-AeY">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="609"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="609"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPB-ri-HaQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="oi8-CW-VLg"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkG-vV-OqJ">
-                                    <rect key="frame" x="0.0" y="40" width="320" height="80"/>
+                                    <rect key="frame" x="0.0" y="40" width="414" height="80"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-24-7NR">
-                                            <rect key="frame" x="30" y="10" width="260" height="60"/>
+                                            <rect key="frame" x="30" y="10" width="354" height="60"/>
                                             <string key="text">New
 Account</string>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
@@ -62,33 +65,33 @@ Account</string>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="do6-tA-3Qw">
-                                    <rect key="frame" x="0.0" y="120" width="320" height="30"/>
+                                    <rect key="frame" x="0.0" y="120" width="414" height="30"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="MzI-28-too"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rm7-Z7-51w">
-                                    <rect key="frame" x="0.0" y="150" width="320" height="244"/>
+                                    <rect key="frame" x="0.0" y="150" width="414" height="244"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-Tl-tke">
-                                            <rect key="frame" x="30" y="0.0" width="260" height="244"/>
+                                            <rect key="frame" x="30" y="0.0" width="354" height="244"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconAlertWarning" translatesAutoresizingMaskIntoConstraints="NO" id="0bv-M0-zwj">
-                                                    <rect key="frame" x="105" y="30" width="50" height="50"/>
+                                                    <rect key="frame" x="152" y="30" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="538-EU-ADc"/>
                                                         <constraint firstAttribute="width" constant="50" id="wIY-3h-sYa"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Email Verification Required" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Mtc-kB-HL8">
-                                                    <rect key="frame" x="30" y="100" width="200" height="84"/>
+                                                    <rect key="frame" x="30" y="100" width="294" height="84"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="keB-Jj-N1B">
-                                                    <rect key="frame" x="30" y="204" width="200" height="0.0"/>
+                                                    <rect key="frame" x="30" y="204" width="294" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -118,10 +121,10 @@ Account</string>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDN-X0-ynI">
-                                    <rect key="frame" x="0.0" y="394" width="320" height="70"/>
+                                    <rect key="frame" x="0.0" y="394" width="414" height="70"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DIDN'T RECEIVE AN EMAIL?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7aA-Ih-tnK">
-                                            <rect key="frame" x="30" y="30" width="260" height="20"/>
+                                            <rect key="frame" x="30" y="30" width="354" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="dSl-d8-qZz"/>
                                             </constraints>
@@ -130,7 +133,7 @@ Account</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLICK HERE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T1c-P9-BMH">
-                                            <rect key="frame" x="30" y="50" width="260" height="20"/>
+                                            <rect key="frame" x="30" y="50" width="354" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="UpB-qr-aZY"/>
                                             </constraints>
@@ -139,7 +142,7 @@ Account</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-V0-Avw">
-                                            <rect key="frame" x="30" y="25" width="260" height="40"/>
+                                            <rect key="frame" x="30" y="25" width="354" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="8VL-5A-nxG"/>
                                             </constraints>
@@ -163,17 +166,17 @@ Account</string>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rca-ny-q7f">
-                                    <rect key="frame" x="0.0" y="464" width="320" height="30"/>
+                                    <rect key="frame" x="0.0" y="464" width="414" height="30"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="cof-ma-1kI"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXl-Eq-3H9">
-                                    <rect key="frame" x="0.0" y="494" width="320" height="55"/>
+                                    <rect key="frame" x="0.0" y="494" width="414" height="55"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBT-3e-7Dy">
-                                            <rect key="frame" x="30" y="0.0" width="260" height="55"/>
+                                            <rect key="frame" x="30" y="0.0" width="354" height="55"/>
                                             <color key="backgroundColor" red="0.12534517049999999" green="0.17366850380000001" blue="0.36080163720000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <state key="normal" title="DONE">
@@ -194,7 +197,7 @@ Account</string>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJ8-3M-hC4">
-                                    <rect key="frame" x="0.0" y="549" width="320" height="60"/>
+                                    <rect key="frame" x="0.0" y="549" width="414" height="60"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="tWE-6W-xiR"/>
@@ -235,14 +238,17 @@ Account</string>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="cea-Qe-AeY" secondAttribute="bottom" id="7lf-9C-U0A"/>
+                        <constraint firstAttribute="trailing" secondItem="Fhn-Vm-teu" secondAttribute="trailing" constant="10" id="9qM-1C-hkU"/>
                         <constraint firstItem="cea-Qe-AeY" firstAttribute="leading" secondItem="shQ-qj-7vJ" secondAttribute="leading" id="9zZ-Me-6zd"/>
+                        <constraint firstItem="Fhn-Vm-teu" firstAttribute="top" secondItem="shQ-qj-7vJ" secondAttribute="top" constant="40" id="MFH-QB-Y9c"/>
                         <constraint firstAttribute="trailing" secondItem="cea-Qe-AeY" secondAttribute="trailing" id="X1s-Sr-5Ny"/>
                         <constraint firstItem="cea-Qe-AeY" firstAttribute="top" secondItem="shQ-qj-7vJ" secondAttribute="top" id="gLS-ba-Wgt"/>
                         <constraint firstItem="cea-Qe-AeY" firstAttribute="width" secondItem="shQ-qj-7vJ" secondAttribute="width" id="ioa-IR-kfc"/>
+                        <constraint firstItem="Fhn-Vm-teu" firstAttribute="leading" secondItem="shQ-qj-7vJ" secondAttribute="leading" constant="160" id="r6U-xQ-MyB"/>
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekZ-2X-eSp" customClass="OrangeHeaderView" customModule="BES" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="fbd-jR-wSS"/>
@@ -264,6 +270,7 @@ Account</string>
         </view>
     </objects>
     <resources>
+        <image name="Frame" width="400" height="400"/>
         <image name="iconAlertWarning" width="75" height="75"/>
     </resources>
 </document>

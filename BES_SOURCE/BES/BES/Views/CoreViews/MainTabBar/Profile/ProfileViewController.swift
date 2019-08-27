@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DropDown
 
 class ProfileViewController: UIViewController {
 
@@ -19,7 +20,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var passwordView: InputView!
     @IBOutlet weak var createAccountBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
+    var locations:[String] = []
+    let locationDropDown = DropDown()
     
+    var imagePickerOne: ImagePicker!
+    var imageURL : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +33,22 @@ class ProfileViewController: UIViewController {
         setupUI()
         
         profileHeaderView.user  = AppController.shared.user
+        
+        profileHeaderView.profileImageTapped = {
+            self.imagePickerOne.present(from: self.profileHeaderView.profileImgView)
+        }
+        
+        
+        firstNameView.accessoryImgView.isHidden  =   false
+        firstNameView.accessoryImgBtn.isHidden = false
         firstNameView.getUpdatedText = { string in
             self.firstNameView.accessoryImgView.isHidden = true
             if string.count > 0 {
                 self.firstNameView.accessoryImgView.isHidden = false
             }
         }
-        
+        lastNameView.accessoryImgView.isHidden  =   false
+        lastNameView.accessoryImgBtn.isHidden = false
         lastNameView.getUpdatedText = { string in
             self.lastNameView.accessoryImgView.isHidden = true
             if string.count > 0 {
@@ -42,19 +56,41 @@ class ProfileViewController: UIViewController {
             }
         }
         
+        locationView.accessoryImgView.isHidden  =   false
+        locationView.accessoryImgBtn.isHidden = false
+        locationView.accessoryAction = { sender in
+            self.view.endEditing(true)
+            self.locationDropDown.dataSource = self.locations
+            self.locationDropDown.show()
+        }
+        emailView.accessoryImgView.isHidden  =   false
+        emailView.accessoryImgBtn.isHidden = false
         emailView.getUpdatedText = { string in
             self.emailView.accessoryImgView.isHidden = true
             if string.isValidEmail(){
                 self.emailView.accessoryImgView.isHidden = false
             }
         }
+        passwordView.accessoryImgView.isHidden  =   false
+        passwordView.accessoryImgBtn.isHidden = false
         
         passwordView.getUpdatedText = { string in
-            self.passwordView.accessoryImgView.isHidden = true
-            if string.count >= 6 {
+            if string.count > 0 {
+                self.passwordView.accessoryImgBtn.isHidden = false
                 self.passwordView.accessoryImgView.isHidden = false
             }
+            else {
+                self.passwordView.accessoryImgBtn.isHidden = true
+                self.passwordView.accessoryImgView.isHidden = true
+            }
         }
+        passwordView.accessoryAction = { sender in
+            self.passwordView.txtField.isSecureTextEntry = sender.isSelected
+            self.passwordView.txtField.clearsOnBeginEditing = false
+            sender.isSelected = !sender.isSelected
+        }
+        
+        getLocations()
        
     }
 
@@ -85,12 +121,27 @@ class ProfileViewController: UIViewController {
     }
 
 
+    func getLocations() {
+        NetworkManager().get(method: .getStates, parameters: [:]) { (result, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    self.view.makeToast(error, duration: 2.0, position: .center)
+                    return
+                }
+                self.locations = (result as! [State]).map{$0.statename?.trimmingCharacters(in: NSCharacterSet.whitespaces) ?? ""}
+                self.locationDropDown.dataSource = self.locations.sorted()
+            }
+        }
+        self.locationDropDown.dataSource = self.locations.sorted()
+    }
     
     @objc func backBtnAction() {
         self.dismiss(animated: true, completion: nil)
     }
     
     func setupUI() {
+        
+        self.imagePickerOne = ImagePicker(presentationController: self, delegate: self)
         
         firstNameView.titleLbl.text = "First Name"
         firstNameView.txtField.placeholder = "Enter first name"
@@ -118,6 +169,19 @@ class ProfileViewController: UIViewController {
             emailView.txtField.text = user.email
             passwordView.txtField.text = user.password
         }
+        
+        
+        self.locationDropDown.anchorView = self.locationView.txtField
+        self.locationDropDown.textColor = UIColor.black
+        self.locationDropDown.textFont = UIFont.systemFont(ofSize: 15)
+        self.locationDropDown.backgroundColor = UIColor.white
+        self.locationDropDown.selectionBackgroundColor = UIColor(red:0.99, green:0.4, blue:0.1, alpha:1)
+        self.locationDropDown.cellHeight = 60
+        self.locationDropDown.cornerRadius = 10
+        self.locationDropDown.width = UIScreen.main.bounds.size.width - 60
+        self.locationDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.locationView.txtField.text = item
+        }
  
     }
     @IBAction func btnAction(_ sender: UIButton) {
@@ -134,19 +198,39 @@ class ProfileViewController: UIViewController {
                 let password = passwordView.txtField.text!
                 
                 var parameters = ParameterDetail()
+                parameters.id = "\(AppController.shared.user?.id ?? 0)"
                 parameters.firstName = firstName
                 parameters.lastName = lastName
                 parameters.email = email
                 parameters.password = password
-                parameters.role = "user"
-                parameters.pic = ""
+                parameters.role = AppController.shared.user?.role ?? ""
+                parameters.location = location
                 
                 if let parm = parameters.dictionary {
-                    NetworkManager().post(method: .saveUser, parameters: parm) { (result, error) in
+                    NetworkManager().put(method: .updateUser, parameters: parm, isURLEncode: false) { (result, error) in
                         DispatchQueue.main.async {
                             if error != nil {
                                 self.view.makeToast(error, duration: 2.0, position: .center)
                                 return
+                            }
+                            
+                            if let url = self.imageURL {
+                                
+                                
+                                if let user = result as? User {
+                                    NetworkManager().uploadImage(method: .uploadImage, parameters: ["id": "\(user.id!)"], image: self.profileHeaderView.profileImgView.image!, completion: { (imgResult, imgError) in
+                                        if imgError != nil {
+                                            self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
+                                        }
+                                        
+                                       self.view.makeToast("User profile updated successfully.", duration: 2.0, position: .center)
+                                        self.dismiss(animated: true, completion: nil)
+                                    })
+                                }
+                            }
+                            else {
+                                self.view.makeToast("User profile updated successfully.", duration: 2.0, position: .center)
+                                self.dismiss(animated: true, completion: nil)
                             }
                         }
                     }
@@ -184,6 +268,7 @@ class ProfileViewController: UIViewController {
             passwordView.txtField.becomeFirstResponder()
             return false
         }
+      
         
         if firstName.count < 1 {
             self.view.makeToast("Please enter first name", duration: 1.0, position: .center)
@@ -219,3 +304,14 @@ class ProfileViewController: UIViewController {
     }
 
 }
+
+extension ProfileViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        
+        self.profileHeaderView.profileImgView.image = image
+        self.profileHeaderView.profileImgPlaceholderView.isHidden = true
+        self.imageURL = "Saved"
+    }
+}
+

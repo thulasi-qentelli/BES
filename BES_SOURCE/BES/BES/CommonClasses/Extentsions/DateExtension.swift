@@ -47,19 +47,16 @@ extension Date {
     }
     
     func humanDisplayDaateFormat() -> String {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
         dateFormatter.doesRelativeDateFormatting = true
         
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "h:mm a"
-        
-        let time = "\(dateFormatter.string(from: self)) at \(timeFormatter.string(from: self))"
+        let time = dateFormatter.string(from: self)
         return time    // prints "Today, 5:10 PM"
     }
-    
-
-    
+        
 }
 
 extension Int {
