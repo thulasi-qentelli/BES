@@ -112,10 +112,16 @@ class AcknowledgeViewController: UIViewController {
     @IBAction func btnAction(_ sender: UIButton) {
         if sender == clickHereBtn {
         
-//            self.type == .ForgotPassword {
-//                
-//            }
-//            
+            if self.type == .Signup {
+                NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
+                    
+                    if error != nil {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                        return
+                    }
+                    self.view.makeToast(result as? String , duration: 2.0, position: .center)
+                }
+            }
         }
         else if sender == doneBtn {
             self.navigationController?.popToRootViewController(animated: true)

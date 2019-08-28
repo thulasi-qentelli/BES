@@ -16,12 +16,12 @@ class FeedViewController: UIViewController {
     var feeds: [Feed] = []
     let feedCellReuseIdentifier = "FeedTableViewCell"
     let refreshControl = UIRefreshControl()
+    @IBOutlet weak var noDataLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         setupUI()
         loadFeeds(showLoader: true)
     }
@@ -29,7 +29,6 @@ class FeedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        
         AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
     }
     
@@ -37,7 +36,6 @@ class FeedViewController: UIViewController {
     func setupUI() {
         self.tblView.estimatedRowHeight = 260
         self.tblView.rowHeight = UITableView.automaticDimension
-    
         self.tblView.register(UINib.init(nibName: feedCellReuseIdentifier, bundle: nil), forCellReuseIdentifier: feedCellReuseIdentifier)
         
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
@@ -60,6 +58,7 @@ class FeedViewController: UIViewController {
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
             loadingNotification.label.text = "Please wait.."
+            self.noDataLbl.isHidden = true
         }
         
         NetworkManager().get(method: .getAllFeeds, parameters: [:]) { (result, error) in
@@ -68,12 +67,24 @@ class FeedViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 if error != nil {
                     self.view.makeToast(error, duration: 2.0, position: .center)
+                    if self.feeds.count == 0{
+                        self.noDataLbl.isHidden = false
+                    }
+                    else {
+                        self.noDataLbl.isHidden = true
+                    }
                     return
                 }
                 
-                if let _ = result, let kmess = (result as? [Feed]) {
-                    self.feeds = kmess
+                if let _ = result, let kmess = (result as? [Feed]), kmess.count > 0 {
+                    self.feeds = kmess.sorted(by: { $0.createdDateObj!.compare($1.createdDateObj!) == .orderedDescending })
                     self.tblView.reloadData()
+                     self.noDataLbl.isHidden = true
+                }
+                else {
+                    self.feeds = []
+                    self.tblView.reloadData()
+                    self.noDataLbl.isHidden = false
                 }
             }
         }
@@ -109,9 +120,9 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.timestampLbl.text = feed.createdDate?.date?.humanDisplayDaateFormat()
         cell.likedLbl.text = "0 Likes"
         cell.commentsLbl.text = "0 Comments"
-        if let likes = feed.likes{
-            cell.likedLbl.text = "\(likes.count) Likes"
-        }
+        
+        cell.likedLbl.text = "\(feed.getLikesCount()) Likes"
+        
         if let comments = feed.comments {
             cell.commentsLbl.text = "\(comments.count) Comments"
         }
@@ -125,7 +136,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
         cell.thumUpImgView.image = UIImage(named: "thumb_up")
         
-        if feed.likedUsers?.contains(AppController.shared.user?.email ?? "") ?? false {
+        if let likedObj = feed.likeObj, let count = likedObj.likes, count > 0{
             cell.thumUpImgView.image = UIImage(named: "thumb_up_orange")
         }
         
@@ -172,7 +183,30 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.likeBtnTap = { kFeed in
+            feed.likeAction(completion: { (status,error) in
+                
+                cell.likedLbl.text = "\(feed.getLikesCount()) Likes"
+                if status == true {
+                    cell.thumUpImgView.image = UIImage(named: "thumb_up_orange")
+                }
+                else {
+                    if error != nil, error! == networkUnavailable {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                    }
+                    cell.thumUpImgView.image = UIImage(named: "thumb_up")
+                }
+                
+            })
+        }
+        cell.commentBtnTap = { kFeed in
             
+            if let comments = feed.comments {
+                let commentsVC = CommentsViewController()
+                commentsVC.commentsSource = comments
+                let navSeven = UINavigationController(rootViewController: commentsVC)
+                self.present(navSeven, animated: true, completion: nil)
+                
+            }
         }
         return cell
     }

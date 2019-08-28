@@ -26,5 +26,11 @@ class InvoiceViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        
+        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
+    }
 
 }

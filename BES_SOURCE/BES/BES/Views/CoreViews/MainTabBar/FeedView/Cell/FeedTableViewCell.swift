@@ -35,6 +35,9 @@ class FeedTableViewCell: UITableViewCell {
     var likeBtnTap:(Feed)->Void = { feed in
         
     }
+    var commentBtnTap:(Feed)->Void = { feed in
+        
+    }
     
     var string = ""
     override func awakeFromNib() {
@@ -63,6 +66,13 @@ class FeedTableViewCell: UITableViewCell {
             likeBtnTap(kFeed)
         }
     }
+    
+    @IBAction func commentBtnAction(_ sender: UIButton) {
+        if let kFeed = self.feed {
+            commentBtnTap(kFeed)
+        }
+    }
+    
     @objc func imageViewTapped() {
         imageViewTapAction(self.imgView)
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class SignupViewController: UIViewController {
 
@@ -184,23 +185,35 @@ class SignupViewController: UIViewController {
                 parameters.role = "user"
                 
                 if let parm = parameters.dictionary {
+                    let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    loadingNotification.mode = MBProgressHUDMode.indeterminate
+                    loadingNotification.label.text = "Please wait.."
+                    
                     NetworkManager().post(method: .saveUser, parameters: parm, isURLEncode: false) { (result, error) in
                         DispatchQueue.main.async {
                             if error != nil {
+                                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                                 self.view.makeToast(error, duration: 2.0, position: .center)
                                 return
                             }
                             
                             if let user = result as? User {
                                 NetworkManager().uploadImage(method: .uploadImage, parameters: ["id": "\(user.id!)"], image: self.profileHeaderView.profileImgView.image!, completion: { (imgResult, imgError) in
-                                    if imgError != nil {
-                                        self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
+                                    DispatchQueue.main.async {
+                                        if imgError != nil {
+                                            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                                            self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
+                                        }
+                                        NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
+                                            DispatchQueue.main.async {
+                                                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                                                let alertVC     =   AcknowledgeViewController()
+                                                alertVC.type    =   .Signup
+                                                alertVC.email   =   email
+                                                self.navigationController?.pushViewController(alertVC, animated: true)
+                                            }
+                                        }
                                     }
-                                    
-                                    let alertVC     =   AcknowledgeViewController()
-                                    alertVC.type    =   .Signup
-                                    alertVC.email   =   email
-                                    self.navigationController?.pushViewController(alertVC, animated: true)
                                 })
                             }                            
                         }

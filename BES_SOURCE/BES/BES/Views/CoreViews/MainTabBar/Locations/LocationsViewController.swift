@@ -27,6 +27,7 @@ class LocationsViewController: UIViewController {
     var locationManager:CLLocationManager!
     let refreshControl = UIRefreshControl()
     
+    @IBOutlet weak var noDataLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,9 +85,6 @@ class LocationsViewController: UIViewController {
         } else {
             self.tblView.backgroundView = refreshControl
         }
-        
-        
-        
     }
     
     @objc func refresh(_ refreshControl: UIRefreshControl) {
@@ -100,6 +98,7 @@ class LocationsViewController: UIViewController {
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
             loadingNotification.label.text = "Please wait.."
+            self.noDataLbl.isHidden = true
         }
         
         filteredRegions = []
@@ -112,10 +111,16 @@ class LocationsViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 if error != nil {
                     self.view.makeToast(error, duration: 2.0, position: .center)
+                    if self.locations.count == 0{
+                        self.noDataLbl.isHidden = false
+                    }
+                    else {
+                        self.noDataLbl.isHidden = true
+                    }
                     return
                 }
                 
-                if let _ = result, let kmess = (result as? [Location]) {
+                if let _ = result, let kmess = (result as? [Location]),kmess.count > 0 {
                     self.locations = kmess
                     self.locations.sort(by: { (loc1, loc2) -> Bool in
                         loc1.getTitle() < loc2.getTitle()
@@ -124,6 +129,12 @@ class LocationsViewController: UIViewController {
                     self.tblView.reloadData()
                     let mapModel = MapViewModel(locations: self.filteredLocations, mapView: self.mapView)
                     mapModel.loadDetails()
+                }
+                else {
+                    self.locations = []
+                    self.filteredLocations = []
+                    self.tblView.reloadData()
+                    self.noDataLbl.isHidden = false
                 }
             }
         }
@@ -145,6 +156,11 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
         view.titleLbl.text = "Locations"
         view.backgroundColor = self.view.backgroundColor
         view.filterBtnAction = {
+            
+            if self.locations.count <= 0 {
+                self.view.makeToast("No data available.", duration: 2.0, position: .center)
+                return
+            }
             let filterView = FilterViewController()
             filterView.locations = self.locations
             filterView.filteredRegions = self.filteredRegions

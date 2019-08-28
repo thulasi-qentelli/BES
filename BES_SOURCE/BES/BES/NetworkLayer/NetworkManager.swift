@@ -24,6 +24,7 @@ public enum Method: String {
     case forgotPassword = "bes/forgotPassword"
     case saveUser = "bes/saveUser"
     case updateUser = "bes/updateUser"
+    case sendEmail = "bes/sendEmail"
     case getMessagesByEmail = "message/getMessagesByEmail"
     case getAllFeeds = "feed/getFeeds"
     case getAllLocations = "location/getLocation"
@@ -33,10 +34,14 @@ public enum Method: String {
     case getCategories = "category/getCategories"
     case saveInquiry = "Enquiry/saveEnquiry"
     case saveFeedback = "feedback/saveFeedback"
+    case saveLike = "likes/saveLike"
+    case updateLike = "likes/updateLike"
+    case saveComment = "comments/saveComment"
+    case getAllComments = "comments/getAllComments"
 }
 
 enum NetworkEnvironment: String {
-    case sandboxURL = "http://bes.qentelli.com:8085/"
+    case sandboxURL = "http://bes.qentelli.com:8181/"
     case productionURL = "http://besconnect.qentelli.com:8085/"
 }
 
@@ -93,45 +98,48 @@ struct NetworkManager {
                                 switch method {
                                 case .getMessagesByEmail:
                                     if let messages = Mapper<Message>().mapArray(JSONString: jsonString) {
+                                        saveMessagesLocally(messages: jsonString)
                                         completion(messages,nil)
                                     }
                                     else {
-                                        completion(nil, jsonString)
+                                        completion(nil, "Request failed")
                                     }
                                 case .getAllFeeds:
                                     if let messages = Mapper<Feed>().mapArray(JSONString: jsonString) {
+                                        saveFeedsLocally(feeds: jsonString)
                                         completion(messages,nil)
                                     }
                                     else {
-                                        completion(nil, jsonString)
+                                        completion(nil, "Request failed")
                                     }
                                 case .getAllLocations:
                                     if let messages = Mapper<Location>().mapArray(JSONString: jsonString) {
+                                        saveLocaitonsLocally(locaitons: jsonString)
                                         completion(messages,nil)
                                     }
                                     else {
-                                        completion(nil, jsonString)
+                                        completion(nil, "Request failed")
                                     }
                                 case .getUser:
                                     if let user = User(JSONString: jsonString), let id = user.id, id>0 {
                                         completion(user,nil)
                                     }
                                     else {
-                                        completion(nil,jsonString)
+                                        completion(nil,"Request failed")
                                     }
                                 case .getStates:
                                     if let states = Mapper<State>().mapArray(JSONString: jsonString) {
                                         completion(states,nil)
                                     }
                                     else {
-                                        completion(nil, jsonString)
+                                        completion(nil, "Request failed")
                                     }
                                 case .getCategories:
                                     if let states = Mapper<Category>().mapArray(JSONString: jsonString) {
                                         completion(states,nil)
                                     }
                                     else {
-                                        completion(nil, jsonString)
+                                        completion(nil, "Request failed")
                                     }
                                     
                                 default:
@@ -214,7 +222,7 @@ struct NetworkManager {
                         completion(user,nil)
                     }
                     else {
-                        completion(nil,jsonString)
+                        completion(nil,"Failed")
                     }
                 case.forgotPassword:
                     completion(jsonString,nil)
@@ -225,6 +233,17 @@ struct NetworkManager {
                     else {
                         completion(nil,"User already exists.")
                     }
+                case .sendEmail:
+                        completion("Verification email sent. Please check in your inbox or spam folder.",nil)
+                case .saveLike:
+                    if let feed = Feed(JSONString: jsonString),feed.id ?? 0 > 0 {
+                        completion(feed,nil)
+                    }
+                    else {
+                        completion(nil,"Failed")
+                    }
+                    
+                    completion("Liked feed.", nil)
                 case .saveInquiry:
                     print(response.response?.statusCode)
                     if response.response?.statusCode == 200 {
@@ -257,8 +276,13 @@ struct NetworkManager {
                         completion(nil, "Enter valid Email or Password.")
                     }
                     else {
-                        let errorMessage = self.handleNetworkResponse(response.response!)
-                        completion(nil, errorMessage)
+                        if let kResp = response.response {
+                            let errorMessage = self.handleNetworkResponse(kResp)
+                            completion(nil, errorMessage)
+                        }
+                        else {
+                            completion(nil, "Server not responding. Please try after some time.")
+                        }
                     }
                 case .forgotPassword:
                     print(response.response?.statusCode)
@@ -269,14 +293,25 @@ struct NetworkManager {
 //                        completion(nil, "User does not exist with this email.")
 //                    }
                     else {
-                        let errorMessage = self.handleNetworkResponse(response.response!)
-                        completion(nil, errorMessage)
+                        if let kResp = response.response {
+                            let errorMessage = self.handleNetworkResponse(kResp)
+                            completion(nil, errorMessage)
+                        }
+                        else {
+                            completion(nil, "Server not responding. Please try after some time.")
+                        }
                     }
                     
                 default:
                     print("========================")
-                    let errorMessage = self.handleNetworkResponse(response.response!)
-                    completion(nil, errorMessage)
+                    
+                    if let kResp = response.response {
+                        let errorMessage = self.handleNetworkResponse(kResp)
+                        completion(nil, errorMessage)
+                    }
+                    else {
+                        completion(nil, "Server not responding. Please try after some time.")
+                    }
                     
                 }
             }
@@ -341,7 +376,14 @@ struct NetworkManager {
                         completion(user,nil)
                     }
                     else {
-                        completion(nil,jsonString)
+                        completion(nil,"Error while updating user.")
+                    }
+                case .updateLike:
+                    if let like = Like(JSONString: jsonString),like.id ?? 0 > 0  {
+                        completion(like,nil)
+                    }
+                    else {
+                        completion(nil,"Error while updatinglike.")
                     }
         
                 default:
@@ -352,9 +394,13 @@ struct NetworkManager {
                 print(error)
                 switch method {
                 default:
-                    print("========================")
-                    let errorMessage = self.handleNetworkResponse(response.response!)
-                    completion(nil, errorMessage)
+                    if let kResp = response.response {
+                        let errorMessage = self.handleNetworkResponse(kResp)
+                        completion(nil, errorMessage)
+                    }
+                    else {
+                        completion(nil, "Server not responding. Please try after some time.")
+                    }
                     
                 }
             }

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import ObjectMapper
 class AppController {
     static let shared = AppController()
     private init(){}
@@ -158,3 +158,50 @@ func clearAuthToken() {
     UserDefaults.standard.removeObject(forKey: "AuthTokenForUser")
     UserDefaults.standard.synchronize()
 }
+
+func saveFeedsLocally(feeds:String) {
+    UserDefaults.standard.set(feeds, forKey: "FeedsBES")
+    UserDefaults.standard.synchronize()
+}
+
+func getLocalFeeds()-> [Feed]? {
+    
+    if let string = UserDefaults.standard.object(forKey: "FeedsBES") {
+        if let feeds = Mapper<Feed>().mapArray(JSONString: string as! String) {
+            return feeds
+        }
+    }
+    return nil
+}
+
+func saveMessagesLocally(messages:String) {
+    UserDefaults.standard.set(messages, forKey: "MessagesBES")
+    UserDefaults.standard.synchronize()
+}
+
+func getLocalMessages()-> [Message]? {
+    
+    if let string = UserDefaults.standard.object(forKey: "MessagesBES") {
+        if let feeds = Mapper<Message>().mapArray(JSONString: string as! String) {
+            return feeds
+        }
+    }
+    return nil
+}
+
+func saveLocaitonsLocally(locaitons:String) {
+    UserDefaults.standard.set(locaitons, forKey: "LocationsBES")
+    UserDefaults.standard.synchronize()
+}
+
+func getLocalLocaitons()-> [Location]? {
+    
+    if let string = UserDefaults.standard.object(forKey: "LocationsBES") {
+        if let feeds = Mapper<Location>().mapArray(JSONString: string as! String) {
+            return feeds
+        }
+    }
+    return nil
+}
+
+

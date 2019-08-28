@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationsViewController" customModule="BES" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="pzl-17-Wje" id="2es-qT-EcE"/>
+                <outlet property="noDataLbl" destination="Oow-jd-gls" id="ooc-Ip-Cjn"/>
                 <outlet property="tblView" destination="Wd1-0V-fXa" id="K5M-uw-nnx"/>
                 <outlet property="view" destination="s32-IT-6j0" id="Ked-Ex-eWL"/>
             </connections>
@@ -39,6 +40,12 @@
                         <outlet property="delegate" destination="-1" id="Xhe-pa-oHp"/>
                     </connections>
                 </mapView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No records found." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oow-jd-gls">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pgC-1O-jBW">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                     <color key="backgroundColor" red="0.89124143119999999" green="0.4804035425" blue="0.22342813010000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -70,6 +77,7 @@
             <constraints>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="top" secondItem="JrJ-Dd-G6N" secondAttribute="bottom" constant="54" id="1HN-RG-CK7"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="3ji-6j-Yeu"/>
+                <constraint firstItem="Oow-jd-gls" firstAttribute="top" secondItem="pgC-1O-jBW" secondAttribute="bottom" id="ApO-Fo-wfH"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="BZ8-5a-pJ4"/>
                 <constraint firstItem="pgC-1O-jBW" firstAttribute="leading" secondItem="s32-IT-6j0" secondAttribute="leading" id="Exj-Z6-KqY"/>
                 <constraint firstItem="1WQ-qx-MiR" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" constant="160" id="MxV-O0-x6W"/>
@@ -77,6 +85,7 @@
                 <constraint firstItem="pzl-17-Wje" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="Qaq-Ci-2Tn"/>
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="top" secondItem="pgC-1O-jBW" secondAttribute="bottom" id="TpT-FM-zVj"/>
                 <constraint firstItem="pgC-1O-jBW" firstAttribute="top" secondItem="s32-IT-6j0" secondAttribute="top" id="WI4-5v-cbc"/>
+                <constraint firstItem="xEn-nP-f3c" firstAttribute="bottom" secondItem="Oow-jd-gls" secondAttribute="bottom" id="Y8G-nG-BfM"/>
                 <constraint firstAttribute="trailing" secondItem="pgC-1O-jBW" secondAttribute="trailing" id="YSq-wp-yhJ"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="bottom" secondItem="GVd-gd-niy" secondAttribute="bottom" constant="6" id="aI1-L4-kOF"/>
                 <constraint firstItem="1WQ-qx-MiR" firstAttribute="top" secondItem="xEn-nP-f3c" secondAttribute="top" constant="20" id="dWJ-DT-ZCi"/>
@@ -84,9 +93,11 @@
                 <constraint firstItem="Wd1-0V-fXa" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="q2w-y6-ZXK"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="top" secondItem="xEn-nP-f3c" secondAttribute="top" constant="-44" id="rM3-Me-nVO"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="trailing" secondItem="1WQ-qx-MiR" secondAttribute="trailing" constant="10" id="ry5-4u-Xin"/>
+                <constraint firstItem="Oow-jd-gls" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="sKl-ob-Tzy"/>
                 <constraint firstItem="pzl-17-Wje" firstAttribute="bottom" secondItem="xEn-nP-f3c" secondAttribute="bottom" id="uPl-Lu-iTA"/>
                 <constraint firstItem="xEn-nP-f3c" firstAttribute="bottom" secondItem="Wd1-0V-fXa" secondAttribute="bottom" id="ulK-Iw-reW"/>
                 <constraint firstItem="JrJ-Dd-G6N" firstAttribute="leading" secondItem="xEn-nP-f3c" secondAttribute="leading" id="vB6-HB-vWq"/>
+                <constraint firstItem="Oow-jd-gls" firstAttribute="trailing" secondItem="xEn-nP-f3c" secondAttribute="trailing" id="yeM-rN-TMV"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="xEn-nP-f3c"/>
             <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>

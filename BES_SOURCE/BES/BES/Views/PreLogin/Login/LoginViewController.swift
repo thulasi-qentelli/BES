@@ -140,7 +140,6 @@ class LoginViewController: UIViewController {
                                 AppController.shared.loadStartView()
                             }
                         }
-                        
                     }
                 }
             }

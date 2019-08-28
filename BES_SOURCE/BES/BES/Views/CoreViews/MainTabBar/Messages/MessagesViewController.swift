@@ -17,7 +17,8 @@ class MessagesViewController: UIViewController {
     var keys:[String] = []
     let refreshControl = UIRefreshControl()
 
-
+    @IBOutlet weak var noDataLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,6 +70,7 @@ class MessagesViewController: UIViewController {
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
             loadingNotification.label.text = "Please wait.."
+            self.noDataLbl.isHidden = true
         }
         
         NetworkManager().get(method: .getMessagesByEmail, parameters: ["email" : AppController.shared.user?.email ?? ""]) { (result, error) in
@@ -77,10 +79,16 @@ class MessagesViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 if error != nil {
                     self.view.makeToast(error, duration: 2.0, position: .center)
+                    if self.messages.count == 0{
+                        self.noDataLbl.isHidden = false
+                    }
+                    else {
+                        self.noDataLbl.isHidden = true
+                    }
                     return
                 }
                 
-                if let _ = result, let kmess = (result as? [Message]) {
+                if let _ = result, let kmess = (result as? [Message]),kmess.count > 0 {
                     
                     let datesArray = kmess.compactMap { $0.dateShortForm }
                     var dic = [String:[Message]]()
@@ -92,8 +100,13 @@ class MessagesViewController: UIViewController {
                     let keysArr = dic.keys
                     self.keys =  keysArr.sorted().reversed()
                     self.messages = dic
-                    
                     self.tblView.reloadData()
+                }
+                else {
+                    self.keys = []
+                    self.messages = [:]
+                    self.tblView.reloadData()
+                    self.noDataLbl.isHidden = false
                 }
             }
         }
