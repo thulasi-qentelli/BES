@@ -8,10 +8,13 @@
 
 import Foundation
 
-struct FeedViewModel {
+class FeedViewModel {
     var feed: Feed
+    var readMore: Bool = false
     
-    
+    init(feed:Feed) {
+        self.feed = feed
+    }
     func likeAction() {
         
     }

@@ -140,25 +140,58 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.thumUpImgView.image = UIImage(named: "thumb_up_orange")
         }
         
-        
-        //Profile Image
-        if let urlString = feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-            if let url  = URL(string: urlString){
-                cell.profileImgView.sd_setImage(with:url, completed: nil)
-                cell.profileImgPlaceholderView.isHidden = true
+        //Profile Image        
+        if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.userPic as NSString? ?? "" as NSString) {
+             cell.profileImgView.image = kLocalImg
+        }
+        else {
+            DispatchQueue.global(qos: .background).async {
+                if let urlString = feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+                    if let url  = URL(string: urlString){
+                        cell.profileImgView.sd_setImage(with: url, completed: { (image, error, type, kURL) in
+                            DispatchQueue.main.async {
+                                if let kImg = image {
+                                    AppController.shared.imageCache.setObject(kImg, forKey: feed.userPic! as NSString)
+                                    cell.profileImgPlaceholderView.isHidden = true
+                                }
+                            }
+                        })
+                    }
+                }
             }
         }
-        cell.imgHeight.constant = 0
-        if let urlString = feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-            if let url  = URL(string: urlString){
-                cell.imgView?.sd_setImage(with: url, completed: { (image, error, type, url) in
-                    cell.imgHeight.constant = image?.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
-                    tableView.beginUpdates()
-                    tableView.endUpdates()
-                })
+        
+        if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.image as NSString? ?? "" as NSString) {
+            cell.imgView.image = kLocalImg
+            cell.imgHeight.constant = kLocalImg.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            
+//            tableView.reloadData()
+        }
+        else {
+            cell.imgHeight.constant = 0
+         DispatchQueue.global(qos: .background).async {
+            if let urlString = feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+                if let url  = URL(string: indexPath.row == 0 ? "https://upload.wikimedia.org/wikipedia/commons/d/d7/Astro_4D_stars_proper_radial_g_b_8mag_big.png" : urlString){
+                    cell.imgView?.sd_setImage(with: url, completed: { (image, error, type, url) in
+                        
+                        DispatchQueue.main.async {
+                            if let kImg = image {
+                                AppController.shared.imageCache.setObject(kImg, forKey: feed.image! as NSString)
+                            cell.imgHeight.constant = image?.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
+                            tableView.beginUpdates()
+                            tableView.endUpdates()
+//                                tableView.reloadData()
+                            }
+                        }
+                        
+                    })
+                }
             }
         }
         
+        }
         //Read More Text
         cell.readMoreFunction = { (sender, str) in
             if sender.isSelected == true {

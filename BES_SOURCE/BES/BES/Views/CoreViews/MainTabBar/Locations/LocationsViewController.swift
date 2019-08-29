@@ -56,7 +56,6 @@ class LocationsViewController: UIViewController {
     
     @IBAction func mapSwitchTapped(_ sender: UIButton) {
         
-//        self.tblView.isHidden = !self.tblView.isHidden
         if self.filteredLocations.count>0 {
             let indexPath = NSIndexPath(row: 0, section: 0)
             self.tblView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
@@ -285,16 +284,10 @@ extension LocationsViewController: MKMapViewDelegate {
                 UIApplication.shared.open(phoneNumberUrl, options: [:], completionHandler: nil)
             }
         }
-
-//        let views = Bundle.main.loadNibNamed("CustomCalloutView", owner: nil, options: nil)
-//        let calloutView = views?[0] as! CustomCalloutView
-//        calloutView.starbucksName.text = starbucksAnnotation.title
-//        calloutView.starbucksAddress.text = starbucksAnnotation.address
         
         calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height*0.52)
         view.addSubview(calloutView)
         mapView.setCenter((view.annotation?.coordinate)!, animated: true)
-//        calloutView.iconbtn.addTarget(self, action: #selector(popup), for: .touchUpInside)
         
     }
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
@@ -305,18 +298,6 @@ extension LocationsViewController: MKMapViewDelegate {
                 subview.removeFromSuperview()
             }
         }
-    }
-    
-    
-    @objc func popup(){
-        //        MTPopUp(frame: (self.view.window?.frame)!).show(complete: { (index) in
-        //            if index == 1{
-        //                AppController.shared.loadOrderDetails(order: self.markerOrder.serviceOrder)
-        //            }else if index == 2{
-        //                Directions().navigate_to_map(order: self.markerOrder.serviceOrder)
-        //            }
-        //
-        //        }, view: (self.view.window)!, animationType: MTAnimation.TopToMoveCenter,  btnArray: ["Details","Directions","   "],strTitle: "Navigate To")
     }
     
 }

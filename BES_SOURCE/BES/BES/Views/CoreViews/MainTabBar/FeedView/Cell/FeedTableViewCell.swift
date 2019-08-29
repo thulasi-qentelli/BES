@@ -51,6 +51,10 @@ class FeedTableViewCell: UITableViewCell {
         self.imgView.addGestureRecognizer(tapGesture)
     }
 
+    override func prepareForReuse() {
+        // CELLS STILL FREEZE EVEN WHEN THE FOLLOWING LINE IS COMMENTED OUT?!?!
+        super.prepareForReuse()
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
