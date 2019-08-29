@@ -17,11 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+         application.statusBarStyle = .lightContent
+        
         window          =   UIWindow(frame: UIScreen.main.bounds)
         appController   =   AppController.shared
         appController!.window   =   window
         appController!.loadStartView()
         window?.makeKeyAndVisible()
+        
+       
         
         return true
     }

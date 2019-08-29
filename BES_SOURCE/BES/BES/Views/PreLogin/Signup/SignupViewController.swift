@@ -73,23 +73,6 @@ class SignupViewController: UIViewController {
             
         }
         
-//        passwordView.getUpdatedText = { string in
-//            self.passwordView.accessoryImgView.isHidden = true
-//            self.confirmPasswordView.accessoryImgView.isHidden = true
-//            if string.count >= 6 {
-//                self.passwordView.accessoryImgView.isHidden = false
-//                if string == self.confirmPasswordView.txtField.text {
-//                    self.confirmPasswordView.accessoryImgView.isHidden = false
-//                }
-//            }
-//        }
-//        confirmPasswordView.getUpdatedText = { string in
-//            self.confirmPasswordView.accessoryImgView.isHidden = true
-//            if string.count >= 6, string == self.passwordView.txtField.text {
-//                self.confirmPasswordView.accessoryImgView.isHidden = false
-//            }
-//        }
-//
         confirmPasswordView.txtField.textContentType = .password
         confirmPasswordView.getUpdatedText = { string in
             if string.count > 0 {
@@ -204,6 +187,7 @@ class SignupViewController: UIViewController {
                                             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                                             self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
                                         }
+                                        
                                         NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
                                             DispatchQueue.main.async {
                                                 MBProgressHUD.hideAllHUDs(for: self.view, animated: true)

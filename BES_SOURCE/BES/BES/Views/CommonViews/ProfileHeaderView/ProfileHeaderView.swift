@@ -42,7 +42,6 @@ class ProfileHeaderView: UIView {
         self.profileImgView.layer.masksToBounds =   true
         self.profileSubIcon.layer.cornerRadius  = self.profileSubIcon.frame.size.width/2.0
         self.profileSubIcon.layer.masksToBounds = true
-
   
     }
     

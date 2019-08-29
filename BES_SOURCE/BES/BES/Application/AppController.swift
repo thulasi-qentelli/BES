@@ -11,6 +11,7 @@ import UIKit
 import ObjectMapper
 class AppController {
     static let shared = AppController()
+    let imageCache = NSCache<NSString, UIImage>()
     private init(){}
     var user:User? {
         didSet {
@@ -90,6 +91,8 @@ class AppController {
         
     }
     
+    
+    
     @objc func menuBtnAction() {
         self.mainView.contentViewController?.presentLeftMenuViewController()
     }
@@ -109,6 +112,10 @@ class AppController {
         alert.addAction(noButton)
         
         self.mainView.contentViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func clearImageCahce() {
+        imageCache.removeAllObjects()
     }
     
 }

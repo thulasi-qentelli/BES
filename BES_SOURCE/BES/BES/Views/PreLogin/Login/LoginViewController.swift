@@ -23,9 +23,7 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupUI()
-        
-        userNameView.txtField.textContentType = .username
-        userNameView.txtField.keyboardType = .emailAddress
+        //Username text update
         userNameView.getUpdatedText = { string in
             if string.isValidEmail() {
                 self.userNameView.accessoryImgView.isHidden = false
@@ -34,7 +32,8 @@ class LoginViewController: UIViewController {
                 self.userNameView.accessoryImgView.isHidden = true
             }
         }
-        passwordView.txtField.textContentType = .password
+
+        //Password text update
         passwordView.getUpdatedText = { string in
             if string.count > 0 {
                 self.passwordView.accessoryImgBtn.isHidden = false
@@ -45,9 +44,9 @@ class LoginViewController: UIViewController {
                 self.passwordView.accessoryImgView.isHidden = true
             }
         }
+        //password eye action
         passwordView.accessoryAction = { sender in
             self.passwordView.txtField.isSecureTextEntry = sender.isSelected
-            self.passwordView.txtField.clearsOnBeginEditing = false
             sender.isSelected = !sender.isSelected
         }
     }
@@ -58,18 +57,11 @@ class LoginViewController: UIViewController {
     }
     
     func setupUI() {
-        forgotPasswordBtn.titleLabel?.numberOfLines = 1
-        forgotPasswordBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        createAccountBtn.titleLabel?.numberOfLines = 1
-        createAccountBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        userNameView.titleLbl.text = "Username"
-        userNameView.txtField.placeholder = "Enter email"
         userNameView.txtField.keyboardType = .emailAddress
-        
-        passwordView.titleLbl.text = "Password"
-        passwordView.txtField.placeholder = "Enter password"
+        userNameView.txtField.textContentType = .username
+        userNameView.txtField.keyboardType = .emailAddress
         passwordView.txtField.isSecureTextEntry = true
+        passwordView.txtField.textContentType = .password
         
     }
 
@@ -85,65 +77,9 @@ class LoginViewController: UIViewController {
     @IBAction func btnAction(_ sender: UIButton) {
                 self.view.endEditing(true)
         if sender == signInBtn {
-            guard let email = userNameView.txtField.text else {
-                self.view.makeToast("Please enter user name", duration: 1.0, position: .center)
-                userNameView.txtField.becomeFirstResponder()
-                return
+            if validateData() {
+                self.loginService()
             }
-            guard let password = passwordView.txtField.text else {
-                self.view.makeToast("Please enter password", duration: 1.0, position: .center)
-                passwordView.txtField.becomeFirstResponder()
-                return
-            }
-            
-            if email.count <= 0 {
-                self.view.makeToast("Please enter user name", duration: 1.0, position: .center)
-                userNameView.txtField.becomeFirstResponder()
-                return
-            }
-            
-            if !email.isValidEmail() {
-                self.view.makeToast("Please enter a vaild email address", duration: 1.0, position: .center)
-                userNameView.txtField.becomeFirstResponder()
-                return
-            }
-            
-            if password.count < 6 {
-                self.view.makeToast("Please enter password", duration: 1.0, position: .center)
-                passwordView.txtField.becomeFirstResponder()
-                return
-            }
-            
-            SecAddSharedWebCredential("http://bes.qentelli.com:8085" as CFString, email as CFString, password as CFString) { (error) in
-                print(error?.localizedDescription)
-                DispatchQueue.main.async {
-                    var parameters = ParameterDetail()
-                    parameters.email = email
-                    parameters.password = password
-                    
-                    if let parm = parameters.dictionary {
-                        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
-                        loadingNotification.mode = MBProgressHUDMode.indeterminate
-                        loadingNotification.label.text = "Please wait.."
-                        
-                        NetworkManager().post(method: .login, parameters: parm) { (result, error) in
-                            DispatchQueue.main.async {
-                                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                                if error != nil {
-                                    self.view.makeToast(error, duration: 2.0, position: .center)
-                                    return
-                                }
-                                
-                                AppController.shared.user = result as? User
-                                saveAuthToken(token: AppController.shared.user!.token!)
-                                saveUserDetails(user: result as! User)
-                                AppController.shared.loadStartView()
-                            }
-                        }
-                    }
-                }
-            }
-            
         }
         else if sender == forgotPasswordBtn {
             let forgotVC = ForgotPWDViewController()
@@ -154,6 +90,76 @@ class LoginViewController: UIViewController {
             self.navigationController?.pushViewController(signupVC, animated: true)
         }
         
+    }
+    
+    
+    func loginService() {
+        let email = self.userNameView.txtField.text!
+        let password = self.passwordView.txtField.text!
+        
+        SecAddSharedWebCredential("http://besconnect.qentelli.com:8081" as CFString, email as CFString, password as CFString) { (error) in
+            print(error?.localizedDescription)
+            
+            DispatchQueue.main.async {
+                var parameters = ParameterDetail()
+                parameters.email = email
+                parameters.password = password
+                
+                if let parm = parameters.dictionary {
+                    let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    loadingNotification.mode = MBProgressHUDMode.indeterminate
+                    loadingNotification.label.text = "Please wait.."
+                    
+                    NetworkManager().post(method: .login, parameters: parm) { (result, error) in
+                        DispatchQueue.main.async {
+                            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                            if error != nil {
+                                self.view.makeToast(error, duration: 2.0, position: .center)
+                                return
+                            }
+                            
+                            AppController.shared.user = result as? User
+                            saveAuthToken(token: AppController.shared.user!.token!)
+                            saveUserDetails(user: result as! User)
+                            AppController.shared.loadStartView()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func validateData()->Bool {
+        
+        guard let email = userNameView.txtField.text else {
+            self.view.makeToast("Please enter user name", duration: 1.0, position: .center)
+            userNameView.txtField.becomeFirstResponder()
+            return false
+        }
+        guard let password = passwordView.txtField.text else {
+            self.view.makeToast("Please enter password", duration: 1.0, position: .center)
+            passwordView.txtField.becomeFirstResponder()
+            return false
+        }
+        
+        if email.count <= 0 {
+            self.view.makeToast("Please enter user name", duration: 1.0, position: .center)
+            userNameView.txtField.becomeFirstResponder()
+            return false
+        }
+        
+        if !email.isValidEmail() {
+            self.view.makeToast("Please enter a vaild email address", duration: 1.0, position: .center)
+            userNameView.txtField.becomeFirstResponder()
+            return false
+        }
+        
+        if password.count < 6 {
+            self.view.makeToast("Please enter password", duration: 1.0, position: .center)
+            passwordView.txtField.becomeFirstResponder()
+            return false
+        }
+        return true
     }
     
 }
