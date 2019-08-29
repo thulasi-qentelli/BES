@@ -70,13 +70,13 @@ class MainTabbarViewController: UITabBarController {
         
         let invoiceVC = InvoiceViewController()
         let navSix = UINavigationController(rootViewController: invoiceVC)
-        let invoiceBarItem = UITabBarItem(title: "Invoice", image: UIImage(named: "Invoice_grey"), selectedImage: UIImage(named: "Invoice"))
+        let invoiceBarItem = UITabBarItem(title: "Invoices".uppercased(), image: UIImage(named: "receipt_grey"), selectedImage: UIImage(named: "receipt"))
         navSix.tabBarItem = invoiceBarItem
         
         
         let documentationVC = DocumentsViewController()
         let navSeven = UINavigationController(rootViewController: documentationVC)
-        let documentationBarItem = UITabBarItem(title: "Documents", image: UIImage(named: "documentation_grey"), selectedImage: UIImage(named: "documentation"))
+        let documentationBarItem = UITabBarItem(title: "Documents".uppercased(), image: UIImage(named: "documents_grey"), selectedImage: UIImage(named: "documents"))
         navSeven.tabBarItem = documentationBarItem
         
         

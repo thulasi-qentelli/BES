@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentFieldView" customModule="BES" customModuleProvider="target">
+            <connections>
+                <outlet property="sendBtn" destination="hOm-s7-lf1" id="hjl-03-4uA"/>
+                <outlet property="txtField" destination="U3c-cE-rZn" id="udr-W4-Gzb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-Oz-B1w">
+                    <rect key="frame" x="30" y="0.0" width="315" height="60"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter comment here" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U3c-cE-rZn">
+                            <rect key="frame" x="0.0" y="10" width="235" height="40"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" smartDashesType="no"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOm-s7-lf1">
+                            <rect key="frame" x="245" y="10" width="70" height="40"/>
+                            <color key="backgroundColor" red="0.2033638656" green="0.47054857020000002" blue="0.96475118400000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="X8g-CX-kUv"/>
+                                <constraint firstAttribute="height" constant="40" id="ZKM-b5-ePm"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Send">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="25K-8k-Sx3"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hOm-s7-lf1" firstAttribute="leading" secondItem="U3c-cE-rZn" secondAttribute="trailing" constant="10" id="6Nl-3Z-Uxh"/>
+                        <constraint firstItem="hOm-s7-lf1" firstAttribute="centerY" secondItem="U3c-cE-rZn" secondAttribute="centerY" id="86B-s6-YGs"/>
+                        <constraint firstAttribute="trailing" secondItem="hOm-s7-lf1" secondAttribute="trailing" id="HLQ-b0-Cw9"/>
+                        <constraint firstAttribute="bottom" secondItem="U3c-cE-rZn" secondAttribute="bottom" constant="10" id="L4K-Kz-y0x"/>
+                        <constraint firstItem="U3c-cE-rZn" firstAttribute="top" secondItem="iRN-Oz-B1w" secondAttribute="top" constant="10" id="gBS-tq-ke0"/>
+                        <constraint firstItem="U3c-cE-rZn" firstAttribute="leading" secondItem="iRN-Oz-B1w" secondAttribute="leading" id="hIz-KB-5Z7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="iRN-Oz-B1w" secondAttribute="bottom" id="2sF-44-NLM"/>
+                <constraint firstItem="iRN-Oz-B1w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H6y-9e-dli"/>
+                <constraint firstItem="iRN-Oz-B1w" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Nfl-67-UyH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iRN-Oz-B1w" secondAttribute="trailing" constant="30" id="RXf-DZ-kjG"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="308" y="-451.47783251231527"/>
+        </view>
+    </objects>
+</document>

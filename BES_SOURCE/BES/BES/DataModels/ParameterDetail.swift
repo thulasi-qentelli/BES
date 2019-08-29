@@ -19,6 +19,8 @@ struct ParameterDetail: Codable {
     var content:String?
     var rating:String?
     var useremail:String?
+    var comment:String?
+    var postId:String?
         
     init() {
     }

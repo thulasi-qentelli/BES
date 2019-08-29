@@ -9,15 +9,25 @@
 import UIKit
 import MBProgressHUD
 import SDWebImage
+import IQKeyboardManager
 
 class CommentsViewController: UIViewController {
+    
     @IBOutlet weak var tblView: UITableView!
+    
     var feed:Feed?
     var commentsSource:[Comment] = []
     var comments: [String:[Comment]] = [:]
     let cellReuseIdendifier = "CommentsTableViewCell"
     var keys:[String] = []
     let refreshControl = UIRefreshControl()
+    @IBOutlet weak var commentsBottomConst: NSLayoutConstraint!
+    
+    @IBOutlet weak var commentsInputView: CommentFieldView!
+    
+    var commentesAdded:(Feed)-> Void = { comments in
+        
+    }
 
     @IBOutlet weak var noDataLbl: UILabel!
     
@@ -28,21 +38,74 @@ class CommentsViewController: UIViewController {
         setupUI()
         if self.commentsSource.count > 0 {
             self.noDataLbl.isHidden = true
-            let datesArray = self.commentsSource.compactMap { $0.dateShortForm }
-            var dic = [String:[Comment]]()
-            datesArray.forEach {
-                let dateKey = $0
-                let filterArray = self.commentsSource.filter { $0.dateShortForm == dateKey }
-                dic[$0] = filterArray//.sorted(){$0.timeShortForm < $1.timeShortForm}
-            }
-            let keysArr = dic.keys
-            self.keys =  keysArr.sorted().reversed()
-            self.comments = dic
-            self.tblView.reloadData()
+          
+            self.filterCommentsAndReload()
         }
         
-       // self.loadComments(showLoader: true)
         
+        
+        
+        commentsInputView.getUpdatedText = { text in
+            if text.count > 0 {
+                
+                let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+                loadingNotification.mode = MBProgressHUDMode.indeterminate
+                loadingNotification.label.text = "Please wait.."
+                
+                self.view.endEditing(true)
+                var parameters = ParameterDetail()
+                parameters.comment = text
+                parameters.postId = "\(self.feed!.id!)"
+                parameters.email = "\(AppController.shared.user!.email!)"
+                
+                if let parm = parameters.dictionary {
+                    NetworkManager().post(method: .saveComment, parameters:parm,isURLEncode: false , completion: { (result, error) in
+                        DispatchQueue.main.async {
+                            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+        
+                            if error != nil {
+                                self.view.makeToast(error, duration: 2.0, position: .center)
+                                return
+                            }
+                            self.noDataLbl.isHidden = true
+                            self.commentsInputView.txtField.text = ""
+                            if (result as? Comment) != nil {
+                                self.feed?.comments?.append(result as! Comment)
+                                self.commentsSource = self.feed!.comments!
+                                self.filterCommentsAndReload()
+                            }
+                            self.commentesAdded(self.feed!)
+                        }
+                    })
+                }
+            }
+            else {
+                self.view.makeToast("Please enter comment.", duration: 2.0, position: .center)
+            }
+        }
+       // self.loadComments(showLoader: true)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            self.commentsBottomConst.constant = keyboardHeight
+            self.view.setNeedsUpdateConstraints()
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.view.layoutIfNeeded()
+            })
+            
+            
+        }
+    }
+    
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+      
+            self.commentsBottomConst.constant = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +132,37 @@ class CommentsViewController: UIViewController {
         
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        IQKeyboardManager.shared().isEnabled = true
+        NotificationCenter.default.removeObserver(self)
+    }
+    func filterCommentsAndReload() {
+        let datesArray = self.commentsSource.compactMap { $0.dateShortForm }
+        var dic = [String:[Comment]]()
+        datesArray.forEach {
+            let dateKey = $0
+            let filterArray = self.commentsSource.filter { $0.dateShortForm == dateKey }
+            dic[$0] = filterArray//.sorted(){$0.timeShortForm < $1.timeShortForm}
+        }
+        let keysArr = dic.keys
+        self.keys =  keysArr.sorted()
+        self.comments = dic
+        self.tblView.reloadData()
+        
+        if self.keys.count>0 {
+            
+            let kcomments = self.comments[self.keys[self.keys.count - 1]]
+        
+            let indexPath = NSIndexPath(row: kcomments!.count - 1, section: self.keys.count - 1)
+            self.tblView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
+           
+           
+        } else {
+            self.tblView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
+        }
+    }
     @objc func backBtnAction() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -87,13 +181,32 @@ class CommentsViewController: UIViewController {
         self.tblView.rowHeight = UITableView.automaticDimension
         self.tblView.register(UINib.init(nibName: cellReuseIdendifier, bundle: nil), forCellReuseIdentifier: cellReuseIdendifier)
             
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+//        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
-        if #available(iOS 10.0, *) {
-            self.tblView.refreshControl = refreshControl
-        } else {
-            self.tblView.backgroundView = refreshControl
-        }
+//        if #available(iOS 10.0, *) {
+//            self.tblView.refreshControl = refreshControl
+//        } else {
+//            self.tblView.backgroundView = refreshControl
+//        }
+        
+        
+        IQKeyboardManager.shared().isEnabled = false
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        
+        self.commentsInputView.backgroundColor = self.view.backgroundColor
+        
     }
     
     @objc func refresh(_ refreshControl: UIRefreshControl) {

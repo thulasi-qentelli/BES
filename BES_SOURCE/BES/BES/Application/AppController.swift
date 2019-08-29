@@ -26,7 +26,7 @@ class AppController {
             let VC1 =   MainTabbarViewController()
             let VC2 =   SideViewController()
             VC2.menuTapped = { index in
-                if index == 5 {
+                if index == 7 {
                     self.logoutAction()
                 } else {
                     VC1.selectedIndex = index

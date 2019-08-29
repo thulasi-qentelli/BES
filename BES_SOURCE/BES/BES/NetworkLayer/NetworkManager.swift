@@ -41,8 +41,8 @@ public enum Method: String {
 }
 
 enum NetworkEnvironment: String {
-    case sandboxURL = "http://bes.qentelli.com:8181/"
-    case productionURL = "http://besconnect.qentelli.com:8085/"
+    case sandbox = "http://bes.qentelli.com:8181/"
+    case production = "http://besconnect.qentelli.com:8081/"
 }
 
 enum Result<String>{
@@ -52,8 +52,8 @@ enum Result<String>{
 
 
 struct NetworkManager {
-    let environment : NetworkEnvironment = .sandboxURL
     
+    let environment : NetworkEnvironment = .production
     
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> String{
         switch response.statusCode {
@@ -243,7 +243,6 @@ struct NetworkManager {
                         completion(nil,"Failed")
                     }
                     
-                    completion("Liked feed.", nil)
                 case .saveInquiry:
                     print(response.response?.statusCode)
                     if response.response?.statusCode == 200 {
@@ -261,6 +260,13 @@ struct NetworkManager {
                         completion(nil, "Feedback not submitted due to unknown error. Pleasetry later")
                     }
                     
+                case .saveComment:
+                    if let comment = Comment(JSONString: jsonString),comment.id ?? 0 > 0 {
+                        completion(comment,nil)
+                    }
+                    else {
+                        completion(nil,"Failed")
+                    }
                 default:
                     print("========================")
                     

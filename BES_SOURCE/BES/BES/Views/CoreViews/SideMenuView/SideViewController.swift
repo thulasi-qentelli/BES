@@ -18,6 +18,9 @@ class SideViewController: UIViewController {
     @IBOutlet weak var messages: SideMenuCell!
     @IBOutlet weak var feedback: SideMenuCell!
     @IBOutlet weak var inquiry: SideMenuCell!
+    @IBOutlet weak var invoices: SideMenuCell!
+    @IBOutlet weak var documents: SideMenuCell!
+    
     @IBOutlet weak var logout: SideMenuCell!
     
     var menuTapped:(Int)->Void = { index in
@@ -60,10 +63,19 @@ class SideViewController: UIViewController {
             self.sideMenuViewController?.hideMenuViewController()
             self.menuTapped(4)
         }
-        logout.btnClickAction = {
-//            self.dismiss(animated: true, completion: nil)
+        invoices.btnClickAction = {
+            self.sideMenuViewController?.hideMenuViewController()
             self.menuTapped(5)
         }
+        documents.btnClickAction = {
+            self.sideMenuViewController?.hideMenuViewController()
+            self.menuTapped(6)
+        }
+        logout.btnClickAction = {
+//            self.dismiss(animated: true, completion: nil)
+            self.menuTapped(7)
+        }
+        
         
         var parameters = ParameterDetail()
         parameters.userId = "\(AppController.shared.user!.id!)"

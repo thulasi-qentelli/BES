@@ -115,7 +115,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
         let cell = tableView.dequeueReusableCell(withIdentifier: feedCellReuseIdentifier, for: indexPath) as! FeedTableViewCell
-        let feed = feeds[indexPath.row]
+        var feed = feeds[indexPath.row]
         cell.feed = feed
         cell.timestampLbl.text = feed.createdDate?.date?.humanDisplayDaateFormat()
         cell.likedLbl.text = "0 Likes"
@@ -203,6 +203,11 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             if let comments = feed.comments {
                 let commentsVC = CommentsViewController()
                 commentsVC.commentsSource = comments
+                commentsVC.feed = feed
+                commentsVC.commentesAdded = { kFeed in
+                    feed = kFeed
+                    self.tblView.reloadData()
+                }
                 let navSeven = UINavigationController(rootViewController: commentsVC)
                 self.present(navSeven, animated: true, completion: nil)
                 

@@ -159,6 +159,8 @@ class Comment: NSObject, Mappable, Codable {
     var postId: Int?
     var dateShortForm:String?
     var timeShortForm:String?
+    var createdDateObj: Date?
+    var updatedDateObj: Date?
     override init() {
         super.init()
     }
@@ -182,6 +184,13 @@ class Comment: NSObject, Mappable, Codable {
             let splitArr = created.split(separator: " ")
             dateShortForm =  String(splitArr.first ?? "")
             timeShortForm = String(splitArr.last ?? "")
+        }
+        
+        if let created = createdDate {
+            self.createdDateObj = created.date
+        }
+        if let updated = updatedDate {
+            self.updatedDateObj = updated.date
         }
     }
 }

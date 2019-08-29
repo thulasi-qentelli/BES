@@ -44,7 +44,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="hideFilterView" value="NO"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Invoice"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Invoices"/>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Db7-0G-I1B">

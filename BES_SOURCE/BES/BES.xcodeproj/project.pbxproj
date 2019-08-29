@@ -100,6 +100,8 @@
 		00F8F1E623165E3A00A9F3C4 /* CommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1E423165E3A00A9F3C4 /* CommentsViewController.xib */; };
 		00F8F1EA23165E6D00A9F3C4 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1E823165E6D00A9F3C4 /* CommentsTableViewCell.swift */; };
 		00F8F1EB23165E6D00A9F3C4 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1E923165E6D00A9F3C4 /* CommentsTableViewCell.xib */; };
+		00F8F1F123169A4100A9F3C4 /* CommentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1EF23169A4100A9F3C4 /* CommentFieldView.swift */; };
+		00F8F1F223169A4100A9F3C4 /* CommentFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1F023169A4100A9F3C4 /* CommentFieldView.xib */; };
 		6FE5A2EA602FA0F75FE0522D /* Pods_BES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008B5D06ED3F1B4039CA5DB2 /* Pods_BES.framework */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +203,8 @@
 		00F8F1E423165E3A00A9F3C4 /* CommentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsViewController.xib; sourceTree = "<group>"; };
 		00F8F1E823165E6D00A9F3C4 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		00F8F1E923165E6D00A9F3C4 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
+		00F8F1EF23169A4100A9F3C4 /* CommentFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentFieldView.swift; sourceTree = "<group>"; };
+		00F8F1F023169A4100A9F3C4 /* CommentFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFieldView.xib; sourceTree = "<group>"; };
 		C0F567F34FCF16D8094431BD /* Pods-BES.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BES.debug.xcconfig"; path = "Target Support Files/Pods-BES/Pods-BES.debug.xcconfig"; sourceTree = "<group>"; };
 		FE6276E075ED6C8C746EAF17 /* Pods-BES.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BES.release.xcconfig"; path = "Target Support Files/Pods-BES/Pods-BES.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -407,6 +411,7 @@
 		005BC716230D168300BCAC1A /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				00F8F1EE23169A1500A9F3C4 /* CommentFieldView */,
 				00CF89FC2314C6F3006889A6 /* MobileNumberView */,
 				00CF89FB2314BD46006889A6 /* RatingView */,
 				00CF89F62314BA54006889A6 /* CommentInputView */,
@@ -681,6 +686,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		00F8F1EE23169A1500A9F3C4 /* CommentFieldView */ = {
+			isa = PBXGroup;
+			children = (
+				00F8F1EF23169A4100A9F3C4 /* CommentFieldView.swift */,
+				00F8F1F023169A4100A9F3C4 /* CommentFieldView.xib */,
+			);
+			path = CommentFieldView;
+			sourceTree = "<group>";
+		};
 		4D252CC1F47319274408A9C5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -738,7 +752,7 @@
 								enabled = 1;
 							};
 							com.apple.SafariKeychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -786,6 +800,7 @@
 				00C8F9DE2312D86500C2378C /* FeedTableViewCell.xib in Resources */,
 				00F21A3C230EA95A008D9976 /* FeedbackViewController.xib in Resources */,
 				00C9184F2311EEE300922DC7 /* CustomCalloutView.xib in Resources */,
+				00F8F1F223169A4100A9F3C4 /* CommentFieldView.xib in Resources */,
 				00CF89F323148590006889A6 /* LocationPopView.xib in Resources */,
 				005BC70D230D117000BCAC1A /* SplashViewController.xib in Resources */,
 				00F21A45230EB6A4008D9976 /* ProfileDisplayView.xib in Resources */,
@@ -857,6 +872,7 @@
 				0055FBCE230FAC9A003D4D41 /* NetworkManager.swift in Sources */,
 				0055FBDE230FAD9C003D4D41 /* DateExtension.swift in Sources */,
 				00F21A3F230EA967008D9976 /* InquiryViewController.swift in Sources */,
+				00F8F1F123169A4100A9F3C4 /* CommentFieldView.swift in Sources */,
 				00CF89F12314857D006889A6 /* LocationPopView.swift in Sources */,
 				0055FBED230FEC18003D4D41 /* Message.swift in Sources */,
 				005BC714230D119900BCAC1A /* SignupViewController.swift in Sources */,
