@@ -350,12 +350,12 @@
 			path = CommonClasses;
 			sourceTree = "<group>";
 		};
-		005BC702230D0A6B00BCAC1A /* SideMenu */ = {
+		005BC702230D0A6B00BCAC1A /* SideMenuController */ = {
 			isa = PBXGroup;
 			children = (
 				005BC703230D0AB100BCAC1A /* SideMenuMainController.swift */,
 			);
-			path = SideMenu;
+			path = SideMenuController;
 			sourceTree = "<group>";
 		};
 		005BC705230D0C8F00BCAC1A /* PreLogin */ = {
@@ -373,10 +373,9 @@
 		005BC706230D0C9E00BCAC1A /* CoreViews */ = {
 			isa = PBXGroup;
 			children = (
-				00F21A2C230EA908008D9976 /* ProfileEditView */,
 				00F21A22230E6DC5008D9976 /* MainTabBar */,
 				00F21A21230E6DB3008D9976 /* SideMenuView */,
-				005BC702230D0A6B00BCAC1A /* SideMenu */,
+				005BC702230D0A6B00BCAC1A /* SideMenuController */,
 			);
 			path = CoreViews;
 			sourceTree = "<group>";
@@ -622,13 +621,6 @@
 				00F21A3E230EA967008D9976 /* InquiryViewController.xib */,
 			);
 			path = Inquiry;
-			sourceTree = "<group>";
-		};
-		00F21A2C230EA908008D9976 /* ProfileEditView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ProfileEditView;
 			sourceTree = "<group>";
 		};
 		00F21A41230EB674008D9976 /* ProfileDisplayView */ = {

@@ -72,7 +72,7 @@ class AcknowledgeViewController: UIViewController {
         case .Inquiry:
             titleLbl.text = "Inquiry"
             alertTitleLbl.text = "Form submitted successfully"
-            alertDetailLbl.text = "Thanks for inquiy.\nSomeone will contact you in next 24 to 48 hours."
+            alertDetailLbl.text = "Thanks for inquiry.\nSomeone will contact you in next 24 to 48 hours."
             clickHereHeightConstraint.constant = 0
             doneBtn.setTitle("BACK TO HOME", for: .normal)
         case .ForgotPassword:

@@ -11,6 +11,8 @@ import UIKit
 class FeedTableViewCell: UITableViewCell {
 
     var feed: Feed?
+    var feedModel:FeedViewModel?
+    var indexPAth: IndexPath?
     @IBOutlet weak var displayTextLbl: UILabel!
     @IBOutlet weak var txtLbl: UILabel!
     @IBOutlet weak var readMoreBtn: UIButton!
@@ -25,7 +27,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsLbl: UILabel!
     @IBOutlet weak var thumUpImgView: UIImageView!
     
-    var readMoreFunction:(UIButton, String)->Void = { (sender, str) in
+    var updateUI:(IndexPath)->Void = {  indexpath in
     
     }
     var imageViewTapAction:(UIImageView)->Void = { sender in
@@ -43,7 +45,6 @@ class FeedTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-//        getTextForReadmore(numberOfLines: 3)
         profileImgView.layer.cornerRadius = 25
         profileImgView.layer.masksToBounds = true
         self.imgView.isUserInteractionEnabled = true
@@ -51,10 +52,7 @@ class FeedTableViewCell: UITableViewCell {
         self.imgView.addGestureRecognizer(tapGesture)
     }
 
-    override func prepareForReuse() {
-        // CELLS STILL FREEZE EVEN WHEN THE FOLLOWING LINE IS COMMENTED OUT?!?!
-        super.prepareForReuse()
-    }
+   
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -62,7 +60,9 @@ class FeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func readMoreAction(_ sender: UIButton) {
-        readMoreFunction(sender, string)
+        self.feedModel?.readMoreAction()
+        self.setupUI()
+        self.updateUI(self.indexPAth!)
     }
     
     @IBAction func likeBtnAction(_ sender: UIButton) {
@@ -80,44 +80,52 @@ class FeedTableViewCell: UITableViewCell {
     @objc func imageViewTapped() {
         imageViewTapAction(self.imgView)
     }
-    func getTextForReadmore(kStr:String, numberOfLines:Int) {
+
+    
+    func setupCell(viewModel:FeedViewModel) {
+        self.feed = viewModel.feed
+        self.feedModel = viewModel
+        setupUI()
+    }
+    
+    func setupUI() {
+        self.nameLbl.text = self.feedModel!.feed.userName ?? ""
+        self.timestampLbl.text = self.feedModel!.dateForDisplay
         
-        string = kStr
-        self.readMoreBtn.isHidden = false
-        var height: CGFloat = 0
-        var changes = 0
-        var finalArr:[String] = []
-        let splitArray = string.split(separator: " ")
-        for i in 0..<splitArray.count {
-            
-            finalArr.append(String(splitArray[i]))
-            
-            let subStr = finalArr.joined(separator: " ")
-            let newStr = String(subStr)
-            let kHeight = newStr.height(withConstrainedWidth: UIScreen.main.bounds.size.width - 60, font: self.txtLbl.font)
-            
-            if height == 0 {
-                height = kHeight
-            }
-            else {
-                if height != kHeight {
-                    changes = changes + 1
+        self.readMoreBtn.isHidden = !self.feedModel!.isReadMoreRequired
+        self.readMoreBtn.isSelected = self.feedModel!.isTextExpanded
+        self.txtLbl.text = self.feedModel!.getTextLabelContent()
+        self.displayTextLbl.text = self.feedModel!.getDisplayTextLabelContet()
+        
+        self.txtLbl.isHidden = self.feedModel!.isTextExpanded
+        self.displayTextLbl.isHidden = !self.feedModel!.isTextExpanded
+        
+        self.profileImgPlaceholderView.isHidden = false
+//        if self.feedModel!.profileImg != nil {
+//            self.profileImgView.image = self.feedModel!.profileImg
+//            self.profileImgPlaceholderView.isHidden = true
+//        }
+//        else {
+//            self.feedModel!.downloadProfileImg()
+//        }
+        
+        if let urlString = self.feedModel?.feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+            if let url  = URL(string: urlString){
+                self.profileImgView.sd_setImage(with: url) { (image, error, cache, url) in
+                    if let img = image {
+                        self.profileImgPlaceholderView.isHidden = true
+                    }
                 }
-                height = kHeight
-            }
-            if splitArray.count == finalArr.count {
-                    self.txtLbl.text = string
-                    self.readMoreBtn.isHidden = true
-            }
-            else if changes == numberOfLines {
-                finalArr.removeLast()
-                finalArr.removeLast()
-                finalArr.removeLast()
-                finalArr.removeLast()
-                self.txtLbl.text =  finalArr.joined(separator: " ") + "..."
-                break
             }
         }
+        self.imgHeight.constant = self.feedModel!.feedImgHeight
+        if self.feedModel!.feedImg != nil {
+            self.imgView.image = self.feedModel!.feedImg
+        }
+        else {
+            self.feedModel!.downloadFeedImg()
+        }
+        
     }
 }
 

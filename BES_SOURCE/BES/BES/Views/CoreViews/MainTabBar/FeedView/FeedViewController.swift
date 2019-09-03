@@ -14,8 +14,10 @@ import SimpleImageViewer
 class FeedViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
     var feeds: [Feed] = []
+    var feedViewModels:[FeedViewModel] = [FeedViewModel]()
     let feedCellReuseIdentifier = "FeedTableViewCell"
     let refreshControl = UIRefreshControl()
+   var cellHeights: [IndexPath : CGFloat] = [:]
     @IBOutlet weak var noDataLbl: UILabel!
     
     override func viewDidLoad() {
@@ -34,7 +36,7 @@ class FeedViewController: UIViewController {
     
     
     func setupUI() {
-        self.tblView.estimatedRowHeight = 260
+//        self.tblView.estimatedRowHeight = 260
         self.tblView.rowHeight = UITableView.automaticDimension
         self.tblView.register(UINib.init(nibName: feedCellReuseIdentifier, bundle: nil), forCellReuseIdentifier: feedCellReuseIdentifier)
         
@@ -77,12 +79,17 @@ class FeedViewController: UIViewController {
                 }
                 
                 if let _ = result, let kmess = (result as? [Feed]), kmess.count > 0 {
+                    self.feedViewModels.removeAll()
                     self.feeds = kmess.sorted(by: { $0.createdDateObj!.compare($1.createdDateObj!) == .orderedDescending })
+                     self.feeds.forEach({ (feed) in
+                        self.feedViewModels.append(FeedViewModel(feed: feed))
+                    })
                     self.tblView.reloadData()
                      self.noDataLbl.isHidden = true
                 }
                 else {
                     self.feeds = []
+                    self.feedViewModels.removeAll()
                     self.tblView.reloadData()
                     self.noDataLbl.isHidden = false
                 }
@@ -96,9 +103,14 @@ class FeedViewController: UIViewController {
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.feeds.count
+        return self.feedViewModels.count
     }
     
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = self.feedViewModels[indexPath.row]
+        return model.isTextExpanded ? model.getExpandedHeight() : model.getNormaHeight()
+    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 90
     }
@@ -111,13 +123,37 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         return view
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeights[indexPath] = cell.frame.size.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[indexPath] ?? 70.0
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
         let cell = tableView.dequeueReusableCell(withIdentifier: feedCellReuseIdentifier, for: indexPath) as! FeedTableViewCell
-        var feed = feeds[indexPath.row]
-        cell.feed = feed
-        cell.timestampLbl.text = feed.createdDate?.date?.humanDisplayDaateFormat()
+        
+        let viewModel = feedViewModels[indexPath.row]
+        
+        viewModel.imageUpdated = {
+            cell.setupUI()
+            self.tblView.beginUpdates()
+            self.tblView.endUpdates()
+        }
+        var feed = viewModel.feed
+        
+        cell.setupCell(viewModel: viewModel)
+        cell.indexPAth = indexPath
+        cell.updateUI = { idxPath in
+            tableView.beginUpdates()
+            //Not needed to reload
+//            tableView.reloadRows(at: [idxPath], with: .automatic)
+            tableView.endUpdates()
+        }
+        
+        
         cell.likedLbl.text = "0 Likes"
         cell.commentsLbl.text = "0 Comments"
         
@@ -126,13 +162,6 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         if let comments = feed.comments {
             cell.commentsLbl.text = "\(comments.count) Comments"
         }
-        
-        cell.displayTextLbl.text = ""
-        cell.getTextForReadmore(kStr: feed.content ?? "", numberOfLines: 3)
-        cell.txtLbl.isHidden = false
-        cell.readMoreBtn.isSelected = false
-        cell.profileImgPlaceholderView.isHidden = false
-        cell.nameLbl.text = feed.userName
     
         cell.thumUpImgView.image = UIImage(named: "thumb_up")
         
@@ -140,73 +169,14 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.thumUpImgView.image = UIImage(named: "thumb_up_orange")
         }
         
-        //Profile Image        
-        if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.userPic as NSString? ?? "" as NSString) {
-             cell.profileImgView.image = kLocalImg
-        }
-        else {
-            DispatchQueue.global(qos: .background).async {
-                if let urlString = feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-                    if let url  = URL(string: urlString){
-                        cell.profileImgView.sd_setImage(with: url, completed: { (image, error, type, kURL) in
-                            DispatchQueue.main.async {
-                                if let kImg = image {
-                                    AppController.shared.imageCache.setObject(kImg, forKey: feed.userPic! as NSString)
-                                    cell.profileImgPlaceholderView.isHidden = true
-                                }
-                            }
-                        })
-                    }
-                }
-            }
-        }
+        //Profile Image
         
-        if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.image as NSString? ?? "" as NSString) {
-            cell.imgView.image = kLocalImg
-            cell.imgHeight.constant = kLocalImg.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
-            tableView.beginUpdates()
-            tableView.endUpdates()
-            
-//            tableView.reloadData()
-        }
-        else {
-            cell.imgHeight.constant = 0
-         DispatchQueue.global(qos: .background).async {
-            if let urlString = feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-                if let url  = URL(string: indexPath.row == 0 ? "https://upload.wikimedia.org/wikipedia/commons/d/d7/Astro_4D_stars_proper_radial_g_b_8mag_big.png" : urlString){
-                    cell.imgView?.sd_setImage(with: url, completed: { (image, error, type, url) in
-                        
-                        DispatchQueue.main.async {
-                            if let kImg = image {
-                                AppController.shared.imageCache.setObject(kImg, forKey: feed.image! as NSString)
-                            cell.imgHeight.constant = image?.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
-                            tableView.beginUpdates()
-                            tableView.endUpdates()
-//                                tableView.reloadData()
-                            }
-                        }
-                        
-                    })
-                }
-            }
-        }
+        cell.profileImgPlaceholderView.isHidden = false
         
-        }
-        //Read More Text
-        cell.readMoreFunction = { (sender, str) in
-            if sender.isSelected == true {
-                cell.displayTextLbl.text = ""
-                cell.getTextForReadmore(kStr: str, numberOfLines: 3)
-                cell.txtLbl.isHidden = false
-            } else {
-                cell.displayTextLbl.text = str
-                cell.txtLbl.text =  str + "  Read More"
-                cell.txtLbl.isHidden = true
-            }
-            sender.isSelected = !sender.isSelected
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }
+       
+        
+//        return cell
+        
         
         cell.imageViewTapAction = { sender in
             let configuration = ImageViewerConfiguration { config in
