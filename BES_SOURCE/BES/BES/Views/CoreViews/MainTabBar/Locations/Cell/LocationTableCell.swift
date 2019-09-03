@@ -36,6 +36,16 @@ class LocationTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupCell(loc:Location) {
+        self.location = loc
+        self.titleLbl.text = location.getTitle()
+        self.addressLbl.text = location.getAddress()
+        self.phoneLbl.text = location.phone
+        self.regionLbl.text = location.region
+        self.servicesLbl.text = location.services
+        self.basinLbl.text = location.basins
+    }
+    
     @IBAction func phoneBtnAction(_ sender: UIButton) {
         phoneAction(location)
     }

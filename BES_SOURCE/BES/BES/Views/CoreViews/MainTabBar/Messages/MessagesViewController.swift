@@ -17,6 +17,7 @@ class MessagesViewController: UIViewController {
     var keys:[String] = []
     let refreshControl = UIRefreshControl()
 
+    @IBOutlet weak var headerView: TableSectionHeaderView!
     @IBOutlet weak var noDataLbl: UILabel!
     
     override func viewDidLoad() {
@@ -26,6 +27,7 @@ class MessagesViewController: UIViewController {
         setupUI()
         
         self.loadMessages(showLoader: true)
+        self.headerView.title = "Messages(\(self.messages.count))"
         
     }
     
@@ -79,6 +81,7 @@ class MessagesViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 if error != nil {
                     self.view.makeToast(error, duration: 2.0, position: .center)
+                    
                     if self.messages.count == 0{
                         self.noDataLbl.isHidden = false
                     }

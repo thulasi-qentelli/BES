@@ -143,39 +143,15 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             self.tblView.endUpdates()
         }
         var feed = viewModel.feed
-        
-        cell.setupCell(viewModel: viewModel)
         cell.indexPAth = indexPath
+        cell.setupCell(viewModel: viewModel)
+        
         cell.updateUI = { idxPath in
             tableView.beginUpdates()
             //Not needed to reload
 //            tableView.reloadRows(at: [idxPath], with: .automatic)
             tableView.endUpdates()
         }
-        
-        
-        cell.likedLbl.text = "0 Likes"
-        cell.commentsLbl.text = "0 Comments"
-        
-        cell.likedLbl.text = "\(feed.getLikesCount()) Likes"
-        
-        if let comments = feed.comments {
-            cell.commentsLbl.text = "\(comments.count) Comments"
-        }
-    
-        cell.thumUpImgView.image = UIImage(named: "thumb_up")
-        
-        if let likedObj = feed.likeObj, let count = likedObj.likes, count > 0{
-            cell.thumUpImgView.image = UIImage(named: "thumb_up_orange")
-        }
-        
-        //Profile Image
-        
-        cell.profileImgPlaceholderView.isHidden = false
-        
-       
-        
-//        return cell
         
         
         cell.imageViewTapAction = { sender in
@@ -190,15 +166,14 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.likedLbl.text = "\(feed.getLikesCount()) Likes"
                 if status == true {
-                    cell.thumUpImgView.image = UIImage(named: "thumb_up_orange")
+                    cell.thumUpImgView.image = UIImage(named: "thumb_up")
                 }
                 else {
                     if error != nil, error! == networkUnavailable {
                         self.view.makeToast(error, duration: 2.0, position: .center)
                     }
-                    cell.thumUpImgView.image = UIImage(named: "thumb_up")
+                    cell.thumUpImgView.image = UIImage(named: "thumb_up_black")
                 }
-                
             })
         }
         cell.commentBtnTap = { kFeed in

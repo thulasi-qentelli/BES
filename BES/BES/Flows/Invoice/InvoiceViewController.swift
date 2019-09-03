@@ -30,7 +30,7 @@ class InvoiceViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
         
-        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
+//        AppController.shared.addNavigationButtons(navigationItem: self.navigationItem)
     }
 
 }

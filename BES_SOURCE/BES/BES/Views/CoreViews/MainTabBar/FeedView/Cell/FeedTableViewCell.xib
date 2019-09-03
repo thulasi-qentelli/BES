@@ -110,14 +110,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Mg-Kn-8S4">
                                 <rect key="frame" x="0.0" y="198.5" width="260" height="40"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumb_up" translatesAutoresizingMaskIntoConstraints="NO" id="orh-zr-o84">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumb_up_black" translatesAutoresizingMaskIntoConstraints="NO" id="orh-zr-o84">
                                         <rect key="frame" x="0.0" y="10" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="lUr-1I-fG8"/>
                                             <constraint firstAttribute="width" constant="20" id="mGO-A8-TDQ"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_answer" translatesAutoresizingMaskIntoConstraints="NO" id="tcU-qc-WyO">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_answer_black" translatesAutoresizingMaskIntoConstraints="NO" id="tcU-qc-WyO">
                                         <rect key="frame" x="91" y="10" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Dcz-70-bbJ"/>
@@ -227,6 +227,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="commentsImgView" destination="tcU-qc-WyO" id="AUu-FF-KY9"/>
                 <outlet property="commentsLbl" destination="ZnE-CF-Nht" id="x0H-ar-Idz"/>
                 <outlet property="displayTextLbl" destination="2q1-hU-7eC" id="VJy-J0-Z86"/>
                 <outlet property="imgHeight" destination="Gsx-kc-T8G" id="EHt-UP-jUa"/>
@@ -245,7 +246,7 @@
     </objects>
     <resources>
         <image name="person" width="85" height="83"/>
-        <image name="question_answer" width="28" height="28"/>
-        <image name="thumb_up" width="28" height="28"/>
+        <image name="question_answer_black" width="28" height="28"/>
+        <image name="thumb_up_black" width="28" height="28"/>
     </resources>
 </document>

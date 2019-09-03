@@ -152,7 +152,7 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let view = TableSectionHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 90))
-        view.titleLbl.text = "Locations"
+        view.titleLbl.text = "Locations (\(self.filteredLocations.count))"
         view.backgroundColor = self.view.backgroundColor
         view.filterBtnAction = {
             
@@ -194,13 +194,7 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let location = filteredLocations[indexPath.row]
         
-        cell.titleLbl.text = location.getTitle()
-        cell.addressLbl.text = location.getAddress()
-        cell.phoneLbl.text = location.phone
-        cell.regionLbl.text = location.region
-        cell.servicesLbl.text = location.services
-        cell.basinLbl.text = location.basins
-        cell.location = location
+        cell.setupCell(loc: location)
         
         cell.locationAction = { loc in
             print("Location action")
@@ -344,6 +338,5 @@ extension LocationsViewController : CLLocationManagerDelegate {
             UIApplication.shared.openURL(url)
         }
     }
-    
 }
 

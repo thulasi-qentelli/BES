@@ -22,6 +22,9 @@
 		0055FBED230FEC18003D4D41 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0055FBEC230FEC18003D4D41 /* Message.swift */; };
 		0055FBEF231006A3003D4D41 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0055FBEE231006A3003D4D41 /* Feed.swift */; };
 		0055FBF123100B01003D4D41 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0055FBF023100B01003D4D41 /* Location.swift */; };
+		0056E524231E8047005CAEBC /* MapPlaceMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056E521231E8047005CAEBC /* MapPlaceMark.swift */; };
+		0056E525231E8047005CAEBC /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056E522231E8047005CAEBC /* AnnotationView.swift */; };
+		0056E526231E8047005CAEBC /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056E523231E8047005CAEBC /* MapViewModel.swift */; };
 		005BC6EA230D091800BCAC1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005BC6E9230D091800BCAC1A /* AppDelegate.swift */; };
 		005BC6F4230D091900BCAC1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 005BC6F2230D091900BCAC1A /* LaunchScreen.storyboard */; };
 		005BC701230D0A0900BCAC1A /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005BC700230D0A0900BCAC1A /* AppController.swift */; };
@@ -54,9 +57,6 @@
 		00C918432311EC5200922DC7 /* ChipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C918402311EC5200922DC7 /* ChipView.xib */; };
 		00C918442311EC5200922DC7 /* ChipFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918412311EC5200922DC7 /* ChipFilterView.swift */; };
 		00C918452311EC5200922DC7 /* ChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918422311EC5200922DC7 /* ChipView.swift */; };
-		00C9184A2311ECF600922DC7 /* MapPlaceMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918472311ECF600922DC7 /* MapPlaceMark.swift */; };
-		00C9184B2311ECF600922DC7 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918482311ECF600922DC7 /* AnnotationView.swift */; };
-		00C9184C2311ECF600922DC7 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918492311ECF600922DC7 /* MapViewModel.swift */; };
 		00C9184F2311EEE300922DC7 /* CustomCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C9184D2311EEE300922DC7 /* CustomCalloutView.xib */; };
 		00C918502311EEE300922DC7 /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C9184E2311EEE300922DC7 /* CustomCalloutView.swift */; };
 		00C918532311F4CC00922DC7 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C918512311F4CC00922DC7 /* FilterViewController.swift */; };
@@ -121,6 +121,9 @@
 		0055FBEC230FEC18003D4D41 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0055FBEE231006A3003D4D41 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		0055FBF023100B01003D4D41 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		0056E521231E8047005CAEBC /* MapPlaceMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPlaceMark.swift; sourceTree = "<group>"; };
+		0056E522231E8047005CAEBC /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		0056E523231E8047005CAEBC /* MapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		005BC6E6230D091800BCAC1A /* BES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BES.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		005BC6E9230D091800BCAC1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		005BC6F3230D091900BCAC1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -157,9 +160,6 @@
 		00C918402311EC5200922DC7 /* ChipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChipView.xib; sourceTree = "<group>"; };
 		00C918412311EC5200922DC7 /* ChipFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipFilterView.swift; sourceTree = "<group>"; };
 		00C918422311EC5200922DC7 /* ChipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipView.swift; sourceTree = "<group>"; };
-		00C918472311ECF600922DC7 /* MapPlaceMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapPlaceMark.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/MapModels/MapPlaceMark.swift; sourceTree = "<group>"; };
-		00C918482311ECF600922DC7 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnotationView.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/MapModels/AnnotationView.swift; sourceTree = "<group>"; };
-		00C918492311ECF600922DC7 /* MapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewModel.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/MapModels/MapViewModel.swift; sourceTree = "<group>"; };
 		00C9184D2311EEE300922DC7 /* CustomCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCalloutView.xib; path = ../../../../../../../../BES/BES/Flows/Locations/Location/LocationCell/CustomCalloutView.xib; sourceTree = "<group>"; };
 		00C9184E2311EEE300922DC7 /* CustomCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCalloutView.swift; path = ../../../../../../../../BES/BES/Flows/Locations/Location/LocationCell/CustomCalloutView.swift; sourceTree = "<group>"; };
 		00C918512311F4CC00922DC7 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -485,9 +485,9 @@
 		00C918462311ECE800922DC7 /* MapModels */ = {
 			isa = PBXGroup;
 			children = (
-				00C918482311ECF600922DC7 /* AnnotationView.swift */,
-				00C918472311ECF600922DC7 /* MapPlaceMark.swift */,
-				00C918492311ECF600922DC7 /* MapViewModel.swift */,
+				0056E522231E8047005CAEBC /* AnnotationView.swift */,
+				0056E521231E8047005CAEBC /* MapPlaceMark.swift */,
+				0056E523231E8047005CAEBC /* MapViewModel.swift */,
 			);
 			path = MapModels;
 			sourceTree = "<group>";
@@ -868,7 +868,6 @@
 				00CF89F12314857D006889A6 /* LocationPopView.swift in Sources */,
 				0055FBED230FEC18003D4D41 /* Message.swift in Sources */,
 				005BC714230D119900BCAC1A /* SignupViewController.swift in Sources */,
-				00C9184B2311ECF600922DC7 /* AnnotationView.swift in Sources */,
 				005BC6EA230D091800BCAC1A /* AppDelegate.swift in Sources */,
 				00C918502311EEE300922DC7 /* CustomCalloutView.swift in Sources */,
 				00F21A3B230EA95A008D9976 /* FeedbackViewController.swift in Sources */,
@@ -879,6 +878,7 @@
 				005BC72F230DBCE000BCAC1A /* AcknowledgeViewController.swift in Sources */,
 				005BC71F230D5F1A00BCAC1A /* ForgotPWDViewController.swift in Sources */,
 				00CF89EE2314637D006889A6 /* TableSectionHeaderView.swift in Sources */,
+				0056E526231E8047005CAEBC /* MapViewModel.swift in Sources */,
 				00F8F1DA2316443400A9F3C4 /* InvoiceViewController.swift in Sources */,
 				00F21A2F230EA92F008D9976 /* FeedViewController.swift in Sources */,
 				00D343A7230F0F7300555E32 /* SideProfileView.swift in Sources */,
@@ -889,13 +889,14 @@
 				00C918532311F4CC00922DC7 /* FilterViewController.swift in Sources */,
 				00F8F1E523165E3A00A9F3C4 /* CommentsViewController.swift in Sources */,
 				005BC710230D117D00BCAC1A /* LoginViewController.swift in Sources */,
+				0056E524231E8047005CAEBC /* MapPlaceMark.swift in Sources */,
 				0055FBE3230FB653003D4D41 /* CommonFunctions.swift in Sources */,
 				0055FBE8230FB740003D4D41 /* Toast.swift in Sources */,
 				00B843652314FC0B00336EFF /* RatingView.swift in Sources */,
 				00F21A49230ECCB6008D9976 /* MessageTableViewCell.swift in Sources */,
 				0055FBEB230FB75E003D4D41 /* ImagePicker.swift in Sources */,
 				0055FBF123100B01003D4D41 /* Location.swift in Sources */,
-				00C9184C2311ECF600922DC7 /* MapViewModel.swift in Sources */,
+				0056E525231E8047005CAEBC /* AnnotationView.swift in Sources */,
 				0055FBE5230FB669003D4D41 /* StringExtension.swift in Sources */,
 				00C918442311EC5200922DC7 /* ChipFilterView.swift in Sources */,
 				00F21A33230EA940008D9976 /* LocationsViewController.swift in Sources */,
@@ -913,7 +914,6 @@
 				00F21A37230EA94F008D9976 /* MessagesViewController.swift in Sources */,
 				000DBEA9231393F50064692E /* ProfileViewController.swift in Sources */,
 				00F21A26230E9AA8008D9976 /* MainTabbarView.swift in Sources */,
-				00C9184A2311ECF600922DC7 /* MapPlaceMark.swift in Sources */,
 				00C9183D2311DB3100922DC7 /* LocationTableCell.swift in Sources */,
 				0055FBEF231006A3003D4D41 /* Feed.swift in Sources */,
 				00F21A44230EB6A4008D9976 /* ProfileDisplayView.swift in Sources */,

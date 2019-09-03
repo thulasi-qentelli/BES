@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessagesViewController" customModule="BES" customModuleProvider="target">
             <connections>
+                <outlet property="headerView" destination="NtE-q1-yFD" id="PQD-I5-11H"/>
                 <outlet property="noDataLbl" destination="UAw-95-BAB" id="KF1-T5-aja"/>
                 <outlet property="tblView" destination="Hch-75-04D" id="5nM-QK-ihj"/>
                 <outlet property="view" destination="zx7-MA-7Cu" id="YwN-RS-Z0S"/>

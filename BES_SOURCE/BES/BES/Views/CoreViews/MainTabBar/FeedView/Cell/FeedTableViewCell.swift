@@ -26,6 +26,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var likedLbl: UILabel!
     @IBOutlet weak var commentsLbl: UILabel!
     @IBOutlet weak var thumUpImgView: UIImageView!
+    @IBOutlet weak var commentsImgView: UIImageView!
     
     var updateUI:(IndexPath)->Void = {  indexpath in
     
@@ -99,6 +100,28 @@ class FeedTableViewCell: UITableViewCell {
         
         self.txtLbl.isHidden = self.feedModel!.isTextExpanded
         self.displayTextLbl.isHidden = !self.feedModel!.isTextExpanded
+        
+        
+        self.likedLbl.text = "0 Likes"
+        self.commentsLbl.text = "0 Comments"
+        
+        self.likedLbl.text = "\(self.feedModel!.feed.getLikesCount()) Likes"
+        
+        
+        self.commentsImgView.image = UIImage(named: "question_answer_black")
+        
+        if let comments = self.feedModel!.feed.comments {
+            self.commentsImgView.image = UIImage(named: "question_answer")
+            self.commentsLbl.text = "\(comments.count) Comments"
+        }
+        
+        self.thumUpImgView.image = UIImage(named: "thumb_up_black")
+        
+        if let likedObj = self.feedModel!.feed.likeObj, let count = likedObj.likes, count > 0{
+            self.thumUpImgView.image = UIImage(named: "thumb_up")
+        }
+        
+        
         
         self.profileImgPlaceholderView.isHidden = false
 //        if self.feedModel!.profileImg != nil {

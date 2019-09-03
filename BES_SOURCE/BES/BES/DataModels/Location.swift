@@ -51,8 +51,6 @@ class Location: NSObject, Mappable, Codable {
         basins <- map["basins"]
         latitude <- map["latitude"]
         longitude <- map["longitude"]
-        updatedDate <- map["updatedDate"]
-        updatedDate <- map["updatedDate"]
         
         createdDate <- map["createdDate"]
         updatedDate <- map["updatedDate"]
@@ -72,9 +70,7 @@ class Location: NSObject, Mappable, Codable {
             for basin in trimmedBasins {
                 basinsArray.append(basin)
             }
-        }
-        
-        
+        }        
     }
     
     func getTitle() -> String{

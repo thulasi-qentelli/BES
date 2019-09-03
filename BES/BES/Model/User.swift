@@ -19,7 +19,7 @@ enum CodingKeys: String, CodingKey {
 struct User: Codable {
     let id: Int?
     let firstName, lastName, email, password: String?
-    let role, pic, createdDate, updatedDate,location: String?
+    let role, pic, createdDate, updatedDate,location,token: String?
     let feeds: [Feed]?
     let isActive: Int?
     
@@ -37,7 +37,7 @@ struct User: Codable {
         feeds = try values.decodeIfPresent([Feed].self, forKey: .feeds)
         isActive = try values.decodeIfPresent(Int.self, forKey: .isActive)
         location = try values.decodeIfPresent(String.self, forKey: .location)
-        
+        token = try values.decodeIfPresent(String.self, forKey: .token)
     }
 }
 

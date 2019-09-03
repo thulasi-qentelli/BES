@@ -23,7 +23,9 @@ class SignInViewModel{
                     print(user)
                     if user.isActive! == 1{
                         self.appDelegate.user = user
-                        self.getImage(of: user.email!)
+                        //Changed
+                        self.didGetUser.accept(true)
+//                        self.getImage(of: user.email!)
                     }else{
                         self.didGetUser.accept(false)
                     }

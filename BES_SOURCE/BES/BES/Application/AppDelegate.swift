@@ -23,9 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appController   =   AppController.shared
         appController!.window   =   window
         appController!.loadStartView()
-        window?.makeKeyAndVisible()
-        
-       
+        window?.makeKeyAndVisible()       
         
         return true
     }

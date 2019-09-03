@@ -17,7 +17,7 @@ class BESService{
     func loginWith(username inputUsername:String,password inputPassword:String) -> Promise<User> {
         return Promise<User> { seal in
            
-            let url = String(format:"http://bes.qentelli.com:8085/bes/mobileLogin?email=%@&password=%@",inputUsername,inputPassword)
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/mobileLogin?email=%@&password=%@",inputUsername,inputPassword)
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
                         
             
@@ -42,7 +42,7 @@ class BESService{
     func signUpWith(firstName inputFirstName:String,lastName inputLastName:String,email inputEmail:String,password inputPassword:String) -> Promise<Bool> {
         return Promise<Bool> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/bes/saveUser")
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/saveUser")
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             var headers = HTTPHeaders.init()
             headers["Content-Type"]   = "application/json"
@@ -83,7 +83,7 @@ class BESService{
     func resetPasswordFor(_ inputEmail:String) -> Promise<Bool> {
         return Promise<Bool> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/bes/forgotPassword?email=%@&path=localhost:8085/forgot",inputEmail)
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/forgotPassword?email=%@&path=localhost:8085/forgot",inputEmail)
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.post, parameters : nil,
@@ -104,7 +104,7 @@ class BESService{
     func getFeeds() -> Promise<[Feed]> {
         return Promise<[Feed]> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/feed/getFeeds")
+            let url = String(format:"http://besconnect.qentelli.com:8081/feed/getFeeds")
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.get, parameters : nil,
@@ -128,7 +128,7 @@ class BESService{
     func getDetails(of email:String) -> Promise<User> {
         return Promise<User> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/bes/getUserByEmail?email=%@",email)
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/getUserByEmail?email=%@",email)
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.get, parameters : nil,
@@ -153,7 +153,7 @@ class BESService{
     func getLocations() -> Promise<[Location]> {
         return Promise<[Location]> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/location/getLocation")
+            let url = String(format:"http://besconnect.qentelli.com:8081/location/getLocation")
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.get, parameters : nil,
@@ -181,7 +181,7 @@ class BESService{
             guard let email = user.email else { return }
 
            // var tempEmail = "sathya.kanuri@gmail.com"
-            let url = String(format:"http://bes.qentelli.com:8085/message/getMessagesByEmail?email=%@",email)
+            let url = String(format:"http://besconnect.qentelli.com:8081/message/getMessagesByEmail?email=%@",email)
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.get, parameters : nil,
@@ -205,7 +205,7 @@ class BESService{
     func sendFeeback(content inputContent:String,rating inputRating:Int,category inputCategory:String,email inputEmail:String) -> Promise<Bool> {
         return Promise<Bool> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/feedback/saveFeedback")
+            let url = String(format:"http://besconnect.qentelli.com:8081/feedback/saveFeedback")
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             var headers = HTTPHeaders.init()
             headers["Content-Type"]   = "application/json"
@@ -245,7 +245,7 @@ class BESService{
     func sendComment(text inputComment:String,postId inputPostId:Int) -> Promise<Bool> {
         return Promise<Bool> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/comments/saveComment")
+            let url = String(format:"http://besconnect.qentelli.com:8081/comments/saveComment")
             var headers = HTTPHeaders.init()
             headers["Content-Type"]   = "application/json"
           
@@ -284,7 +284,7 @@ class BESService{
     func sendEnquriy(comments inputComments:String,phonenumber inputNumber:String,location inputLocation:String,category inputCategory:String,email inputEmail:String) -> Promise<Bool> {
         return Promise<Bool> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/Enquiry/saveEnquiry")
+            let url = String(format:"http://besconnect.qentelli.com:8081/Enquiry/saveEnquiry")
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             var headers = HTTPHeaders.init()
             headers["Content-Type"]   = "application/json"
@@ -328,7 +328,7 @@ class BESService{
         return Promise<User> { seal in
             
             guard let user = appdelegate.user else {return}
-            let url = String(format:"http://bes.qentelli.com:8085/bes/updateUser")
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/updateUser")
             var headers = HTTPHeaders.init()
             headers["Content-Type"]   = "application/json"
             
@@ -375,7 +375,7 @@ class BESService{
         return Promise<Bool> { seal in
             
             guard let user = appdelegate.user else {return}
-            let url = String(format:"http://bes.qentelli.com:8085/likes/saveLike?email=%@&id=%d",user.email!,inputPostId)
+            let url = String(format:"http://besconnect.qentelli.com:8081/likes/saveLike?email=%@&id=%d",user.email!,inputPostId)
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.post, parameters : nil,
@@ -398,7 +398,7 @@ class BESService{
     func getCategories() -> Promise<[Category]> {
         return Promise<[Category]> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/category/getCategories")
+            let url = String(format:"http://besconnect.qentelli.com:8081/category/getCategories")
             
             Alamofire.request(try! url.asURL(), method : HTTPMethod.get, parameters : nil,
                               encoding : URLEncoding.default , headers : getHeaders()).validate().responseJSON { response in
@@ -421,7 +421,7 @@ class BESService{
     func getStates() -> Promise<[State]> {
         return Promise<[State]> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/states/getStates")
+            let url = String(format:"http://besconnect.qentelli.com:8081/states/getStates")
             
             Alamofire.request(try! url.asURL(), method : HTTPMethod.get, parameters : nil,
                               encoding : URLEncoding.default , headers : getHeaders()).validate().responseJSON { response in
@@ -444,7 +444,7 @@ class BESService{
     func getImage(of user:String) -> Promise<User> {
         return Promise<User> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/bes/getUserByEmail?email=%@",user)
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/getUserByEmail?email=%@",user)
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.get, parameters : nil,
@@ -467,7 +467,7 @@ class BESService{
     func getImage(email inputEmail:String) -> Promise<User> {
         return Promise<User> { seal in
             
-            let url = String(format:"http://bes.qentelli.com:8085/bes/getUserByEmail?email=%@",inputEmail)
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/getUserByEmail?email=%@",inputEmail)
             let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             
             Alamofire.request(try! urlString!.asURL(), method : HTTPMethod.get, parameters : nil,
@@ -491,7 +491,7 @@ class BESService{
     
     func upload(image: UIImage,identifier:String) -> Promise<User> {
         return Promise<User> { seal in
-            let url = String(format:"http://bes.qentelli.com:8085/bes/uploadImage?id=\(identifier)")
+            let url = String(format:"http://besconnect.qentelli.com:8081/bes/uploadImage?id=\(identifier)")
             
             if let data = image.jpegData(compressionQuality: 0.50){
                 
@@ -524,7 +524,11 @@ class BESService{
  
     private func getHeaders() -> HTTPHeaders {
        
-        let headers = HTTPHeaders.init()
+        var headers = HTTPHeaders.init()
+        
+        if let token = appdelegate.user?.token {
+            headers["Authorization"] = token
+        }
         return headers
     }
 }
