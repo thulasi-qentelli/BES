@@ -117,7 +117,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let view = TableSectionHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 90))
-        view.titleLbl.text = "Posts"
+        view.titleLbl.text = "News Feed"
         view.filterView.isHidden    =   true
         view.backgroundColor = self.view.backgroundColor
         return view

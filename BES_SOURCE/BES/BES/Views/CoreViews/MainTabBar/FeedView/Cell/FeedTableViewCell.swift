@@ -110,7 +110,7 @@ class FeedTableViewCell: UITableViewCell {
         
         self.commentsImgView.image = UIImage(named: "question_answer_black")
         
-        if let comments = self.feedModel!.feed.comments {
+        if let comments = self.feedModel!.feed.comments, comments.count > 0 {
             self.commentsImgView.image = UIImage(named: "question_answer")
             self.commentsLbl.text = "\(comments.count) Comments"
         }

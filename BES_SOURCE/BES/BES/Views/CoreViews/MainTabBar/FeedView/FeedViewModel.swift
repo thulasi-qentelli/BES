@@ -23,7 +23,7 @@ class FeedViewModel {
     var normalHeight: CGFloat = 0
 //    var profileImgDataTask:URLSessionDataTask?
     var feedImgDataTask:URLSessionDataTask?
-    
+    var isReqInProgress:Bool = false
     var imageUpdated:()->Void = {
         
     }
@@ -133,13 +133,16 @@ class FeedViewModel {
 //    }
     
     func downloadFeedImg() {
-        print("============= downloadFeedImg")
+        
+        
         DispatchQueue.global(qos: .background).async {
-            if let urlString = self.feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+            
+            if let urlString = self.feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), self.isReqInProgress == false {
                 if let url  = URL(string: urlString){
-                    
+                self.isReqInProgress = true
+                    print("============= \(urlString)")
                     self.feedImgDataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                        
+                        self.isReqInProgress = false
                         guard let data = data, error == nil else {
                             print("\nerror on download \(String(describing: error))")
                             return

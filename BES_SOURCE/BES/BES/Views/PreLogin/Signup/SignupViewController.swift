@@ -134,8 +134,8 @@ class SignupViewController: UIViewController {
         lastNameView.titleLbl.text = "Last Name"
         lastNameView.txtField.placeholder = "Enter last name"
         
-        emailView.titleLbl.text = "Email address"
-        emailView.txtField.placeholder = "Enter email address"
+        emailView.titleLbl.text = "Email"
+        emailView.txtField.placeholder = "Enter email"
         emailView.txtField.keyboardType = .emailAddress
         
         passwordView.titleLbl.text = "Password"

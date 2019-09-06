@@ -21,8 +21,8 @@ class CommentsViewController: UIViewController {
     let cellReuseIdendifier = "CommentsTableViewCell"
     var keys:[String] = []
     let refreshControl = UIRefreshControl()
-    @IBOutlet weak var commentsBottomConst: NSLayoutConstraint!
     
+    @IBOutlet weak var commentsBottomConst: NSLayoutConstraint!
     @IBOutlet weak var commentsInputView: CommentFieldView!
     
     var commentesAdded:(Feed)-> Void = { comments in
@@ -41,9 +41,6 @@ class CommentsViewController: UIViewController {
           
             self.filterCommentsAndReload()
         }
-        
-        
-        
         
         commentsInputView.getUpdatedText = { text in
             if text.count > 0 {
@@ -97,8 +94,6 @@ class CommentsViewController: UIViewController {
             UIView.animate(withDuration: 0.25, animations: {
                 self.view.layoutIfNeeded()
             })
-            
-            
         }
     }
     
@@ -138,6 +133,7 @@ class CommentsViewController: UIViewController {
         IQKeyboardManager.shared().isEnabled = true
         NotificationCenter.default.removeObserver(self)
     }
+    
     func filterCommentsAndReload() {
         let datesArray = self.commentsSource.compactMap { $0.dateShortForm }
         var dic = [String:[Comment]]()

@@ -60,8 +60,6 @@ class ForgotPWDViewController: UIViewController {
     }
     
     func setupUI() {
-        emailView.titleLbl.text = "Email address"
-        emailView.txtField.placeholder = "Enter email address"
         
     }
     

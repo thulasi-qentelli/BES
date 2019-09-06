@@ -204,7 +204,7 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.phoneAction = { loc in
             print("Phone aciton")
             self.selectedLocation = loc
-            if let phoneNumber = loc.phone,let phoneNumberUrl = URL(string: "tel://001\(phoneNumber)"){
+            if let phoneNumber = loc.phone,let phoneNumberUrl = URL(string: "tel://1\(phoneNumber)"){
                 UIApplication.shared.open(phoneNumberUrl, options: [:], completionHandler: nil)
             }
         }
@@ -274,7 +274,7 @@ extension LocationsViewController: MKMapViewDelegate {
         calloutView.phoneAction = { loc in
             print("Phone aciton")
             self.selectedLocation = loc
-            if let phoneNumber = loc.phone,let phoneNumberUrl = URL(string: "tel://001\(phoneNumber)"){
+            if let phoneNumber = loc.phone,let phoneNumberUrl = URL(string: "tel://1\(phoneNumber)"){
                 UIApplication.shared.open(phoneNumberUrl, options: [:], completionHandler: nil)
             }
         }

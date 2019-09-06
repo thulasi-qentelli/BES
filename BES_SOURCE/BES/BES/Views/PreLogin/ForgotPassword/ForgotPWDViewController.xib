@@ -89,6 +89,10 @@ Password?</string>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="HDl-9X-QgV"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Email"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter email"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCE-lu-vZj">
                             <rect key="frame" x="0.0" y="320" width="414" height="40"/>

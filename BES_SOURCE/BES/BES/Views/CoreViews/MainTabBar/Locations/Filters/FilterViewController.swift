@@ -72,10 +72,10 @@ class FilterViewController: UIViewController {
         titleLabel1.backgroundColor = UIColor.clear
         self.acrollView.addSubview(titleLabel1)
         
-        let chipView1 =  ChipFilterView(frame: CGRect(x: 30, y: 80, width: self.view.frame.size.width - 60, height: 800))
+        let chipView1 =  ChipFilterView(frame: CGRect(x: 30, y: 80, width: UIScreen.main.bounds.size.width - 60, height: 800))
         let height1 = chipView1.setupFilters(filters: regions,selectedFil:filteredRegions,rearrange: true,stretch: true)
         self.acrollView.addSubview(chipView1)
-        chipView1.frame = CGRect(x: 30, y: 80, width: self.view.frame.size.width - 60, height: height1)
+        chipView1.frame = CGRect(x: 30, y: 80, width: UIScreen.main.bounds.size.width - 60, height: height1)
         
         var yPos = 80 + height1 + 20
         
@@ -93,10 +93,10 @@ class FilterViewController: UIViewController {
         
         yPos = yPos + 80
         
-        let chipView2 =  ChipFilterView(frame: CGRect(x: 30, y: yPos, width: self.view.frame.size.width - 60, height: 800))
+        let chipView2 =  ChipFilterView(frame: CGRect(x: 30, y: yPos, width: UIScreen.main.bounds.size.width - 60, height: 800))
         let height2 = chipView2.setupFilters(filters: services,selectedFil:filteredServices,rearrange: true,stretch: true)
         self.acrollView.addSubview(chipView2)
-        chipView2.frame = CGRect(x: 30, y: yPos, width: self.view.frame.size.width - 60, height: height2)
+        chipView2.frame = CGRect(x: 30, y: yPos, width: UIScreen.main.bounds.size.width - 60, height: height2)
         
         yPos = yPos + height2 + 20
         
@@ -112,10 +112,10 @@ class FilterViewController: UIViewController {
         
         yPos = yPos + 80
         
-        let chipView3 =  ChipFilterView(frame: CGRect(x: 30, y: yPos, width: self.view.frame.size.width - 60, height: 800))
+        let chipView3 =  ChipFilterView(frame: CGRect(x: 30, y: yPos, width: UIScreen.main.bounds.size.width - 60, height: 800))
         let height3 = chipView3.setupFilters(filters: basins,selectedFil:filteredBasins,rearrange: true,stretch: true)
         self.acrollView.addSubview(chipView3)
-        chipView3.frame = CGRect(x: 30, y: yPos, width: self.view.frame.size.width - 60, height: height3)
+        chipView3.frame = CGRect(x: 30, y: yPos, width: UIScreen.main.bounds.size.width - 60, height: height3)
         
         yPos = yPos + height3 + 50
         
@@ -123,7 +123,7 @@ class FilterViewController: UIViewController {
         imagView3.backgroundColor = UIColor.lightGray
         self.acrollView.addSubview(imagView3)
         
-        self.acrollView.contentSize = CGSize(width: self.view.frame.size.width, height: yPos)
+        self.acrollView.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: yPos)
         
         chipView1.getFilters = { selectedRegions in
             self.filteredRegions = selectedRegions

@@ -54,6 +54,7 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        
     }
     
     func setupUI() {
@@ -97,7 +98,7 @@ class LoginViewController: UIViewController {
         let email = self.userNameView.txtField.text!
         let password = self.passwordView.txtField.text!
         
-        SecAddSharedWebCredential("http://besconnect.qentelli.com:8081" as CFString, email as CFString, password as CFString) { (error) in
+        SecAddSharedWebCredential("besconnect.qentelli.com:8081" as CFString, email as CFString, password as CFString) { (error) in
             print(error?.localizedDescription)
             
             DispatchQueue.main.async {
@@ -132,7 +133,7 @@ class LoginViewController: UIViewController {
     func validateData()->Bool {
         
         guard let email = userNameView.txtField.text else {
-            self.view.makeToast("Please enter user name", duration: 1.0, position: .center)
+            self.view.makeToast("Please enter email", duration: 1.0, position: .center)
             userNameView.txtField.becomeFirstResponder()
             return false
         }
@@ -143,7 +144,7 @@ class LoginViewController: UIViewController {
         }
         
         if email.count <= 0 {
-            self.view.makeToast("Please enter user name", duration: 1.0, position: .center)
+            self.view.makeToast("Please enter email", duration: 1.0, position: .center)
             userNameView.txtField.becomeFirstResponder()
             return false
         }

@@ -27,7 +27,7 @@ class MessagesViewController: UIViewController {
         setupUI()
         
         self.loadMessages(showLoader: true)
-        self.headerView.title = "Messages(\(self.messages.count))"
+        self.headerView.title = "Messages"
         
     }
     

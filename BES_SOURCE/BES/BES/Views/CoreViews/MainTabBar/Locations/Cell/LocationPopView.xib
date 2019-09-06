@@ -31,6 +31,12 @@
                             <color key="textColor" red="0.40000396970000002" green="0.39999473089999998" blue="0.39999657869999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ae-f5-hfd">
+                            <rect key="frame" x="161" y="15" width="147" height="39.5"/>
+                            <connections>
+                                <action selector="locationBtnAction:" destination="EM8-B4-NTI" eventType="touchUpInside" id="ceT-Np-xiM"/>
+                            </connections>
+                        </button>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0a-Yy-523">
                             <rect key="frame" x="12" y="64.5" width="296" height="30"/>
                             <subviews>
@@ -87,25 +93,15 @@
                                             <color key="textColor" red="0.40000396970000002" green="0.39999473089999998" blue="0.39999657869999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ae-f5-hfd">
-                                            <rect key="frame" x="0.0" y="0.0" width="148" height="30"/>
-                                            <connections>
-                                                <action selector="locationBtnAction:" destination="EM8-B4-NTI" eventType="touchUpInside" id="ceT-Np-xiM"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="8nk-MW-8c5" secondAttribute="bottom" id="0zx-uF-xui"/>
                                         <constraint firstItem="vI4-n3-hfr" firstAttribute="leading" secondItem="zdF-j2-XYI" secondAttribute="leading" id="8T8-BM-Erh"/>
-                                        <constraint firstAttribute="bottom" secondItem="1Ae-f5-hfd" secondAttribute="bottom" id="9pv-bs-ztd"/>
                                         <constraint firstItem="8nk-MW-8c5" firstAttribute="top" secondItem="zdF-j2-XYI" secondAttribute="top" id="GQm-1B-D0W"/>
-                                        <constraint firstAttribute="trailing" secondItem="1Ae-f5-hfd" secondAttribute="trailing" id="HRP-w0-MWN"/>
                                         <constraint firstItem="vI4-n3-hfr" firstAttribute="centerY" secondItem="zdF-j2-XYI" secondAttribute="centerY" id="P98-Ax-Toc"/>
                                         <constraint firstAttribute="trailing" secondItem="8nk-MW-8c5" secondAttribute="trailing" id="Zv4-dn-0mg"/>
                                         <constraint firstItem="8nk-MW-8c5" firstAttribute="leading" secondItem="vI4-n3-hfr" secondAttribute="trailing" constant="6" id="bEZ-YW-82P"/>
-                                        <constraint firstItem="1Ae-f5-hfd" firstAttribute="leading" secondItem="zdF-j2-XYI" secondAttribute="leading" id="sHw-b4-OhR"/>
-                                        <constraint firstItem="1Ae-f5-hfd" firstAttribute="top" secondItem="zdF-j2-XYI" secondAttribute="top" id="sKV-Lt-ZX7"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -178,6 +174,8 @@
                         <constraint firstAttribute="trailing" secondItem="RQe-L0-dIS" secondAttribute="trailing" constant="12" id="92d-be-WB3"/>
                         <constraint firstItem="kNk-ZM-hMp" firstAttribute="leading" secondItem="gWE-P0-9Ic" secondAttribute="trailing" constant="2" id="L6P-tV-6lx"/>
                         <constraint firstItem="gWE-P0-9Ic" firstAttribute="top" secondItem="JmD-NR-V5N" secondAttribute="top" constant="15" id="QJf-uW-za3"/>
+                        <constraint firstItem="1Ae-f5-hfd" firstAttribute="height" secondItem="kNk-ZM-hMp" secondAttribute="height" id="Qlx-j2-MgL"/>
+                        <constraint firstItem="1Ae-f5-hfd" firstAttribute="centerY" secondItem="kNk-ZM-hMp" secondAttribute="centerY" id="S5q-Mo-nAk"/>
                         <constraint firstItem="gWE-P0-9Ic" firstAttribute="leading" secondItem="JmD-NR-V5N" secondAttribute="leading" constant="12" id="WKK-k1-GIJ"/>
                         <constraint firstItem="C8a-OX-rAC" firstAttribute="leading" secondItem="JmD-NR-V5N" secondAttribute="leading" constant="12" id="WNS-Li-0iy"/>
                         <constraint firstItem="RQe-L0-dIS" firstAttribute="top" secondItem="A0a-Yy-523" secondAttribute="bottom" constant="5" id="Xng-aK-nLD"/>
@@ -188,6 +186,8 @@
                         <constraint firstAttribute="bottom" secondItem="C8a-OX-rAC" secondAttribute="bottom" constant="13.5" id="jju-kH-PuT"/>
                         <constraint firstAttribute="trailing" secondItem="A0a-Yy-523" secondAttribute="trailing" constant="12" id="niy-nx-7HY"/>
                         <constraint firstItem="RQe-L0-dIS" firstAttribute="leading" secondItem="JmD-NR-V5N" secondAttribute="leading" constant="12" id="q0E-nh-4iM"/>
+                        <constraint firstItem="1Ae-f5-hfd" firstAttribute="centerX" secondItem="kNk-ZM-hMp" secondAttribute="centerX" id="tEJ-Cr-Tb9"/>
+                        <constraint firstItem="1Ae-f5-hfd" firstAttribute="width" secondItem="kNk-ZM-hMp" secondAttribute="width" id="vGx-u4-mKH"/>
                         <constraint firstItem="kNk-ZM-hMp" firstAttribute="top" secondItem="JmD-NR-V5N" secondAttribute="top" constant="15" id="vSt-Yt-jyO"/>
                         <constraint firstItem="A0a-Yy-523" firstAttribute="leading" secondItem="JmD-NR-V5N" secondAttribute="leading" constant="12" id="yU0-oF-rrD"/>
                     </constraints>
