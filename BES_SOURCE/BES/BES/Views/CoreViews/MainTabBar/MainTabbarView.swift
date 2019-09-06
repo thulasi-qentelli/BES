@@ -22,6 +22,9 @@ class MainTabbarViewController: UITabBarController {
         let home     =   FeedViewController()
         if let feeds = getLocalFeeds() {
             home.feeds = feeds.sorted(by: { $0.createdDateObj!.compare($1.createdDateObj!) == .orderedDescending })
+            home.feeds.forEach({ (feed) in
+                home.feedViewModels.append(FeedViewModel(feed: feed))
+            })
         }
         let navOne = UINavigationController(rootViewController: home)
         let homeBarItem = UITabBarItem(title: "Home".uppercased(), image: UIImage(named: "home_blue"), selectedImage: UIImage(named: "home_blue"))

@@ -68,6 +68,7 @@ class MessagesViewController: UIViewController {
     }
     
     func loadMessages(showLoader:Bool) {
+        
         if showLoader {
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.indeterminate
