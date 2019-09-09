@@ -176,6 +176,13 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
                 let mapModel = MapViewModel(locations: self.filteredLocations, mapView: self.mapView)
                 mapModel.loadDetails()
                 
+                if self.filteredLocations.count == 0{
+                    self.noDataLbl.isHidden = false
+                }
+                else {
+                    self.noDataLbl.isHidden = true
+                }
+                
             }
             self.present(filterView, animated: true) {
                 if self.filteredLocations.count>0 {

@@ -160,15 +160,29 @@ class FilterViewController: UIViewController {
     
     func filterLocations() {
         
-        var filteredLocations = locations.filter({
-            $0.regionsArray.contains(where: {filteredRegions.contains($0)}) ||
-                $0.servicesArraay.contains(where: {filteredServices.contains($0)}) ||
-                $0.basinsArray.contains(where: {filteredBasins.contains($0)})
+        var filteredLocations: [Location] = []
+        
+        let tempRegionFilters: [String] = (filteredRegions.count == 0) ? regions : filteredRegions
+        let tempServiceFilters: [String] = (filteredServices.count == 0) ? services : filteredServices
+        let tempBasinFilters: [String] = (filteredBasins.count == 0) ? basins : filteredBasins
+        
+        
+//        filteredLocations = locations.filter({
+//            $0.regionsArray.contains(where: {filteredRegions.contains($0)}) &&
+//                $0.servicesArraay.contains(where: {filteredServices.contains($0)}) &&
+//                $0.basinsArray.contains(where: {filteredBasins.contains($0)})
+//        })
+        
+        filteredLocations = locations.filter({
+            $0.regionsArray.contains(where: {tempRegionFilters.contains($0)}) &&
+                $0.servicesArraay.contains(where: {tempServiceFilters.contains($0)}) &&
+                $0.basinsArray.contains(where: {tempBasinFilters.contains($0)})
         })
         
         if filteredRegions.count == 0 && filteredServices.count == 0 && filteredBasins.count == 0 {
             filteredLocations = locations
         }
+
         getFilteredLocations(filteredLocations, filteredRegions, filteredServices, filteredBasins)
     }
     

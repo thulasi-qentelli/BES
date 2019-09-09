@@ -25,6 +25,8 @@
 		0056E524231E8047005CAEBC /* MapPlaceMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056E521231E8047005CAEBC /* MapPlaceMark.swift */; };
 		0056E525231E8047005CAEBC /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056E522231E8047005CAEBC /* AnnotationView.swift */; };
 		0056E526231E8047005CAEBC /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056E523231E8047005CAEBC /* MapViewModel.swift */; };
+		005AFC67232643B0008CDEE3 /* InvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005AFC65232643B0008CDEE3 /* InvoiceViewController.swift */; };
+		005AFC68232643B0008CDEE3 /* InvoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005AFC66232643B0008CDEE3 /* InvoiceViewController.xib */; };
 		005BC6EA230D091800BCAC1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005BC6E9230D091800BCAC1A /* AppDelegate.swift */; };
 		005BC6F4230D091900BCAC1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 005BC6F2230D091900BCAC1A /* LaunchScreen.storyboard */; };
 		005BC701230D0A0900BCAC1A /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005BC700230D0A0900BCAC1A /* AppController.swift */; };
@@ -92,8 +94,6 @@
 		00F21A45230EB6A4008D9976 /* ProfileDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F21A43230EB6A4008D9976 /* ProfileDisplayView.xib */; };
 		00F21A49230ECCB6008D9976 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F21A47230ECCB6008D9976 /* MessageTableViewCell.swift */; };
 		00F21A4A230ECCB6008D9976 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F21A48230ECCB6008D9976 /* MessageTableViewCell.xib */; };
-		00F8F1DA2316443400A9F3C4 /* InvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1D82316443400A9F3C4 /* InvoiceViewController.swift */; };
-		00F8F1DB2316443400A9F3C4 /* InvoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1D92316443400A9F3C4 /* InvoiceViewController.xib */; };
 		00F8F1DE2316448700A9F3C4 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1DC2316448700A9F3C4 /* DocumentsViewController.swift */; };
 		00F8F1DF2316448700A9F3C4 /* DocumentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1DD2316448700A9F3C4 /* DocumentsViewController.xib */; };
 		00F8F1E523165E3A00A9F3C4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1E323165E3A00A9F3C4 /* CommentsViewController.swift */; };
@@ -124,6 +124,8 @@
 		0056E521231E8047005CAEBC /* MapPlaceMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPlaceMark.swift; sourceTree = "<group>"; };
 		0056E522231E8047005CAEBC /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		0056E523231E8047005CAEBC /* MapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		005AFC65232643B0008CDEE3 /* InvoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceViewController.swift; sourceTree = "<group>"; };
+		005AFC66232643B0008CDEE3 /* InvoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceViewController.xib; sourceTree = "<group>"; };
 		005BC6E6230D091800BCAC1A /* BES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BES.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		005BC6E9230D091800BCAC1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		005BC6F3230D091900BCAC1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -195,8 +197,6 @@
 		00F21A43230EB6A4008D9976 /* ProfileDisplayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDisplayView.xib; sourceTree = "<group>"; };
 		00F21A47230ECCB6008D9976 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		00F21A48230ECCB6008D9976 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
-		00F8F1D82316443400A9F3C4 /* InvoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvoiceViewController.swift; path = ../../../../../../../BES/BES/Flows/Invoice/InvoiceViewController.swift; sourceTree = "<group>"; };
-		00F8F1D92316443400A9F3C4 /* InvoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InvoiceViewController.xib; path = ../../../../../../../BES/BES/Flows/Invoice/InvoiceViewController.xib; sourceTree = "<group>"; };
 		00F8F1DC2316448700A9F3C4 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		00F8F1DD2316448700A9F3C4 /* DocumentsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocumentsViewController.xib; sourceTree = "<group>"; };
 		00F8F1E323165E3A00A9F3C4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
@@ -644,8 +644,8 @@
 		00F8F1D62316441B00A9F3C4 /* Invoice */ = {
 			isa = PBXGroup;
 			children = (
-				00F8F1D82316443400A9F3C4 /* InvoiceViewController.swift */,
-				00F8F1D92316443400A9F3C4 /* InvoiceViewController.xib */,
+				005AFC65232643B0008CDEE3 /* InvoiceViewController.swift */,
+				005AFC66232643B0008CDEE3 /* InvoiceViewController.xib */,
 			);
 			path = Invoice;
 			sourceTree = "<group>";
@@ -798,7 +798,6 @@
 				00F21A45230EB6A4008D9976 /* ProfileDisplayView.xib in Resources */,
 				000DBEAA231393F50064692E /* ProfileViewController.xib in Resources */,
 				005BC71B230D16BC00BCAC1A /* InputView.xib in Resources */,
-				00F8F1DB2316443400A9F3C4 /* InvoiceViewController.xib in Resources */,
 				005BC72B230DA82900BCAC1A /* Assets.xcassets in Resources */,
 				00F21A30230EA92F008D9976 /* FeedViewController.xib in Resources */,
 				00D343A8230F0F7300555E32 /* SideProfileView.xib in Resources */,
@@ -808,6 +807,7 @@
 				00D343A3230F0DDB00555E32 /* SideViewController.xib in Resources */,
 				00F21A38230EA94F008D9976 /* MessagesViewController.xib in Resources */,
 				00F21A40230EA967008D9976 /* InquiryViewController.xib in Resources */,
+				005AFC68232643B0008CDEE3 /* InvoiceViewController.xib in Resources */,
 				00F8F1EB23165E6D00A9F3C4 /* CommentsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -879,7 +879,6 @@
 				005BC71F230D5F1A00BCAC1A /* ForgotPWDViewController.swift in Sources */,
 				00CF89EE2314637D006889A6 /* TableSectionHeaderView.swift in Sources */,
 				0056E526231E8047005CAEBC /* MapViewModel.swift in Sources */,
-				00F8F1DA2316443400A9F3C4 /* InvoiceViewController.swift in Sources */,
 				00F21A2F230EA92F008D9976 /* FeedViewController.swift in Sources */,
 				00D343A7230F0F7300555E32 /* SideProfileView.swift in Sources */,
 				00CF89F52314B2F1006889A6 /* StateModel.swift in Sources */,
@@ -900,6 +899,7 @@
 				0055FBE5230FB669003D4D41 /* StringExtension.swift in Sources */,
 				00C918442311EC5200922DC7 /* ChipFilterView.swift in Sources */,
 				00F21A33230EA940008D9976 /* LocationsViewController.swift in Sources */,
+				005AFC67232643B0008CDEE3 /* InvoiceViewController.swift in Sources */,
 				005BC70C230D117000BCAC1A /* SplashViewController.swift in Sources */,
 				0055FBD8230FAD73003D4D41 /* ParameterDetail.swift in Sources */,
 				0055FBDA230FAD7B003D4D41 /* User.swift in Sources */,
