@@ -15,6 +15,7 @@ class AppController {
     private init(){}
     var user:User? {
         didSet {
+            print("Changedddddd")
             (self.mainView.leftMenuViewController as? SideViewController)?.profileView.user = user
         }
     }
@@ -101,9 +102,7 @@ class AppController {
         
         let alert = UIAlertController(title: "BES", message: "Are You Sure Want to Logout!", preferredStyle:.alert)
         let yesButton = UIAlertAction(title: "Yes", style: .default) { (action) in
-            clearAuthToken()
-            clearUserDetails()
-            AppController.shared.loadStartView()
+            self.forceLogoutAction()
         }
         let noButton = UIAlertAction(title: "Cancel", style: .default) { (action) in
             
@@ -116,6 +115,13 @@ class AppController {
     
     func clearImageCahce() {
         imageCache.removeAllObjects()
+    }
+    
+    
+    func forceLogoutAction() {
+        clearAuthToken()
+        clearUserDetails()
+        AppController.shared.loadStartView()
     }
     
 }

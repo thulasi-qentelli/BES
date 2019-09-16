@@ -25,6 +25,9 @@ class AcknowledgeViewController: UIViewController {
     @IBOutlet weak var clickHereBtn: UIButton!
     @IBOutlet weak var doneBtn: UIButton!
     
+    var gobackHome:()->Void = {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +62,7 @@ class AcknowledgeViewController: UIViewController {
     
     @objc func backBtnAction() {
         self.navigationController?.popToRootViewController(animated: true)
+        
     }
     
     func setupUI() {
@@ -111,10 +115,8 @@ class AcknowledgeViewController: UIViewController {
     }
     @IBAction func btnAction(_ sender: UIButton) {
         if sender == clickHereBtn {
-        
             if self.type == .Signup {
                 NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
-                    
                     if error != nil {
                         self.view.makeToast(error, duration: 2.0, position: .center)
                         return
@@ -124,7 +126,13 @@ class AcknowledgeViewController: UIViewController {
             }
         }
         else if sender == doneBtn {
-            self.navigationController?.popToRootViewController(animated: true)
+            switch type {
+            case .Feedback,.Inquiry:
+                self.gobackHome()
+                self.navigationController?.popToRootViewController(animated: false)
+            default:
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
     

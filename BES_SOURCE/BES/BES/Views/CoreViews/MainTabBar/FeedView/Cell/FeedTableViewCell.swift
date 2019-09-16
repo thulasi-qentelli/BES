@@ -132,6 +132,8 @@ class FeedTableViewCell: UITableViewCell {
 //            self.feedModel!.downloadProfileImg()
 //        }
         
+        self.profileImgView.image = UIImage(named: "Group")
+        
         if let urlString = self.feedModel?.feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
             if let url  = URL(string: urlString){
                 self.profileImgView.sd_setImage(with: url) { (image, error, cache, url) in
@@ -142,12 +144,23 @@ class FeedTableViewCell: UITableViewCell {
             }
         }
         self.imgHeight.constant = self.feedModel!.feedImgHeight
-        if self.feedModel!.feedImg != nil {
-            self.imgView.image = self.feedModel!.feedImg
+        
+        if let urlString = self.feedModel?.feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+            if let url  = URL(string: urlString){
+                self.imgView.sd_setImage(with: url) { (image, error, cache, url) in
+//                    if let img = image {
+//                        self.profileImgPlaceholderView.isHidden = true
+//                    }
+                }
+            }
         }
-        else {
-            self.feedModel!.downloadFeedImg()
-        }
+        
+//        if self.feedModel!.feedImg != nil {
+//            self.imgView.image = self.feedModel!.feedImg
+//        }
+//        else {
+//            self.feedModel!.downloadFeedImg()
+//        }
         
     }
 }

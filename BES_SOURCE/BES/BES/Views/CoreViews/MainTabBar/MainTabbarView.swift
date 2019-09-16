@@ -21,7 +21,7 @@ class MainTabbarViewController: UITabBarController {
         // Create Tab one
         let home     =   FeedViewController()
         if let feeds = getLocalFeeds() {
-            home.feeds = feeds.sorted(by: { $0.createdDateObj!.compare($1.createdDateObj!) == .orderedDescending })
+            home.feeds = feeds.sorted(by: { $0.updatedDateObj!.compare($1.updatedDateObj!) == .orderedDescending })
             home.feeds.forEach({ (feed) in
                 home.feedViewModels.append(FeedViewModel(feed: feed))
             })
@@ -49,8 +49,26 @@ class MainTabbarViewController: UITabBarController {
             var dic = [String:[Message]]()
             datesArray.forEach {
                 let dateKey = $0
-                let filterArray = kmess.filter { $0.dateShortForm == dateKey }
-                dic[$0] = filterArray//.sorted(){$0.timeShortForm < $1.timeShortForm}
+                var filterArray = kmess.filter { $0.dateShortForm == dateKey }
+                
+                filterArray = filterArray.reversed()
+                var isNewName = true
+                var name = ""
+                for i in 0..<filterArray.count {
+                    
+                    let messs = filterArray[i]
+                    if isNewName == true {
+                        name = messs.userName!
+                        isNewName = false
+                        messs.isNameRequired = true
+                    }
+                    
+                    if name != messs.userName! {
+                        name = messs.userName!
+                        messs.isNameRequired = true
+                    }
+                }
+                dic[$0] = filterArray
             }
             let keysArr = dic.keys
             messages.keys =  keysArr.sorted().reversed()
@@ -62,11 +80,17 @@ class MainTabbarViewController: UITabBarController {
         navThree.tabBarItem = messagesBarItem
         
         let feedback = FeedbackViewController()
+        feedback.gobackHome = {
+             self.selectedIndex = 0
+        }
         let navFour = UINavigationController(rootViewController: feedback)
         let feedbackBarItem = UITabBarItem(title: "Feedback".uppercased(), image: UIImage(named: "chat"), selectedImage: UIImage(named: "chat_blue"))
         navFour.tabBarItem = feedbackBarItem
         
         let inquiry = InquiryViewController()
+        inquiry.gobackHome = {
+            self.selectedIndex = 0
+        }
         let navFive = UINavigationController(rootViewController: inquiry)
         let inquiryBarItem = UITabBarItem(title: "Inquiry".uppercased(), image: UIImage(named: "live_help"), selectedImage: UIImage(named: "live_help_blue"))
         navFive.tabBarItem = inquiryBarItem

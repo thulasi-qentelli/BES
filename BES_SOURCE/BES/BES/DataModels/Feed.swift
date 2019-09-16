@@ -26,6 +26,7 @@ class Feed: NSObject, Mappable, Codable {
     var likedUsers:[String]?
     var createdDateObj: Date?
     var updatedDateObj: Date?
+    var imagesize: String?
     
     override init() {
         super.init()
@@ -49,6 +50,7 @@ class Feed: NSObject, Mappable, Codable {
         likes <- map["likes"]
         likecount <- map["likecount"]
         likeObj <- map["likeObj"]
+        imagesize <- map["imagesize"]
         
         if let kLikes = likes {
             self.likedUsers =  kLikes.map{$0.email ?? ""}
@@ -161,6 +163,8 @@ class Comment: NSObject, Mappable, Codable {
     var timeShortForm:String?
     var createdDateObj: Date?
     var updatedDateObj: Date?
+    var isNameRequired:Bool = false
+    
     override init() {
         super.init()
     }

@@ -11,6 +11,7 @@ import UIKit
 
 public protocol ImagePickerDelegate: class {
     func didSelect(image: UIImage?)
+    func removeImage()
 }
 
 open class ImagePicker: NSObject {
@@ -18,8 +19,8 @@ open class ImagePicker: NSObject {
     private let pickerController: UIImagePickerController
     private weak var presentationController: UIViewController?
     private weak var delegate: ImagePickerDelegate?
-    
-    public init(presentationController: UIViewController, delegate: ImagePickerDelegate) {
+    private var isDestructiveNeeded:Bool?
+    public init(presentationController: UIViewController, delegate: ImagePickerDelegate, destructiveNeeded: Bool) {
         self.pickerController = UIImagePickerController()
         
         super.init()
@@ -31,6 +32,8 @@ open class ImagePicker: NSObject {
         self.pickerController.allowsEditing = true
         self.pickerController.mediaTypes = ["public.image"]
         self.pickerController.navigationBar.tintColor = AppController.shared.window?.rootViewController?.view.tintColor
+        
+        self.isDestructiveNeeded = destructiveNeeded
     }
     
     private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
@@ -57,7 +60,11 @@ open class ImagePicker: NSObject {
         if let action = self.action(for: .photoLibrary, title: "Photo library") {
             alertController.addAction(action)
         }
-        
+        if isDestructiveNeeded ?? false {
+            alertController.addAction(UIAlertAction(title: "Remove Profile Picture", style: .destructive, handler: { (action) in
+                self.delegate?.removeImage()
+            }))
+        }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         if UIDevice.current.userInterfaceIdiom == .pad {

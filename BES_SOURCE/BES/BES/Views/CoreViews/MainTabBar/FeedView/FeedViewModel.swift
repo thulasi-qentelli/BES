@@ -33,7 +33,7 @@ class FeedViewModel {
         setTextForReadmore(numberOfLines: 3)
         normalHeight = readMoreText.height(withConstrainedWidth: UIScreen.main.bounds.size.width - 60, font: UIFont.systemFont(ofSize: 14))
         expandedHeight = (feed.content! + "  Read More").height(withConstrainedWidth: UIScreen.main.bounds.size.width - 60, font: UIFont.systemFont(ofSize: 14))
-        dateForDisplay = feed.createdDate?.date?.humanDisplayDaateFormat() ?? ""
+        dateForDisplay = feed.updatedDate?.date?.humanDisplayDaateFormat() ?? ""
         
 //        if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.userPic as NSString? ?? "" as NSString) {
 //            profileImg = kLocalImg
@@ -42,6 +42,13 @@ class FeedViewModel {
         if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.image as NSString? ?? "" as NSString) {
             feedImg = kLocalImg
             feedImgHeight = kLocalImg.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
+        }
+        
+        if let imageHeight = feed.imagesize {
+            let width =  imageHeight.components(separatedBy: "x").first?.floatValue ?? 1
+            let height = imageHeight.components(separatedBy: "x").last?.floatValue ?? 1
+            self.feedImgHeight =  ((UIScreen.main.bounds.size.width - 60)/width*height)
+            print("dwncm")
         }
     }
  
@@ -170,7 +177,13 @@ class FeedViewModel {
     
     deinit {
 //        self.profileImgDataTask?.cancel()
-        self.feedImgDataTask?.resume()
+        self.feedImgDataTask?.cancel()
         print("=========== View model Deinit =========")
+    }
+}
+
+extension String {
+    var floatValue: CGFloat {
+        return CGFloat((self as NSString).floatValue)
     }
 }

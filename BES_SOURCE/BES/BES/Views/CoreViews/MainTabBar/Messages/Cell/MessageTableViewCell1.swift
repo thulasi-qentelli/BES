@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageTableViewCell: UITableViewCell {
+class MessageTableViewCell1: UITableViewCell {
 
     @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var messaageContainer: UIView!

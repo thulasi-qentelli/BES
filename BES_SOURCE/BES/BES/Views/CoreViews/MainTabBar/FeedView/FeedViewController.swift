@@ -80,7 +80,7 @@ class FeedViewController: UIViewController {
                 
                 if let _ = result, let kmess = (result as? [Feed]), kmess.count > 0 {
                     self.feedViewModels.removeAll()
-                    self.feeds = kmess.sorted(by: { $0.createdDateObj!.compare($1.createdDateObj!) == .orderedDescending })
+                    self.feeds = kmess.sorted(by: { $0.updatedDateObj!.compare($1.updatedDateObj!) == .orderedDescending })
                      self.feeds.forEach({ (feed) in
                         self.feedViewModels.append(FeedViewModel(feed: feed))
                     })
@@ -152,7 +152,6 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
 //            tableView.reloadRows(at: [idxPath], with: .automatic)
             tableView.endUpdates()
         }
-        
         
         cell.imageViewTapAction = { sender in
             let configuration = ImageViewerConfiguration { config in

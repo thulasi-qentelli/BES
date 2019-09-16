@@ -126,7 +126,7 @@ class SignupViewController: UIViewController {
     
     func setupUI() {
         
-        self.imagePickerOne = ImagePicker(presentationController: self, delegate: self)
+        self.imagePickerOne = ImagePicker(presentationController: self, delegate: self, destructiveNeeded: false)
         
         firstNameView.titleLbl.text = "First Name"
         firstNameView.txtField.placeholder = "Enter first name"
@@ -181,31 +181,47 @@ class SignupViewController: UIViewController {
                             }
                             
                             if let user = result as? User {
-                                NetworkManager().uploadImage(method: .uploadImage, parameters: ["id": "\(user.id!)"], image: self.profileHeaderView.profileImgView.image!, completion: { (imgResult, imgError) in
-                                    DispatchQueue.main.async {
-                                        if imgError != nil {
-                                            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                                            self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
-                                        }
-                                        
-                                        NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
-                                            DispatchQueue.main.async {
-                                                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                                                let alertVC     =   AcknowledgeViewController()
-                                                alertVC.type    =   .Signup
-                                                alertVC.email   =   email
-                                                self.navigationController?.pushViewController(alertVC, animated: true)
-                                            }
-                                        }
-                                    }
-                                })
-                            }                            
+                               self.checkAndUploadImage(user: user)
+                            }
+                            else {
+                                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                                self.view.makeToast("Unknown error occured while signup. Please try later.", duration: 2.0, position: .center)
+                            }
                         }
                     }
                 }
             }
         }
-        
+    }
+    
+    func checkAndUploadImage(user:User) {
+        if self.imageURL != nil  {
+            NetworkManager().uploadImage(method: .uploadImage, parameters: ["id": "\(user.id!)"], image: self.profileHeaderView.profileImgView.image!, completion: { (imgResult, imgError) in
+                DispatchQueue.main.async {
+                    if imgError != nil {
+                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                        self.view.makeToast("Profile picture upload failed. Please try update later.", duration: 2.0, position: .center)
+                    }
+                    self.callSendEmail()
+                }
+            })
+        }
+        else {
+            self.callSendEmail()
+        }
+    }
+    
+    func callSendEmail() {
+        let email = emailView.txtField.text!
+        NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
+            DispatchQueue.main.async {
+                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                let alertVC     =   AcknowledgeViewController()
+                alertVC.type    =   .Signup
+                alertVC.email   =   email
+                self.navigationController?.pushViewController(alertVC, animated: true)
+            }
+        }
     }
     
     func validateData() -> Bool {
@@ -236,10 +252,10 @@ class SignupViewController: UIViewController {
             return false
         }
         
-        guard let url = imageURL else {
-            self.view.makeToast("Please upload profile picture", duration: 1.0, position: .center)
-            return false
-        }
+//        guard let url = imageURL else {
+//            self.view.makeToast("Please upload profile picture", duration: 1.0, position: .center)
+//            return false
+//        }
         if firstName.count < 1 {
             self.view.makeToast("Please enter first name", duration: 1.0, position: .center)
             firstNameView.txtField.becomeFirstResponder()
@@ -288,6 +304,9 @@ class SignupViewController: UIViewController {
 }
 
 extension SignupViewController: ImagePickerDelegate {
+    func removeImage() {
+        
+    }
     
     func didSelect(image: UIImage?) {
         if let kImage = image {

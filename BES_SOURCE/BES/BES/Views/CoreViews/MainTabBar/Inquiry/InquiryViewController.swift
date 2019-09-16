@@ -16,7 +16,9 @@ class InquiryViewController: UIViewController {
     @IBOutlet weak var locationView: InputView!
     @IBOutlet weak var phoneView: MobileNumberView!
     @IBOutlet weak var commentsView: CommentInputView!
-    
+    var gobackHome:()->Void = {
+        
+    }
     var locations:[String] = []
     let locationDropDown = DropDown()
     
@@ -219,6 +221,9 @@ class InquiryViewController: UIViewController {
                     
                     let alertVC     =   AcknowledgeViewController()
                     alertVC.type    =   .Inquiry
+                    alertVC.gobackHome = {
+                        self.gobackHome()
+                    }
                     self.navigationController?.pushViewController(alertVC, animated: true)
                 }
             }

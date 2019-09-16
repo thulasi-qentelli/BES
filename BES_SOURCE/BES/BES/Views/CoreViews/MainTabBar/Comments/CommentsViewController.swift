@@ -18,9 +18,9 @@ class CommentsViewController: UIViewController {
     var feed:Feed?
     var commentsSource:[Comment] = []
     var comments: [String:[Comment]] = [:]
-    let cellReuseIdendifier = "CommentsTableViewCell"
+    let cellReuseIdendifier = "CommentsTableViewCell1"
     var keys:[String] = []
-    let refreshControl = UIRefreshControl()
+    var colorsDict:[String:UIColor] = [:]
     
     @IBOutlet weak var commentsBottomConst: NSLayoutConstraint!
     @IBOutlet weak var commentsInputView: CommentFieldView!
@@ -67,6 +67,8 @@ class CommentsViewController: UIViewController {
                             self.noDataLbl.isHidden = true
                             self.commentsInputView.txtField.text = ""
                             if (result as? Comment) != nil {
+                                let comment = result as! Comment
+                                comment.userName = AppController.shared.user?.getName().capitalized
                                 self.feed?.comments?.append(result as! Comment)
                                 self.commentsSource = self.feed!.comments!
                                 self.filterCommentsAndReload()
@@ -80,7 +82,6 @@ class CommentsViewController: UIViewController {
                 self.view.makeToast("Please enter comment.", duration: 2.0, position: .center)
             }
         }
-       // self.loadComments(showLoader: true)
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -140,7 +141,25 @@ class CommentsViewController: UIViewController {
         datesArray.forEach {
             let dateKey = $0
             let filterArray = self.commentsSource.filter { $0.dateShortForm == dateKey }
-            dic[$0] = filterArray//.sorted(){$0.timeShortForm < $1.timeShortForm}
+            
+            var isNewName = true
+            var name = ""
+            for i in 0..<filterArray.count {
+                
+                let messs = filterArray[i]
+                if isNewName == true {
+                    name = messs.userName ?? ""
+                    isNewName = false
+                    messs.isNameRequired = true
+                }
+                
+                if name != messs.userName ?? ""{
+                    name = messs.userName ?? ""
+                    messs.isNameRequired = true
+                }
+            }
+            
+            dic[$0] = filterArray
         }
         let keysArr = dic.keys
         self.keys =  keysArr.sorted()
@@ -171,20 +190,10 @@ class CommentsViewController: UIViewController {
         AppController.shared.logoutAction()
     }
 
-
     func setupUI() {
         self.tblView.estimatedRowHeight = 60
         self.tblView.rowHeight = UITableView.automaticDimension
         self.tblView.register(UINib.init(nibName: cellReuseIdendifier, bundle: nil), forCellReuseIdentifier: cellReuseIdendifier)
-            
-//        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        
-//        if #available(iOS 10.0, *) {
-//            self.tblView.refreshControl = refreshControl
-//        } else {
-//            self.tblView.backgroundView = refreshControl
-//        }
-        
         
         IQKeyboardManager.shared().isEnabled = false
         
@@ -202,64 +211,7 @@ class CommentsViewController: UIViewController {
         )
         
         self.commentsInputView.backgroundColor = self.view.backgroundColor
-        
     }
-    
-    @objc func refresh(_ refreshControl: UIRefreshControl) {
-        // Do your job, when done:
-        self.refreshControl.endRefreshing()
-        loadComments(showLoader: true)
-    }
-    
-    func loadComments(showLoader:Bool) {
-        if showLoader {
-            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
-            loadingNotification.mode = MBProgressHUDMode.indeterminate
-            loadingNotification.label.text = "Please wait.."
-            self.noDataLbl.isHidden = true
-        }
-        
-        NetworkManager().get(method: .getMessagesByEmail, parameters: ["email" : AppController.shared.user?.email ?? ""]) { (result, error) in
-            DispatchQueue.main.async {
-                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                self.refreshControl.endRefreshing()
-                if error != nil {
-                    self.view.makeToast(error, duration: 2.0, position: .center)
-                    if self.commentsSource.count == 0{
-                        self.noDataLbl.isHidden = false
-                    }
-                    else {
-                        self.noDataLbl.isHidden = true
-                    }
-                    return
-                }
-                
-                if let _ = result, let kmess = (result as? [Comment]),kmess.count > 0 {
-                    
-                    let datesArray = kmess.compactMap { $0.dateShortForm }
-                    var dic = [String:[Comment]]()
-                    datesArray.forEach {
-                        let dateKey = $0
-                        let filterArray = kmess.filter { $0.dateShortForm == dateKey }
-                        dic[$0] = filterArray//.sorted(){$0.timeShortForm < $1.timeShortForm}
-                    }
-                    let keysArr = dic.keys
-                    self.commentsSource = kmess
-                    self.keys =  keysArr.sorted().reversed()
-                    self.comments = dic
-                    self.tblView.reloadData()
-                }
-                else {
-                    self.keys = []
-                    self.commentsSource = []
-                    self.comments = [:]
-                    self.tblView.reloadData()
-                    self.noDataLbl.isHidden = false
-                }
-            }
-        }
-    }
-
 }
 
 
@@ -273,7 +225,7 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -282,23 +234,51 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         let titleLabel = UILabel(frame: CGRect(x: 30, y: 0, width: UIScreen.main.bounds.size.width - 60, height: 30))
         titleLabel.text = self.comments[self.keys[section]]?.first?.createdDate?.date?.messageHeaderDate
+        titleLabel.backgroundColor = UIColor(red: 222.0/255.0, green: 242.0/255.0, blue: 249.0/255.0, alpha: 1)
+        
         titleLabel.font = UIFont.systemFont(ofSize: 13)
-        titleLabel.textColor = self.view.tintColor
-        titleLabel.backgroundColor = UIColor.clear
+        
+        let width = (self.comments[self.keys[section]]?.first?.createdDate?.date?.messageHeaderDate.widthOfString(usingFont: titleLabel.font) ?? 0) + 20
+        
+        if width <= UIScreen.main.bounds.size.width - 60 {
+            titleLabel.frame.size.width = width
+        }
+        
+        //        titleLabel.textColor = self.view.tintColor
+        titleLabel.textColor = UIColor.darkGray
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
+        titleLabel.center = CGPoint(x: view.center.x, y: 20)
+        titleLabel.layer.cornerRadius = 6
+        titleLabel.layer.masksToBounds = true
         return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier, for: indexPath) as! CommentsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier, for: indexPath) as! CommentsTableViewCell1
         
-        cell.messageLbl.text = self.comments[self.keys[indexPath.section]]?[indexPath.row].comment
-        cell.timeStampLbl.text = self.comments[self.keys[indexPath.section]]?[indexPath.row].createdDate?.date?.displayTime
-        
-        if let urlString = self.comments[self.keys[indexPath.section]]?[indexPath.row].userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-            if let url  = URL(string: urlString){
-                cell.profileImgView.sd_setImage(with:url, completed: nil)
+        if let message = self.comments[self.keys[indexPath.section]]?[indexPath.row] {
+            
+            cell.nameLbl.text = ""
+            if message.isNameRequired {
+                cell.nameLbl.text = message.userName?.capitalized
+                if colorsDict[message.userName ?? ""] == nil {
+                    colorsDict[message.userName ?? ""] = UIColor.random
+                }
+                cell.nameLbl.textColor = colorsDict[message.userName ?? ""]
+                
+            }
+    
+            cell.profileImgView.setGmailTypeImageFromString(str: message.userName?.gmailString ?? " ", bgcolor: colorsDict[message.userName ?? ""] ?? UIColor.black)
+            
+            cell.messageLbl.text = (message.comment ?? "")
+            cell.timeStampLbl.text = message.createdDate?.date?.displayTime
+            
+//            cell.profileImgView.image = UIImage(named: "Group")
+            if let urlString = message.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+                if let url  = URL(string: urlString){
+                    cell.profileImgView.sd_setImage(with:url, completed: nil)
+                }
             }
         }
         return cell

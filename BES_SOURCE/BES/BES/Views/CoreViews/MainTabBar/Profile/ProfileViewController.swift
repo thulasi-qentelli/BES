@@ -149,7 +149,7 @@ class ProfileViewController: UIViewController {
     
     func setupUI() {
         
-        self.imagePickerOne = ImagePicker(presentationController: self, delegate: self)
+        self.imagePickerOne = ImagePicker(presentationController: self, delegate: self, destructiveNeeded: true)
         
         firstNameView.titleLbl.text = "First Name"
         firstNameView.txtField.placeholder = "Enter first name"
@@ -215,6 +215,10 @@ class ProfileViewController: UIViewController {
                 parameters.location = location
                 parameters.pic = AppController.shared.user?.pic
                 
+                if let url = self.imageURL, url == "" {
+                    parameters.pic = ""
+                }
+                
                 if let parm = parameters.dictionary {
                     let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
                     loadingNotification.mode = MBProgressHUDMode.indeterminate
@@ -228,7 +232,7 @@ class ProfileViewController: UIViewController {
                                 return
                             }
                             
-                            if let url = self.imageURL {
+                            if let url = self.imageURL, url == "Saved" {
                                 if let user = result as? User {
                                     let loadingNotification1 = MBProgressHUD.showAdded(to: self.view, animated: true)
                                     loadingNotification1.mode = MBProgressHUDMode.indeterminate
@@ -366,5 +370,15 @@ extension ProfileViewController: ImagePickerDelegate {
             self.imageURL = "Saved"
         }
     }
+    
+    func removeImage() {
+        self.imageURL = ""
+        
+//        self.btnAction(createAccountBtn)
+//        AppController.shared.user = AppController.shared.user
+        self.profileHeaderView.profileImgView.image = nil
+        self.profileHeaderView.profileImgPlaceholderView.isHidden = false
+    }
 }
+
 

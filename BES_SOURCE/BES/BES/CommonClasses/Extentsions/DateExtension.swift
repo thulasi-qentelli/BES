@@ -12,11 +12,17 @@ extension Date {
     
     var messageHeaderDate: String {
         get {
+            if Calendar.current.isDateInToday(self) {
+                return "Today".uppercased()
+            }
+            if Calendar.current.isDateInYesterday(self) {
+                return "Yesterday".uppercased()
+            }
             let formatter = NumberFormatter()
             formatter.numberStyle = .ordinal
             
             let dateFormatterPrint = DateFormatter()
-            dateFormatterPrint.dateFormat = "EEEE, MMMM"
+            dateFormatterPrint.dateFormat = "EEEE, MMM"
             let firstString = dateFormatterPrint.string(from: self)
             dateFormatterPrint.dateFormat = "dd"
             let kTest =  dateFormatterPrint.string(from: self)
@@ -27,6 +33,19 @@ extension Date {
             let thirdString = dateFormatterPrint.string(from: self)
             
             return firstString + " \(secondString!) \(thirdString)"
+        }
+    }
+    
+    var messageHeaderDateHumanType: String {
+        get {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+//        dateFormatter.timeStyle = .short
+        dateFormatter.doesRelativeDateFormatting = true
+        
+        let time = dateFormatter.string(from: self)
+        return time    // prints "Today, 5:10 PM"
         }
     }
     

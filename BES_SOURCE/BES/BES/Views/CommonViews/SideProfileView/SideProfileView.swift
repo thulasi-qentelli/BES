@@ -19,6 +19,8 @@ class SideProfileView: UIView {
     
     var user:User? {
         didSet {
+            profileImgView.image = nil
+            profileImgPlaceholderView.isHidden = false
             if let urlString = AppController.shared.user?.pic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
                 if let url  = URL(string: urlString){
                     profileImgView.sd_setImage(with:url, completed: nil)

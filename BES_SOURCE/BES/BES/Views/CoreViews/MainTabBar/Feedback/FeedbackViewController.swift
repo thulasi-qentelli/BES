@@ -15,7 +15,9 @@ class FeedbackViewController: UIViewController {
     @IBOutlet weak var categoryView: InputView!
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var commentsView: CommentInputView!
-    
+    var gobackHome:()->Void = {
+        
+    }
     var categories:[String] = []
     let categoryDropDown = DropDown()
     
@@ -146,6 +148,9 @@ class FeedbackViewController: UIViewController {
                     
                     let alertVC     =   AcknowledgeViewController()
                     alertVC.type    =   .Feedback
+                    alertVC.gobackHome = {
+                        self.gobackHome()
+                    }
                     self.navigationController?.pushViewController(alertVC, animated: true)
                 }
             }

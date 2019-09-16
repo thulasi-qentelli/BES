@@ -50,8 +50,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pyX-3K-1eb">
                                 <rect key="frame" x="40" y="0.0" width="220" height="50.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTw-aE-73a">
-                                        <rect key="frame" x="15" y="15" width="190" height="15.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udn-o9-dgy">
+                                        <rect key="frame" x="15" y="11" width="190" height="18.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                        <color key="textColor" red="0.36485487222671509" green="0.056857846677303314" blue="0.38433414697647095" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTw-aE-73a">
+                                        <rect key="frame" x="15" y="34.5" width="190" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.058824531733989716" green="0.058822199702262878" blue="0.058822669088840485" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -59,10 +65,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="LTw-aE-73a" firstAttribute="top" secondItem="pyX-3K-1eb" secondAttribute="top" constant="15" id="Lfa-g8-9eF"/>
-                                    <constraint firstAttribute="bottom" secondItem="LTw-aE-73a" secondAttribute="bottom" constant="20" id="fLC-2d-Gdc"/>
-                                    <constraint firstItem="LTw-aE-73a" firstAttribute="leading" secondItem="pyX-3K-1eb" secondAttribute="leading" constant="15" id="gWO-My-ioe"/>
-                                    <constraint firstAttribute="trailing" secondItem="LTw-aE-73a" secondAttribute="trailing" constant="15" id="tt4-Wd-DRf"/>
+                                    <constraint firstAttribute="trailing" secondItem="LTw-aE-73a" secondAttribute="trailing" constant="15" id="9lo-Nw-6uq"/>
+                                    <constraint firstItem="LTw-aE-73a" firstAttribute="top" secondItem="udn-o9-dgy" secondAttribute="bottom" constant="5" id="DES-OJ-Cwg"/>
+                                    <constraint firstAttribute="bottom" secondItem="LTw-aE-73a" secondAttribute="bottom" constant="16" id="DQf-0T-3YM"/>
+                                    <constraint firstItem="udn-o9-dgy" firstAttribute="leading" secondItem="pyX-3K-1eb" secondAttribute="leading" constant="15" id="RIb-MM-IRq"/>
+                                    <constraint firstAttribute="trailing" secondItem="udn-o9-dgy" secondAttribute="trailing" constant="15" id="Zbm-d5-ncD"/>
+                                    <constraint firstItem="udn-o9-dgy" firstAttribute="top" secondItem="pyX-3K-1eb" secondAttribute="top" constant="11" id="gkt-Jl-CKS"/>
+                                    <constraint firstItem="LTw-aE-73a" firstAttribute="leading" secondItem="pyX-3K-1eb" secondAttribute="leading" constant="15" id="xij-Ih-2mS"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -95,6 +104,7 @@
             <connections>
                 <outlet property="messaageContainer" destination="pyX-3K-1eb" id="Ctu-eJ-AiX"/>
                 <outlet property="messageLbl" destination="LTw-aE-73a" id="rDe-KG-hI7"/>
+                <outlet property="nameLbl" destination="udn-o9-dgy" id="6du-Ap-DnU"/>
                 <outlet property="profileImgView" destination="Le5-rQ-3be" id="KVm-Gi-sMw"/>
                 <outlet property="timeStampLbl" destination="h8m-Cv-7c6" id="YP6-nV-b89"/>
             </connections>

@@ -79,6 +79,12 @@
 		00D343A8230F0F7300555E32 /* SideProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D343A6230F0F7300555E32 /* SideProfileView.xib */; };
 		00D343AC230F134B00555E32 /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D343AA230F134B00555E32 /* SideMenuCell.xib */; };
 		00D343AD230F134B00555E32 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D343AB230F134B00555E32 /* SideMenuCell.swift */; };
+		00DC26C4232BAAB800D59A20 /* MessageTableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC26C2232BAAB800D59A20 /* MessageTableViewCell1.swift */; };
+		00DC26C5232BAAB800D59A20 /* MessageTableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DC26C3232BAAB800D59A20 /* MessageTableViewCell1.xib */; };
+		00DC26CA232BB7C800D59A20 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DC26C6232BB7C800D59A20 /* CommentsTableViewCell.xib */; };
+		00DC26CB232BB7C800D59A20 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC26C7232BB7C800D59A20 /* CommentsTableViewCell.swift */; };
+		00DC26CC232BB7C800D59A20 /* CommentsTableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DC26C8232BB7C800D59A20 /* CommentsTableViewCell1.xib */; };
+		00DC26CD232BB7C800D59A20 /* CommentsTableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC26C9232BB7C800D59A20 /* CommentsTableViewCell1.swift */; };
 		00F21A26230E9AA8008D9976 /* MainTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F21A25230E9AA8008D9976 /* MainTabbarView.swift */; };
 		00F21A2F230EA92F008D9976 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F21A2D230EA92F008D9976 /* FeedViewController.swift */; };
 		00F21A30230EA92F008D9976 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F21A2E230EA92F008D9976 /* FeedViewController.xib */; };
@@ -98,8 +104,6 @@
 		00F8F1DF2316448700A9F3C4 /* DocumentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1DD2316448700A9F3C4 /* DocumentsViewController.xib */; };
 		00F8F1E523165E3A00A9F3C4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1E323165E3A00A9F3C4 /* CommentsViewController.swift */; };
 		00F8F1E623165E3A00A9F3C4 /* CommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1E423165E3A00A9F3C4 /* CommentsViewController.xib */; };
-		00F8F1EA23165E6D00A9F3C4 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1E823165E6D00A9F3C4 /* CommentsTableViewCell.swift */; };
-		00F8F1EB23165E6D00A9F3C4 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1E923165E6D00A9F3C4 /* CommentsTableViewCell.xib */; };
 		00F8F1F123169A4100A9F3C4 /* CommentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8F1EF23169A4100A9F3C4 /* CommentFieldView.swift */; };
 		00F8F1F223169A4100A9F3C4 /* CommentFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8F1F023169A4100A9F3C4 /* CommentFieldView.xib */; };
 		6FE5A2EA602FA0F75FE0522D /* Pods_BES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008B5D06ED3F1B4039CA5DB2 /* Pods_BES.framework */; };
@@ -182,6 +186,12 @@
 		00D343A6230F0F7300555E32 /* SideProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideProfileView.xib; sourceTree = "<group>"; };
 		00D343AA230F134B00555E32 /* SideMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuCell.xib; sourceTree = "<group>"; };
 		00D343AB230F134B00555E32 /* SideMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		00DC26C2232BAAB800D59A20 /* MessageTableViewCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell1.swift; sourceTree = "<group>"; };
+		00DC26C3232BAAB800D59A20 /* MessageTableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell1.xib; sourceTree = "<group>"; };
+		00DC26C6232BB7C800D59A20 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
+		00DC26C7232BB7C800D59A20 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		00DC26C8232BB7C800D59A20 /* CommentsTableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell1.xib; sourceTree = "<group>"; };
+		00DC26C9232BB7C800D59A20 /* CommentsTableViewCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell1.swift; sourceTree = "<group>"; };
 		00F21A25230E9AA8008D9976 /* MainTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarView.swift; sourceTree = "<group>"; };
 		00F21A2D230EA92F008D9976 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		00F21A2E230EA92F008D9976 /* FeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
@@ -201,8 +211,6 @@
 		00F8F1DD2316448700A9F3C4 /* DocumentsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocumentsViewController.xib; sourceTree = "<group>"; };
 		00F8F1E323165E3A00A9F3C4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		00F8F1E423165E3A00A9F3C4 /* CommentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsViewController.xib; sourceTree = "<group>"; };
-		00F8F1E823165E6D00A9F3C4 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
-		00F8F1E923165E6D00A9F3C4 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
 		00F8F1EF23169A4100A9F3C4 /* CommentFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentFieldView.swift; sourceTree = "<group>"; };
 		00F8F1F023169A4100A9F3C4 /* CommentFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFieldView.xib; sourceTree = "<group>"; };
 		C0F567F34FCF16D8094431BD /* Pods-BES.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BES.debug.xcconfig"; path = "Target Support Files/Pods-BES/Pods-BES.debug.xcconfig"; sourceTree = "<group>"; };
@@ -635,6 +643,8 @@
 		00F21A46230ECC9F008D9976 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				00DC26C2232BAAB800D59A20 /* MessageTableViewCell1.swift */,
+				00DC26C3232BAAB800D59A20 /* MessageTableViewCell1.xib */,
 				00F21A47230ECCB6008D9976 /* MessageTableViewCell.swift */,
 				00F21A48230ECCB6008D9976 /* MessageTableViewCell.xib */,
 			);
@@ -672,8 +682,10 @@
 		00F8F1E723165E3C00A9F3C4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				00F8F1E823165E6D00A9F3C4 /* CommentsTableViewCell.swift */,
-				00F8F1E923165E6D00A9F3C4 /* CommentsTableViewCell.xib */,
+				00DC26C7232BB7C800D59A20 /* CommentsTableViewCell.swift */,
+				00DC26C6232BB7C800D59A20 /* CommentsTableViewCell.xib */,
+				00DC26C9232BB7C800D59A20 /* CommentsTableViewCell1.swift */,
+				00DC26C8232BB7C800D59A20 /* CommentsTableViewCell1.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -791,6 +803,8 @@
 				005BC728230D9F5800BCAC1A /* ProfileHeaderView.xib in Resources */,
 				00C8F9DE2312D86500C2378C /* FeedTableViewCell.xib in Resources */,
 				00F21A3C230EA95A008D9976 /* FeedbackViewController.xib in Resources */,
+				00DC26C5232BAAB800D59A20 /* MessageTableViewCell1.xib in Resources */,
+				00DC26CA232BB7C800D59A20 /* CommentsTableViewCell.xib in Resources */,
 				00C9184F2311EEE300922DC7 /* CustomCalloutView.xib in Resources */,
 				00F8F1F223169A4100A9F3C4 /* CommentFieldView.xib in Resources */,
 				00CF89F323148590006889A6 /* LocationPopView.xib in Resources */,
@@ -808,7 +822,7 @@
 				00F21A38230EA94F008D9976 /* MessagesViewController.xib in Resources */,
 				00F21A40230EA967008D9976 /* InquiryViewController.xib in Resources */,
 				005AFC68232643B0008CDEE3 /* InvoiceViewController.xib in Resources */,
-				00F8F1EB23165E6D00A9F3C4 /* CommentsTableViewCell.xib in Resources */,
+				00DC26CC232BB7C800D59A20 /* CommentsTableViewCell1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,10 +900,12 @@
 				005BC701230D0A0900BCAC1A /* AppController.swift in Sources */,
 				005BC734230DE72A00BCAC1A /* OrangeHeaderView.swift in Sources */,
 				00C918532311F4CC00922DC7 /* FilterViewController.swift in Sources */,
+				00DC26CD232BB7C800D59A20 /* CommentsTableViewCell1.swift in Sources */,
 				00F8F1E523165E3A00A9F3C4 /* CommentsViewController.swift in Sources */,
 				005BC710230D117D00BCAC1A /* LoginViewController.swift in Sources */,
 				0056E524231E8047005CAEBC /* MapPlaceMark.swift in Sources */,
 				0055FBE3230FB653003D4D41 /* CommonFunctions.swift in Sources */,
+				00DC26C4232BAAB800D59A20 /* MessageTableViewCell1.swift in Sources */,
 				0055FBE8230FB740003D4D41 /* Toast.swift in Sources */,
 				00B843652314FC0B00336EFF /* RatingView.swift in Sources */,
 				00F21A49230ECCB6008D9976 /* MessageTableViewCell.swift in Sources */,
@@ -905,7 +921,6 @@
 				0055FBDA230FAD7B003D4D41 /* User.swift in Sources */,
 				00C918452311EC5200922DC7 /* ChipView.swift in Sources */,
 				00F8F1DE2316448700A9F3C4 /* DocumentsViewController.swift in Sources */,
-				00F8F1EA23165E6D00A9F3C4 /* CommentsTableViewCell.swift in Sources */,
 				00CF89F92314BA76006889A6 /* CommentInputView.swift in Sources */,
 				00C8F9DD2312D86500C2378C /* FeedTableViewCell.swift in Sources */,
 				005BC71A230D16BC00BCAC1A /* InputView.swift in Sources */,
@@ -913,6 +928,7 @@
 				00B84368231538FC00336EFF /* FeedViewModel.swift in Sources */,
 				00F21A37230EA94F008D9976 /* MessagesViewController.swift in Sources */,
 				000DBEA9231393F50064692E /* ProfileViewController.swift in Sources */,
+				00DC26CB232BB7C800D59A20 /* CommentsTableViewCell.swift in Sources */,
 				00F21A26230E9AA8008D9976 /* MainTabbarView.swift in Sources */,
 				00C9183D2311DB3100922DC7 /* LocationTableCell.swift in Sources */,
 				0055FBEF231006A3003D4D41 /* Feed.swift in Sources */,

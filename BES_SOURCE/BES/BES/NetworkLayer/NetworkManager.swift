@@ -41,7 +41,7 @@ public enum Method: String {
 }
 
 enum NetworkEnvironment: String {
-    case sandbox = "http://bes.qentelli.com:8181/"
+    case sandbox = "http ://bes.qentelli.com:8181/"
     case production = "http://besconnect.qentelli.com:8081/"
 }
 
@@ -80,6 +80,7 @@ struct NetworkManager {
         request.httpMethod = HTTPMethod.get.rawValue
         
         if let auth = getAuthToken() {
+            print(auth)
             request.addValue(auth, forHTTPHeaderField: "Authorization")
         }
         
@@ -151,6 +152,10 @@ struct NetworkManager {
                                 print(error)
                                 if let resp = response.response {
                                     let errorMessage = self.handleNetworkResponse(resp)
+                                    if errorMessage == NetworkResponse.authenticationError.rawValue {
+                                        AppController.shared.forceLogoutAction()
+                                        return
+                                    }
                                     completion(nil, errorMessage)
                                 }
                                 else {
@@ -279,11 +284,15 @@ struct NetworkManager {
                         completion(nil, "User doesn't exists.")
                     }
                     else if response.response?.statusCode == 400 {
-                        completion(nil, "Enter valid Email or Password.")
+                        completion(nil, "Please check entered Email or Password.")
                     }
                     else {
                         if let kResp = response.response {
                             let errorMessage = self.handleNetworkResponse(kResp)
+                            if errorMessage == NetworkResponse.authenticationError.rawValue {
+                                 completion(nil, "Please check entered Email or Password.")//AppController.shared.forceLogoutAction()
+                                return
+                            }
                             completion(nil, errorMessage)
                         }
                         else {
@@ -301,6 +310,10 @@ struct NetworkManager {
                     else {
                         if let kResp = response.response {
                             let errorMessage = self.handleNetworkResponse(kResp)
+                            if errorMessage == NetworkResponse.authenticationError.rawValue {
+                                completion(nil, "Enter valid Email.")//AppController.shared.forceLogoutAction()
+                                return
+                            }
                             completion(nil, errorMessage)
                         }
                         else {
@@ -313,6 +326,10 @@ struct NetworkManager {
                     
                     if let kResp = response.response {
                         let errorMessage = self.handleNetworkResponse(kResp)
+                        if errorMessage == NetworkResponse.authenticationError.rawValue {
+                            AppController.shared.forceLogoutAction()
+                            return
+                        }
                         completion(nil, errorMessage)
                     }
                     else {
@@ -402,6 +419,10 @@ struct NetworkManager {
                 default:
                     if let kResp = response.response {
                         let errorMessage = self.handleNetworkResponse(kResp)
+                        if errorMessage == NetworkResponse.authenticationError.rawValue {
+                            AppController.shared.forceLogoutAction()
+                            return
+                        }
                         completion(nil, errorMessage)
                     }
                     else {

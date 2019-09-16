@@ -1,6 +1,7 @@
 import Foundation
 import ObjectMapper
 
+
 class Message: NSObject, Mappable, Codable {
     
     var id: Int?
@@ -13,6 +14,7 @@ class Message: NSObject, Mappable, Codable {
     var userPic: String?
     var dateShortForm:String?
     var timeShortForm:String?
+    var isNameRequired:Bool = false
     
     override init() {
         super.init()

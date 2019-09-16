@@ -1,5 +1,5 @@
 //
-//  CommentsTableViewCell.swift
+//  MessageTableViewCell.swift
 //  BES
 //
 //  Created by Thulasi Ram Boddu on 22/08/19.
@@ -14,6 +14,7 @@ class CommentsTableViewCell: UITableViewCell {
     @IBOutlet weak var messaageContainer: UIView!
     @IBOutlet weak var timeStampLbl: UILabel!
     @IBOutlet weak var messageLbl: UILabel!
+    @IBOutlet weak var nameLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +26,6 @@ class CommentsTableViewCell: UITableViewCell {
         
         self.messaageContainer.layer.cornerRadius = 4
         self.messaageContainer.layer.masksToBounds =   true
-        
         
     }
 
