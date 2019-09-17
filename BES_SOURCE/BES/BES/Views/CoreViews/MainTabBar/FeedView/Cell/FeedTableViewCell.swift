@@ -107,7 +107,6 @@ class FeedTableViewCell: UITableViewCell {
         
         self.likedLbl.text = "\(self.feedModel!.feed.getLikesCount()) Likes"
         
-        
         self.commentsImgView.image = UIImage(named: "question_answer_black")
         
         if let comments = self.feedModel!.feed.comments, comments.count > 0 {
@@ -121,18 +120,9 @@ class FeedTableViewCell: UITableViewCell {
             self.thumUpImgView.image = UIImage(named: "thumb_up")
         }
         
-        
-        
         self.profileImgPlaceholderView.isHidden = false
-//        if self.feedModel!.profileImg != nil {
-//            self.profileImgView.image = self.feedModel!.profileImg
-//            self.profileImgPlaceholderView.isHidden = true
-//        }
-//        else {
-//            self.feedModel!.downloadProfileImg()
-//        }
-        
         self.profileImgView.image = UIImage(named: "Group")
+        self.profileImgView.setGmailTypeImageFromString(str: self.feedModel?.feed.userName?.gmailString ?? " ", bgcolor: UIColor.black)
         
         if let urlString = self.feedModel?.feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
             if let url  = URL(string: urlString){
@@ -144,24 +134,12 @@ class FeedTableViewCell: UITableViewCell {
             }
         }
         self.imgHeight.constant = self.feedModel!.feedImgHeight
-        
+        self.imgView.backgroundColor  = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
         if let urlString = self.feedModel?.feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
             if let url  = URL(string: urlString){
-                self.imgView.sd_setImage(with: url) { (image, error, cache, url) in
-//                    if let img = image {
-//                        self.profileImgPlaceholderView.isHidden = true
-//                    }
-                }
+                self.imgView.sd_setImage(with: url)
             }
         }
-        
-//        if self.feedModel!.feedImg != nil {
-//            self.imgView.image = self.feedModel!.feedImg
-//        }
-//        else {
-//            self.feedModel!.downloadFeedImg()
-//        }
-        
     }
 }
 

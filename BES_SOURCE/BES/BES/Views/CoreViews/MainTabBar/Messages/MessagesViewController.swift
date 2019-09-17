@@ -257,15 +257,3 @@ extension UIImageView {
         UIGraphicsEndImageContext()
     }
 }
-
-
-extension String {
-    
-    var gmailString:String {
-        if self.components(separatedBy: " ").count >= 2 {
-            let stringNeed = (self.components(separatedBy: " ").map({ $0.first }).compactMap({$0}).reduce("", { String($0) + String($1) }) as NSString).substring(to: 2)
-            return stringNeed
-        }
-        return ""
-    }
-}

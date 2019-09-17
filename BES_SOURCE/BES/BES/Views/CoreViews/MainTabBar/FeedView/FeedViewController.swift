@@ -137,19 +137,12 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         let viewModel = feedViewModels[indexPath.row]
         
-        viewModel.imageUpdated = {
-            cell.setupUI()
-            self.tblView.beginUpdates()
-            self.tblView.endUpdates()
-        }
         var feed = viewModel.feed
         cell.indexPAth = indexPath
         cell.setupCell(viewModel: viewModel)
         
         cell.updateUI = { idxPath in
             tableView.beginUpdates()
-            //Not needed to reload
-//            tableView.reloadRows(at: [idxPath], with: .automatic)
             tableView.endUpdates()
         }
         

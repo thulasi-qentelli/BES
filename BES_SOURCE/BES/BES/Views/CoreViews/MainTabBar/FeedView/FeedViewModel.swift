@@ -15,18 +15,11 @@ class FeedViewModel {
     var readMoreText = ""
     var isReadMoreRequired = true
     var dateForDisplay:String = ""
-//    var profileImg: UIImage?
-    var feedImg: UIImage?
     var feedImgHeight: CGFloat = 0
     var basicHeight: CGFloat = 138
     var expandedHeight: CGFloat = 0
     var normalHeight: CGFloat = 0
-//    var profileImgDataTask:URLSessionDataTask?
-    var feedImgDataTask:URLSessionDataTask?
     var isReqInProgress:Bool = false
-    var imageUpdated:()->Void = {
-        
-    }
     
     init(feed:Feed) {
         self.feed = feed
@@ -35,20 +28,10 @@ class FeedViewModel {
         expandedHeight = (feed.content! + "  Read More").height(withConstrainedWidth: UIScreen.main.bounds.size.width - 60, font: UIFont.systemFont(ofSize: 14))
         dateForDisplay = feed.updatedDate?.date?.humanDisplayDaateFormat() ?? ""
         
-//        if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.userPic as NSString? ?? "" as NSString) {
-//            profileImg = kLocalImg
-//        }
-        
-        if let kLocalImg = AppController.shared.imageCache.object(forKey: feed.image as NSString? ?? "" as NSString) {
-            feedImg = kLocalImg
-            feedImgHeight = kLocalImg.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
-        }
-        
         if let imageHeight = feed.imagesize {
             let width =  imageHeight.components(separatedBy: "x").first?.floatValue ?? 1
             let height = imageHeight.components(separatedBy: "x").last?.floatValue ?? 1
             self.feedImgHeight =  ((UIScreen.main.bounds.size.width - 60)/width*height)
-            print("dwncm")
         }
     }
  
@@ -105,85 +88,5 @@ class FeedViewModel {
                 break
             }
         }
-    }
-    
-//    func downloadProfileImg() {
-//        print("============= downloadProfileImg")
-//        DispatchQueue.global(qos: .background).async {
-//            if let urlString = self.feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-//                if let url  = URL(string: urlString){
-//
-//                    self.profileImgDataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-//
-//                        guard let data = data, error == nil else {
-//                            print("\nerror on download \(String(describing: error))")
-//                            return
-//                        }
-//                        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-//                            print("statusCode != 200; \(httpResponse.statusCode)")
-//                            return
-//                        }
-//
-//                        DispatchQueue.main.async {
-//
-//                            if let kImg = UIImage(data: data) {
-//                                AppController.shared.imageCache.setObject(kImg, forKey: self.feed.userPic! as NSString)
-//                                self.profileImg = kImg
-//                                self.imageUpdated()
-//                            }
-//                        }
-//                    })
-//                    self.profileImgDataTask?.resume()
-//                }
-//            }
-//        }
-//    }
-    
-    func downloadFeedImg() {
-        
-        
-        DispatchQueue.global(qos: .background).async {
-            
-            if let urlString = self.feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), self.isReqInProgress == false {
-                if let url  = URL(string: urlString){
-                self.isReqInProgress = true
-                    print("============= \(urlString)")
-                    self.feedImgDataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                        self.isReqInProgress = false
-                        guard let data = data, error == nil else {
-                            print("\nerror on download \(String(describing: error))")
-                            return
-                        }
-                        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-                            print("statusCode != 200; \(httpResponse.statusCode)")
-                            return
-                        }
-                        
-                        DispatchQueue.main.async {
-                            if let kImg = UIImage(data: data) {
-                                AppController.shared.imageCache.setObject(kImg, forKey: self.feed.image! as NSString)
-                                self.feedImg = kImg
-                                self.feedImgHeight = kImg.heightForWidth(width: UIScreen.main.bounds.size.width - 60) ?? 0
-                                self.imageUpdated()
-                            }
-                        }
-                    })
-                    self.feedImgDataTask?.resume()
-                }
-            }
-        }
-    }
-    
-    
-    deinit {
-//        self.profileImgDataTask?.cancel()
-        self.feedImgDataTask?.cancel()
-        print("=========== View model Deinit =========")
-    }
-}
-
-extension String {
-    var floatValue: CGFloat {
-        return CGFloat((self as NSString).floatValue)
     }
 }

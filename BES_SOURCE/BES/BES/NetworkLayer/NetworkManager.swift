@@ -24,7 +24,7 @@ public enum Method: String {
     case forgotPassword = "bes/forgotPassword"
     case saveUser = "bes/saveUser"
     case updateUser = "bes/updateUser"
-    case sendEmail = "bes/sendEmail"
+    case sendEmail = "bes/mail"
     case getMessagesByEmail = "message/getMessagesByEmail"
     case getAllFeeds = "feed/getFeeds"
     case getAllLocations = "location/getLocation"
@@ -178,12 +178,6 @@ struct NetworkManager {
             url = String(format:"\(environment.rawValue)\(method.rawValue)?\(parameters.urlEncodeString)")
         }
         let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-//        var headers = HTTPHeaders.init()
-//        headers["Content-Type"]   = "application/json"
-//
-//        var request = URLRequest(url: try! urlString!.asURL())
-//        request.httpMethod = HTTPMethod.post.rawValue
-//        request.allHTTPHeaderFields = headers
         
         
         var request = URLRequest(url: try! urlString!.asURL())

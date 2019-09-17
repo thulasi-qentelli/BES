@@ -14,6 +14,8 @@ class MainTabbarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
+        
         self.view.backgroundColor   =   UIColor.white
         
         // Do any additional setup after loading the view.
@@ -125,4 +127,12 @@ class MainTabbarViewController: UITabBarController {
      }
      */
     
+}
+
+extension MainTabbarViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController == moreNavigationController {
+            moreNavigationController.navigationBar.topItem?.rightBarButtonItem = nil
+        }
+    }
 }

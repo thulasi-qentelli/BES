@@ -70,7 +70,7 @@ class AcknowledgeViewController: UIViewController {
         case .Feedback:
             titleLbl.text = "Feedback"
             alertTitleLbl.text = "Form submitted successfully"
-            alertDetailLbl.text = "Thanks for letting us know.\nYour feedback improves the quality of BES app."
+            alertDetailLbl.text = "Thanks for letting us know.\nYour feedback improves the quality of BES Connect."
             clickHereHeightConstraint.constant = 0
             doneBtn.setTitle("BACK TO HOME", for: .normal)
         case .Inquiry:
@@ -86,9 +86,9 @@ class AcknowledgeViewController: UIViewController {
             clickHereHeightConstraint.constant = 0
             doneBtn.setTitle("DONE", for: .normal)
         case .Signup:
+            alertImageView.image = UIImage(named: "iconAlertWarning")
             titleLbl.text = "New\nAccount"
             alertTitleLbl.text = "Email Verification Required"
-            
             
             let attributedString = NSMutableAttributedString(string:"Am email has been sent to:\n")
             
@@ -116,7 +116,7 @@ class AcknowledgeViewController: UIViewController {
     @IBAction func btnAction(_ sender: UIButton) {
         if sender == clickHereBtn {
             if self.type == .Signup {
-                NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
+                NetworkManager().post(method: .sendEmail, parameters: ["email" : email, "content" : "bes/activeUser?email=\(email)", "type" : "signup"]) { (result, error) in
                     if error != nil {
                         self.view.makeToast(error, duration: 2.0, position: .center)
                         return

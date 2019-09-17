@@ -85,7 +85,44 @@ class ForgotPWDViewController: UIViewController {
         }
         print(email)
         
+        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+        loadingNotification.mode = MBProgressHUDMode.indeterminate
+        loadingNotification.label.text = "Please wait.."
+        
         if sender == sendLinkBtn {
+            NetworkManager().post(method: .sendEmail, parameters: ["email" : email, "content" : "http://besconnect.qentelli.com:8085/#/resetpassword/\(email)", "type" : "forgot"]) { (result, error) in
+                DispatchQueue.main.async {
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                    if error != nil {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                        return
+                    }
+                    
+                    let alertVC     =   AcknowledgeViewController()
+                    alertVC.type    =   .ForgotPassword
+                    self.navigationController?.pushViewController(alertVC, animated: true)
+                }
+            }
+            
+        }
+        else {
+            NetworkManager().post(method: .sendEmail, parameters: ["email" : email, "content" : "bes/activeUser?email=\(email)", "type" : "signup"]) { (result, error) in
+                DispatchQueue.main.async {
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                    if error != nil {
+                        self.view.makeToast(error, duration: 2.0, position: .center)
+                        return
+                    }
+                    
+                    self.view.makeToast(result as? String, duration: 2.0, position: .center)
+                }
+            }
+        }
+        
+        
+        /*
+        if sender == sendLinkBtn {
+            
         var parameters = ParameterDetail()
         parameters.email = email
         parameters.path = "resetpassword/\(email)"
@@ -112,7 +149,7 @@ class ForgotPWDViewController: UIViewController {
             }
         }
         else {
-            NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
+            NetworkManager().post(method: .sendEmail, parameters: ["email" : email, "content" : "bes/activeUser?email=\(email)", "forgot" : "signup"]) { (result, error) in
                 if error != nil {
                     self.view.makeToast(error, duration: 2.0, position: .center)
                     return
@@ -121,6 +158,7 @@ class ForgotPWDViewController: UIViewController {
                 self.view.makeToast(result as? String, duration: 2.0, position: .center)
             }
         }
+         */
+ 
     }
-    
 }

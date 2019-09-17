@@ -51,7 +51,12 @@ class User: NSObject, Mappable, Codable {
     func getRole() -> String{
         let first = role ?? ""
         let last = location ?? ""
-        return first.capitalized + ", " + last.capitalized
+        var arr = [first.capitalized]
+        
+        if last != "" {
+            arr.append(last.capitalized)
+        }
+        return arr.joined(separator:", ")
     }
 }
 

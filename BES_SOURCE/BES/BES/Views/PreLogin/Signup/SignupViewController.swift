@@ -213,7 +213,8 @@ class SignupViewController: UIViewController {
     
     func callSendEmail() {
         let email = emailView.txtField.text!
-        NetworkManager().post(method: .sendEmail, parameters: ["email" : email]) { (result, error) in
+        
+        NetworkManager().post(method: .sendEmail, parameters: ["email" : email, "content" : "bes/activeUser?email=\(email)", "type" : "signup"]) { (result, error) in
             DispatchQueue.main.async {
                 MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                 let alertVC     =   AcknowledgeViewController()

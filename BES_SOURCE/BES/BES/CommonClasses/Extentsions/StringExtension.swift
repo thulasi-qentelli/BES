@@ -18,6 +18,18 @@ extension String {
             return dateFormatterPrint.date(from: self)
         }
     }
+    
+    var gmailString:String {
+        if self.components(separatedBy: " ").count >= 2 {
+            let stringNeed = (self.components(separatedBy: " ").map({ $0.first }).compactMap({$0}).reduce("", { String($0) + String($1) }) as NSString).substring(to: 2)
+            return stringNeed
+        }
+        return ""
+    }
+    var floatValue: CGFloat {
+        return CGFloat((self as NSString).floatValue)
+    }
+    
     func isValidEmail() -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
@@ -55,8 +67,6 @@ extension String {
         
         return ceil(boundingBox.width)
     }
-    
-    
     
     func hexStringToUIColor () -> UIColor {
         var cString:String = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
