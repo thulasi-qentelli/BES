@@ -19,6 +19,7 @@ class AppController {
             (self.mainView.leftMenuViewController as? SideViewController)?.profileView.user = user
         }
     }
+    var colorsDict:[String:UIColor] = [:]
     var mainView   =   SSASideMenu()
     var window: UIWindow?
     
@@ -217,4 +218,20 @@ func getLocalLocaitons()-> [Location]? {
     return nil
 }
 
+func getGmailTypeImageFromString(str:String, bgcolor:UIColor) -> UIImage {
+    let lblNameInitialize = UILabel()
+    lblNameInitialize.frame.size = CGSize(width: 60.0, height: 60.0)
+    lblNameInitialize.textColor = UIColor.white
+    lblNameInitialize.text = str.uppercased()
+    lblNameInitialize.textAlignment = NSTextAlignment.center
+    lblNameInitialize.backgroundColor = bgcolor
+    lblNameInitialize.layer.cornerRadius = 30.0
+    lblNameInitialize.font = UIFont.systemFont(ofSize: 21)
+    
+    UIGraphicsBeginImageContext(lblNameInitialize.frame.size)
+    lblNameInitialize.layer.render(in: UIGraphicsGetCurrentContext()!)
+    let imageCap = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return imageCap ?? UIImage()
+}
 

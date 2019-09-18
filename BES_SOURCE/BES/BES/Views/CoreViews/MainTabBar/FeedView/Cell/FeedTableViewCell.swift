@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FeedTableViewCell: UITableViewCell {
 
@@ -90,14 +91,18 @@ class FeedTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
+        
+        self.imgView.image = nil
+        self.profileImgView.image = nil
+        
         self.nameLbl.text = self.feedModel!.feed.userName ?? ""
         self.timestampLbl.text = self.feedModel!.dateForDisplay
         
         self.readMoreBtn.isHidden = !self.feedModel!.isReadMoreRequired
         self.readMoreBtn.isSelected = self.feedModel!.isTextExpanded
+        
         self.txtLbl.text = self.feedModel!.getTextLabelContent()
         self.displayTextLbl.text = self.feedModel!.getDisplayTextLabelContet()
-        
         self.txtLbl.isHidden = self.feedModel!.isTextExpanded
         self.displayTextLbl.isHidden = !self.feedModel!.isTextExpanded
         
@@ -120,16 +125,22 @@ class FeedTableViewCell: UITableViewCell {
             self.thumUpImgView.image = UIImage(named: "thumb_up")
         }
         
-        self.profileImgPlaceholderView.isHidden = false
-        self.profileImgView.image = UIImage(named: "Group")
+        self.profileImgPlaceholderView.isHidden = true
+
         self.profileImgView.setGmailTypeImageFromString(str: self.feedModel?.feed.userName?.gmailString ?? " ", bgcolor: UIColor.black)
+
+        let placeHolderImg = getGmailTypeImageFromString(str: self.feedModel?.feed.userName?.gmailString ?? " ", bgcolor: UIColor.black)
         
         if let urlString = self.feedModel?.feed.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
             if let url  = URL(string: urlString){
                 self.profileImgView.sd_setImage(with: url) { (image, error, cache, url) in
-                    if let img = image {
-                        self.profileImgPlaceholderView.isHidden = true
-                    }
+                    self.profileImgView.sd_setImage(with: url, placeholderImage: placeHolderImg , options:SDWebImageOptions.avoidAutoSetImage, completed: { (image, error, cacheType, url) in
+                        DispatchQueue.main.async {
+                            if let image = image, let userPic = self.feed?.userPic, userPic == url!.absoluteString {
+                                self.profileImgView.image = image
+                            }
+                        }
+                    })
                 }
             }
         }
@@ -137,7 +148,13 @@ class FeedTableViewCell: UITableViewCell {
         self.imgView.backgroundColor  = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
         if let urlString = self.feedModel?.feed.image?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
             if let url  = URL(string: urlString){
-                self.imgView.sd_setImage(with: url)
+                self.profileImgView.sd_setImage(with: url, placeholderImage: nil , options:SDWebImageOptions.avoidAutoSetImage, completed: { (image, error, cacheType, url) in
+                    DispatchQueue.main.async {
+                        if let image = image, let pic = self.feed?.image, pic == url!.absoluteString {
+                            self.imgView.image = image
+                        }
+                    }
+                })
             }
         }
     }

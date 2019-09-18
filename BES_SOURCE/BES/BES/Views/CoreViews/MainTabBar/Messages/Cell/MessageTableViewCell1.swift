@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MessageTableViewCell1: UITableViewCell {
 
@@ -15,6 +16,7 @@ class MessageTableViewCell1: UITableViewCell {
     @IBOutlet weak var timeStampLbl: UILabel!
     @IBOutlet weak var messageLbl: UILabel!
     @IBOutlet weak var nameLbl: UILabel!
+    var message:Message?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,4 +37,36 @@ class MessageTableViewCell1: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    func setupCell(message:Message) {
+        self.message = message
+        self.profileImgView.image = nil
+        self.nameLbl.text = ""
+        if message.isNameRequired {
+            self.nameLbl.text = message.userName?.capitalized
+            if AppController.shared.colorsDict[message.userName!] == nil {
+                AppController.shared.colorsDict[message.userName!] = UIColor.random
+            }
+            self.nameLbl.textColor = AppController.shared.colorsDict[message.userName!]
+        }
+        
+        self.profileImgView.setGmailTypeImageFromString(str: message.userName?.gmailString ?? " ", bgcolor: AppController.shared.colorsDict[message.userName!] ?? UIColor.black)
+        self.messageLbl.text = (message.message ?? "")
+        self.timeStampLbl.text = message.createdDate?.date?.displayTime
+        
+        
+        let placeHolderImg = getGmailTypeImageFromString(str: message.userName?.gmailString ?? " ", bgcolor: AppController.shared.colorsDict[message.userName ?? ""] ?? UIColor.black)
+        
+        if let urlString = message.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+            if let url  = URL(string: urlString){
+                self.profileImgView.sd_setImage(with: url, placeholderImage: placeHolderImg , options:SDWebImageOptions.avoidAutoSetImage, completed: { (image, error, cacheType, url) in
+                    DispatchQueue.main.async {
+                        if let image = image, let userPic = self.message?.userPic, userPic == url!.absoluteString {
+                            self.profileImgView.image = image
+                        }
+                    }
+                })
+            }
+        }
+    }
 }

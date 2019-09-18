@@ -20,7 +20,7 @@ class CommentsViewController: UIViewController {
     var comments: [String:[Comment]] = [:]
     let cellReuseIdendifier = "CommentsTableViewCell1"
     var keys:[String] = []
-    var colorsDict:[String:UIColor] = [:]
+    
     
     @IBOutlet weak var commentsBottomConst: NSLayoutConstraint!
     @IBOutlet weak var commentsInputView: CommentFieldView!
@@ -33,7 +33,7 @@ class CommentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         setupUI()
         if self.commentsSource.count > 0 {
@@ -258,28 +258,8 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdendifier, for: indexPath) as! CommentsTableViewCell1
         
         if let message = self.comments[self.keys[indexPath.section]]?[indexPath.row] {
-            
-            cell.nameLbl.text = ""
-            if message.isNameRequired {
-                cell.nameLbl.text = message.userName?.capitalized
-                if colorsDict[message.userName ?? ""] == nil {
-                    colorsDict[message.userName ?? ""] = UIColor.random
-                }
-                cell.nameLbl.textColor = colorsDict[message.userName ?? ""]
-                
-            }
-    
-            cell.profileImgView.setGmailTypeImageFromString(str: message.userName?.gmailString ?? " ", bgcolor: colorsDict[message.userName ?? ""] ?? UIColor.black)
-            
-            cell.messageLbl.text = (message.comment ?? "")
-            cell.timeStampLbl.text = message.createdDate?.date?.displayTime
-            
-//            cell.profileImgView.image = UIImage(named: "Group")
-            if let urlString = message.userPic?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
-                if let url  = URL(string: urlString){
-                    cell.profileImgView.sd_setImage(with:url, completed: nil)
-                }
-            }
+            cell.setupCell(comment: message)
+           
         }
         return cell
     }
