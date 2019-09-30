@@ -129,21 +129,21 @@ class SignupViewController: UIViewController {
         self.imagePickerOne = ImagePicker(presentationController: self, delegate: self, destructiveNeeded: false)
         
         firstNameView.titleLbl.text = "First Name"
-        firstNameView.txtField.placeholder = "Enter first name"
+        firstNameView.txtField.placeholder = "Enter First Name"
         
         lastNameView.titleLbl.text = "Last Name"
-        lastNameView.txtField.placeholder = "Enter last name"
+        lastNameView.txtField.placeholder = "Enter Last Name"
         
         emailView.titleLbl.text = "Email"
-        emailView.txtField.placeholder = "Enter email"
+        emailView.txtField.placeholder = "Enter Email"
         emailView.txtField.keyboardType = .emailAddress
         
         passwordView.titleLbl.text = "Password"
-        passwordView.txtField.placeholder = "Enter password"
+        passwordView.txtField.placeholder = "Enter Password"
         passwordView.txtField.isSecureTextEntry = true
         passwordView.txtField.clearsOnBeginEditing = false
-        confirmPasswordView.titleLbl.text = "Confirm password"
-        confirmPasswordView.txtField.placeholder = "Confirm password"
+        confirmPasswordView.titleLbl.text = "Confirm Password"
+        confirmPasswordView.txtField.placeholder = "Confirm Password"
         confirmPasswordView.txtField.isSecureTextEntry = true
         confirmPasswordView.txtField.clearsOnBeginEditing = false
     }

@@ -63,7 +63,7 @@
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Email"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter email"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter Email"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oM0-qF-dR7">
@@ -85,7 +85,7 @@
                                     <real key="value" value="20"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Password"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter password"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter Password"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sm-Pk-GS0">

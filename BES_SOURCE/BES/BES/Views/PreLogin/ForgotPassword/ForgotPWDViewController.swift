@@ -52,7 +52,7 @@ class ForgotPWDViewController: UIViewController {
         let currHeight = barButton.customView?.heightAnchor.constraint(equalToConstant: 24)
         currHeight?.isActive = true
         self.navigationItem.leftBarButtonItem = barButton
-        
+            
     }
     
     @objc func backBtnAction() {

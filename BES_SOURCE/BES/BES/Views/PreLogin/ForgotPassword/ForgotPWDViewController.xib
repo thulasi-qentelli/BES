@@ -91,7 +91,7 @@ Password?</string>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Email"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter email"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter Email"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCE-lu-vZj">

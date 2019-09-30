@@ -61,8 +61,17 @@ open class ImagePicker: NSObject {
             alertController.addAction(action)
         }
         if isDestructiveNeeded ?? false {
-            alertController.addAction(UIAlertAction(title: "Remove Profile Picture", style: .destructive, handler: { (action) in
-                self.delegate?.removeImage()
+            alertController.addAction(UIAlertAction(title: "Delete Profile Picture", style: .destructive, handler: { (action) in
+                
+                let alertRemove = UIAlertController(title: "Delete Profile Picture", message: "Are you sure you want to delete profile picture?", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action1) in
+                    self.delegate?.removeImage()
+                })
+                alertRemove.addAction(cancelAction)
+                alertRemove.addAction(okAction)
+                self.presentationController?.present(alertRemove, animated: true, completion: nil)
+                
             }))
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -72,7 +81,6 @@ open class ImagePicker: NSObject {
             alertController.popoverPresentationController?.sourceRect = sourceView.bounds
             alertController.popoverPresentationController?.permittedArrowDirections = [.down, .up]
         }
-        
         self.presentationController?.present(alertController, animated: true)
     }
     

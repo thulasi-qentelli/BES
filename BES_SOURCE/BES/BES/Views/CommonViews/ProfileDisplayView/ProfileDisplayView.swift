@@ -17,7 +17,6 @@ class ProfileDisplayView: UIView {
                 if let url  = URL(string: urlString){
                     profileImgView.sd_setImage(with:url, completed: nil)
                     profileImgPlaceholderView.isHidden = true
-
                 }
             }
             textLbl.text = user?.getName()

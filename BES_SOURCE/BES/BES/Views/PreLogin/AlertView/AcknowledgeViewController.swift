@@ -81,7 +81,7 @@ class AcknowledgeViewController: UIViewController {
             doneBtn.setTitle("BACK TO HOME", for: .normal)
         case .ForgotPassword:
             titleLbl.text = "Forgot\nPassword?"
-            alertTitleLbl.text = "Password reset sent"
+            alertTitleLbl.text = "Password reset link sent"
             alertDetailLbl.text = "We've emailed you the instructions for setting your password, if an account exists with the email you entered\n\nIf you didn't receive an email, please make sure you've entered the email address you registered with, and check your spam folder."
             clickHereHeightConstraint.constant = 0
             doneBtn.setTitle("DONE", for: .normal)
