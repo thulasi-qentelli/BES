@@ -66,7 +66,7 @@ class ForgotPWDViewController: UIViewController {
     @IBAction func btnAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        guard let email = emailView.txtField.text else {
+        guard let email = emailView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please enter email address", duration: 1.0, position: .center)
             emailView.txtField.becomeFirstResponder()
             return

@@ -31,10 +31,25 @@ extension String {
     }
     
     func isValidEmail() -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        guard !self.contains(" ") else { return false }
         
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: self)
+    }
+    func isValidName() -> Bool {
+        guard self.count > 2, self.count < 19 else { return false }
+
+        let predicateTest = NSPredicate(format: "SELF MATCHES %@", "^(([^ ]?)(^[a-zA-Z].*[a-zA-Z]$)([^ ]?))$")
+        return predicateTest.evaluate(with: self)
+    }
+    
+    func isValidPassword() -> Bool{
+        guard self.count > 7 else { return false }
+        guard !self.contains(" ") else { return false }
+        
+        let passwordPred = NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*[!@#$*]+)(?=.*?[0-9])(?=.*?[a-z])([!@#$*a-zA-Z0-9]+){8,}$")
+        return passwordPred.evaluate(with: self)
     }
     
     func widthOfString(usingFont font: UIFont) -> CGFloat {

@@ -30,9 +30,6 @@ class SideViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-      
-        
       
         profileView.user = AppController.shared.user
         profileView.editTapped = {
@@ -75,7 +72,13 @@ class SideViewController: UIViewController {
 //            self.dismiss(animated: true, completion: nil)
             self.menuTapped(7)
         }
-        
+                
+        self.profileView.user = AppController.shared.user
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         var parameters = ParameterDetail()
         parameters.userId = "\(AppController.shared.user!.id!)"
@@ -95,7 +98,6 @@ class SideViewController: UIViewController {
             
         }
     }
-
 
     /*
     // MARK: - Navigation

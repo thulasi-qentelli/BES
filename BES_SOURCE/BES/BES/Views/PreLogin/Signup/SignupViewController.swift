@@ -35,13 +35,13 @@ class SignupViewController: UIViewController {
         }
         firstNameView.getUpdatedText = { string in
             self.firstNameView.accessoryImgView.isHidden = true
-            if string.count > 0 {
+            if string.isValidName() {
                 self.firstNameView.accessoryImgView.isHidden = false
             }
         }
         lastNameView.getUpdatedText = { string in
             self.lastNameView.accessoryImgView.isHidden = true
-            if string.count > 0 {
+            if string.isValidName() {
                 self.lastNameView.accessoryImgView.isHidden = false
             }
         }
@@ -57,7 +57,7 @@ class SignupViewController: UIViewController {
         }
         passwordView.txtField.textContentType = .password
         passwordView.getUpdatedText = { string in
-            if string.count > 0 {
+            if string.count > 0  {
                 self.passwordView.accessoryImgBtn.isHidden = false
                 self.passwordView.accessoryImgView.isHidden = false
             }
@@ -155,10 +155,10 @@ class SignupViewController: UIViewController {
         else if sender == createAccountBtn {
             if validateData() {
                 
-                let firstName = firstNameView.txtField.text!
-                let lastName = lastNameView.txtField.text!
-                let email = emailView.txtField.text!
-                let password = passwordView.txtField.text!
+                let firstName = firstNameView.txtField.text!.trimmingCharacters(in: NSCharacterSet.whitespaces)
+                let lastName = lastNameView.txtField.text!.trimmingCharacters(in: NSCharacterSet.whitespaces)
+                let email = emailView.txtField.text!.trimmingCharacters(in: NSCharacterSet.whitespaces)
+                let password = passwordView.txtField.text!.trimmingCharacters(in: NSCharacterSet.whitespaces)
                 
                 var parameters = ParameterDetail()
                 parameters.firstName = firstName
@@ -227,27 +227,27 @@ class SignupViewController: UIViewController {
     
     func validateData() -> Bool {
         
-        guard let firstName = firstNameView.txtField.text else {
+        guard let firstName = firstNameView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please enter first name", duration: 1.0, position: .center)
             firstNameView.txtField.becomeFirstResponder()
             return false
         }
-        guard let lastName = lastNameView.txtField.text else {
+        guard let lastName = lastNameView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please enter last name", duration: 1.0, position: .center)
             lastNameView.txtField.becomeFirstResponder()
             return false
         }
-        guard let email = emailView.txtField.text else {
+        guard let email = emailView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please enter email", duration: 1.0, position: .center)
             emailView.txtField.becomeFirstResponder()
             return false
         }
-        guard let password = passwordView.txtField.text else {
+        guard let password = passwordView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please enter password", duration: 1.0, position: .center)
             passwordView.txtField.becomeFirstResponder()
             return false
         }
-        guard let confirmPassword = confirmPasswordView.txtField.text else {
+        guard let confirmPassword = confirmPasswordView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please confirm password", duration: 1.0, position: .center)
             confirmPasswordView.txtField.becomeFirstResponder()
             return false
@@ -257,14 +257,14 @@ class SignupViewController: UIViewController {
 //            self.view.makeToast("Please upload profile picture", duration: 1.0, position: .center)
 //            return false
 //        }
-        if firstName.count < 1 {
-            self.view.makeToast("Please enter first name", duration: 1.0, position: .center)
+        if !firstName.isValidName() {
+            self.view.makeToast("Please enter valid first name", duration: 1.0, position: .center)
             firstNameView.txtField.becomeFirstResponder()
             return false
         }
         
-        if lastName.count < 1 {
-            self.view.makeToast("Please enter last name", duration: 1.0, position: .center)
+        if !lastName.isValidName(){
+            self.view.makeToast("Please enter valid last name", duration: 1.0, position: .center)
             lastNameView.txtField.becomeFirstResponder()
             return false
         }
@@ -276,25 +276,25 @@ class SignupViewController: UIViewController {
         }
         
         if !email.isValidEmail() {
-            self.view.makeToast("Please enter a vaild email address", duration: 1.0, position: .center)
+            self.view.makeToast("Please enter vaild email address", duration: 1.0, position: .center)
             emailView.txtField.becomeFirstResponder()
             return false
         }
         
-        if password.count < 6 {
-            self.view.makeToast("Please enter password", duration: 1.0, position: .center)
+        if !password.isValidPassword() {
+            self.view.makeToast("Password must contain atleast 1 lowercase and 1 uppercase alphabetical character, 1 numeric character, 1 special character(!@#$*) and must be eight characters or longer", duration: 2.0, position: .center)
             passwordView.txtField.becomeFirstResponder()
             return false
         }
         
-        if confirmPassword.count < 6 {
+        if !confirmPassword.isValidPassword() {
             self.view.makeToast("Please confirm password", duration: 1.0, position: .center)
             confirmPasswordView.txtField.becomeFirstResponder()
             return false
         }
         
         if password != confirmPassword {
-            self.view.makeToast("Passwords doesn't match.", duration: 1.0, position: .center)
+            self.view.makeToast("Passwords doesn't match", duration: 1.0, position: .center)
             confirmPasswordView.txtField.becomeFirstResponder()
             return false
         }

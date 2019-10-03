@@ -372,7 +372,11 @@ struct NetworkManager {
             }
             
             request.allHTTPHeaderFields = headers
-            request.httpBody = jsonData as Data
+            request.httpBody = (jsonData as Data)
+            
+//            if let jsonString:String = String(data: jsonData as Data, encoding: String.Encoding.utf8) {
+//                request.httpBody = jsonString.data(using: String.Encoding.utf8)
+//            }
         }
         
         Alamofire.request(request).validate().responseData { response in

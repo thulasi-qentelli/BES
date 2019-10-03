@@ -63,7 +63,6 @@ class LoginViewController: UIViewController {
         userNameView.txtField.keyboardType = .emailAddress
         passwordView.txtField.isSecureTextEntry = true
         passwordView.txtField.textContentType = .password
-        
     }
 
     /*
@@ -95,8 +94,8 @@ class LoginViewController: UIViewController {
     
     
     func loginService() {
-        let email = self.userNameView.txtField.text!
-        let password = self.passwordView.txtField.text!
+        let email = self.userNameView.txtField.text!.trimmingCharacters(in: NSCharacterSet.whitespaces)
+        let password = self.passwordView.txtField.text!.trimmingCharacters(in: NSCharacterSet.whitespaces)
         
         SecAddSharedWebCredential("besconnect.qentelli.com:8081" as CFString, email as CFString, password as CFString) { (error) in
             print(error?.localizedDescription)
@@ -132,12 +131,12 @@ class LoginViewController: UIViewController {
     
     func validateData()->Bool {
         
-        guard let email = userNameView.txtField.text else {
+        guard let email = userNameView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please enter email", duration: 1.0, position: .center)
             userNameView.txtField.becomeFirstResponder()
             return false
         }
-        guard let password = passwordView.txtField.text else {
+        guard let password = passwordView.txtField.text?.trimmingCharacters(in: NSCharacterSet.whitespaces) else {
             self.view.makeToast("Please enter password", duration: 1.0, position: .center)
             passwordView.txtField.becomeFirstResponder()
             return false
@@ -150,13 +149,13 @@ class LoginViewController: UIViewController {
         }
         
         if !email.isValidEmail() {
-            self.view.makeToast("Please enter a vaild email address", duration: 1.0, position: .center)
+            self.view.makeToast("Please enter valild email address", duration: 1.0, position: .center)
             userNameView.txtField.becomeFirstResponder()
             return false
         }
         
-        if password.count < 6 {
-            self.view.makeToast("Please enter password", duration: 1.0, position: .center)
+        if password.count < 8 {
+            self.view.makeToast("Please enter valid password", duration: 1.0, position: .center)
             passwordView.txtField.becomeFirstResponder()
             return false
         }

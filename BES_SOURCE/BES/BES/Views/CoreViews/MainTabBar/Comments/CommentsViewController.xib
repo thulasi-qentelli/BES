@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -76,11 +74,11 @@
             </subviews>
             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685511830000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="x2c-nk-Zuh" firstAttribute="bottom" secondItem="Hch-75-04D" secondAttribute="bottom" constant="60" id="1x0-M7-KgN"/>
                 <constraint firstItem="GGX-ap-zqV" firstAttribute="leading" secondItem="x2c-nk-Zuh" secondAttribute="leading" id="BAn-Nr-5KN"/>
                 <constraint firstItem="x2c-nk-Zuh" firstAttribute="bottom" secondItem="tjp-uB-NFZ" secondAttribute="bottom" id="EJO-bA-LIh"/>
                 <constraint firstItem="Hch-75-04D" firstAttribute="trailing" secondItem="x2c-nk-Zuh" secondAttribute="trailing" id="H4k-E1-PuZ"/>
                 <constraint firstItem="Hch-75-04D" firstAttribute="top" secondItem="NtE-q1-yFD" secondAttribute="bottom" id="HcP-o1-KWG"/>
+                <constraint firstItem="tjp-uB-NFZ" firstAttribute="top" secondItem="Hch-75-04D" secondAttribute="bottom" id="RIR-vI-Keu"/>
                 <constraint firstItem="Hch-75-04D" firstAttribute="leading" secondItem="x2c-nk-Zuh" secondAttribute="leading" id="SoV-su-ep3"/>
                 <constraint firstItem="rei-9U-nOG" firstAttribute="top" secondItem="x2c-nk-Zuh" secondAttribute="top" constant="20" id="U7p-Sy-qEA"/>
                 <constraint firstItem="rei-9U-nOG" firstAttribute="leading" secondItem="x2c-nk-Zuh" secondAttribute="leading" constant="160" id="Wei-YQ-1I8"/>

@@ -43,7 +43,7 @@ class CommentsViewController: UIViewController {
         }
         
         commentsInputView.getUpdatedText = { text in
-            if text.count > 0 {
+            if text.trimmingCharacters(in: NSCharacterSet.whitespaces).count > 0 {
                 
                 let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
                 loadingNotification.mode = MBProgressHUDMode.indeterminate
@@ -51,7 +51,7 @@ class CommentsViewController: UIViewController {
                 
                 self.view.endEditing(true)
                 var parameters = ParameterDetail()
-                parameters.comment = text
+                parameters.comment = text.trimmingCharacters(in: NSCharacterSet.whitespaces)
                 parameters.postId = "\(self.feed!.id!)"
                 parameters.email = "\(AppController.shared.user!.email!)"
                 
